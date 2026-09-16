@@ -63,7 +63,6 @@ def text(value):
 
 def excerpt_text(value):
     # Display-only path redaction. Hashes always describe the unmodified bytes.
-    value = value.replace('/home/pulcerto/nixos-config/', '')
     return re.sub(r'/(?:home|tmp|root|Users)/[^\s`"<>]+', '[私有路径省略]', value)
 
 

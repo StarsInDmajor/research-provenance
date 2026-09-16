@@ -230,7 +230,7 @@ the historical performance failure. Build current rp before Python integration t
 python3 pkgs/misc/research-provenance/tools/pilot-reader/build.py \
   --project /path/to/project \
   --rp pkgs/misc/research-provenance/target/debug/rp \
-  --output /home/pulcerto/output/rp-pilot/my-reader.html \
+  --output ~/rp-pilot/my-reader.html \
   [--thread <THREAD_ID>] [--as-of <RFC3339>] [--force] [--include-local-sources]
 ```
 
@@ -429,7 +429,7 @@ No Rust/Nix, dependencies, network, GUI/browser, commit or deploy.
 NODE=/nix/store/2bslrww4ch7my47xxwabj1qy4acq4720-nodejs-slim-24.14.1/bin/node
 "$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/follow-relations.test.js
 "$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/follow-relations.test.js \
-  /home/pulcerto/output/rp-pilot/csp-case-r2/csp-reader.html
+  ~/rp-pilot/csp-case-r2/csp-reader.html
 ```
 
 Durable evidence and review handoff: `/tmp/rp-follow-relations-summary.md`.
@@ -438,7 +438,7 @@ level. Remaining canvas/entry/browser-UX priorities are not accepted by these te
 
 ## Fullscreen canvas and fine wheel zoom (current r2, presentation only)
 
-Only `/home/pulcerto/output/rp-pilot/csp-case-r2/csp-reader.html` is rebuilt.
+Only `~/rp-pilot/csp-case-r2/csp-reader.html` is rebuilt.
 **全屏画布** first fills the browser viewport with CSS; only that explicit click
 requests native Fullscreen API on the workspace containing toolbar, graph and
 right floating details. Denial, synchronous exceptions, disabled or unavailable
@@ -486,7 +486,7 @@ manifest, aliases, coordinates, routing/type semantics and old HTML stay unchang
 
 ## Visible-obstacle edge routing (current r2, presentation only)
 
-Only `/home/pulcerto/output/rp-pilot/csp-case-r2/csp-reader.html` is republished.
+Only `~/rp-pilot/csp-case-r2/csp-reader.html` is republished.
 Nodes keep their published absolute coordinates; no automatic relayout or arrange
 button. `routing.js` is a pure Node-testable router; `routing.py` implements the
 same finite candidate contract for static rendering (shared numerical fixtures).
@@ -548,7 +548,7 @@ independent parent-review handoff: `/tmp/rp-edge-label-summary.md` (label repair
 
 ## Current r2 reading clarity (user4, display-only)
 
-Primary output: `/home/pulcerto/output/rp-pilot/csp-case-r2/csp-reader.html`.
+Primary output: `~/rp-pilot/csp-case-r2/csp-reader.html`.
 Delivery marker: `reading-clarity-user4`; the technical disclosure contains its
 explicit generation timestamp. **This is a presentation update, not a frozen
 NodeRevision, source event, new feedback record or acceptance result.** Canonical,
@@ -607,9 +607,9 @@ python3 -m unittest discover -s pkgs/misc/research-provenance/tools/pilot-reader
 # Use the installed Node path documented below; no downloads.
 "$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/clarity.test.js
 "$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/clarity.test.js \
-  /home/pulcerto/output/rp-pilot/csp-case-r2/csp-reader.html
+  ~/rp-pilot/csp-case-r2/csp-reader.html
 "$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/startup.test.js \
-  /home/pulcerto/output/rp-pilot/csp-case-r2/csp-reader.html
+  ~/rp-pilot/csp-case-r2/csp-reader.html
 ```
 
 Durable review/evidence handoff: `/tmp/rp-csp-reading-clarity-summary.md`.
@@ -624,15 +624,15 @@ The original `pilot-pins.json` contract, 32/35 corpora and archived v1–v5 HTML
 remain unchanged. A second named **CSP startup candidate** is explicitly admitted
 by `csp-case-admission.json` (manifest digest only; no private excerpts in repo).
 Its private project, manifest, source index, stable name map, constructor and
-usage instructions live under `/home/pulcerto/output/rp-pilot/csp-case/`.
+usage instructions live under `~/rp-pilot/csp-case/`.
 New reader: `csp-case/csp-reader.html`; parent/data review and usefulness pending.
 
 One command an Agent can execute from this repository:
 
 ```sh
 python3 pkgs/misc/research-provenance/tools/pilot-reader/lookup.py \
-  --project /home/pulcerto/output/rp-pilot/csp-case/project \
-  --case-manifest /home/pulcerto/output/rp-pilot/csp-case/case-manifest.json \
+  --project ~/rp-pilot/csp-case/project \
+  --case-manifest ~/rp-pilot/csp-case/case-manifest.json \
   --rp /nix/store/rrblc2vg0h7q915mprqq864zl7322hlj-research-provenance-0.1.0/bin/rp \
   I03
 ```
@@ -683,7 +683,7 @@ pre-feedback verification boundary; they do not override this new feedback.
 
 ## Graph-first entry and startup boundary (v5)
 
-Current private output: `/home/pulcerto/output/rp-pilot/reader-v5.html`.
+Current private output: `~/rp-pilot/reader-v5.html`.
 V1/v2 (in the private case) and v3/v4 remain byte-identical historical artifacts.
 The current goal is **node-by-node content → origins/uses → project logic** in
 an interactive browser graph, with updates through Agent proposals and researcher
@@ -728,7 +728,7 @@ Additional current test commands (installed Node path is below; no new deps):
 ```sh
 "$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/startup.test.js
 "$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/startup.test.js \
-  /home/pulcerto/output/rp-pilot/reader-v5.html
+  ~/rp-pilot/reader-v5.html
 ```
 
 Remaining restrictions: pinned single engineering case, fixed binary/input pins,
@@ -755,7 +755,7 @@ under docs/plans for evidence and frontend delivery/acceptance refactoring scope
 
 ## Exploration update (v4)
 
-Historical output: `/home/pulcerto/output/rp-pilot/reader-v4.html`; existing v3 stayed
+Historical output: `~/rp-pilot/reader-v4.html`; existing v3 stayed
 byte-identical. Current rebuild/integration commands below target **v5 only**;
 do not rebuild v3/v4 when checking this slice. This remains a private pinned-case prototype, not a general editor.
 
@@ -850,7 +850,7 @@ python3 pkgs/misc/research-provenance/tools/pilot-reader/build.py \
   --project /tmp/rp-private-pilot-20260908-case/after \
   --before /tmp/rp-private-pilot-20260908-case/before \
   --rp /nix/store/rrblc2vg0h7q915mprqq864zl7322hlj-research-provenance-0.1.0/bin/rp \
-  --output /home/pulcerto/output/rp-pilot/reader-v5.html \
+  --output ~/rp-pilot/reader-v5.html \
   --as_of 2026-09-08T23:59:59Z \
   --generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 ```
@@ -941,7 +941,7 @@ python3 pkgs/misc/research-provenance/tools/pilot-reader/tests/integration.py \
   --project /tmp/rp-private-pilot-20260908-case/after \
   --before /tmp/rp-private-pilot-20260908-case/before \
   --rp /nix/store/rrblc2vg0h7q915mprqq864zl7322hlj-research-provenance-0.1.0/bin/rp \
-  --output /home/pulcerto/output/rp-pilot/reader-v5.html
+  --output ~/rp-pilot/reader-v5.html
 ```
 
 Integration is explicit/opt-in because it uses the pinned temporary corpus and

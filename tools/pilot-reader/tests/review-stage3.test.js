@@ -122,7 +122,8 @@ test('BOOT rejects missing/mis-scoped domain controls and locks dynamic controls
 });
 if(process.argv[2])test('actual recorded 12 areas cover all 86 nodes and 23 weak components; isolated R48/R51/R68 discoverable',()=>{
   const s=setup();assert.equal(s.data.graph.nodes.length,86);assert.equal(s.data.graph.edges.length,77);
-  const map=JSON.parse(fs.readFileSync('/home/pulcerto/output/rp-pilot/reion3-project/candidate-r2/node-map.json','utf8'));
+  const mapPath=process.env.RP_NODE_MAP||'node-map.json';
+  const map=JSON.parse(fs.readFileSync(mapPath,'utf8'));
   const areas=['design','simulation','observations','uvlf','xhi','forest','cmb','inference','lifecycle','guard','manuscript','governance'];
   const all=tagGroups(s.data.graph.nodes);assert.deepEqual(all.filter(g=>g.category==='研究领域').map(g=>g.tag).sort(),areas.sort());
   assert.deepEqual(new Set(all.flatMap(g=>g.nodes.map(n=>n.id))),new Set(s.data.graph.nodes.map(n=>n.id)));
