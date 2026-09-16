@@ -1,5 +1,6 @@
 """Visible routing contract shared with the pure Node implementation."""
 import copy
+import os
 import json
 from pathlib import Path
 import subprocess
@@ -10,7 +11,7 @@ from graph_projection import route_edges
 import build
 from test_geometry import points, intersects
 
-NODE='/nix/store/2bslrww4ch7my47xxwabj1qy4acq4720-nodejs-slim-24.14.1/bin/node'
+NODE=os.environ.get('NODE', 'node')
 ROOT=Path(__file__).resolve().parents[1]
 
 class VisibleRoutingTests(unittest.TestCase):

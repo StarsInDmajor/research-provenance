@@ -79,7 +79,7 @@ class CompactTests(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory(prefix='rp-compact-render-snapshot-') as tmp:
             root = Path(tmp); (root/'.research').mkdir()
-            rp = Path(__file__).resolve().parents[3]/'target/debug/rp'
+            rp = Path(os.environ.get('RP_BIN', Path(__file__).resolve().parents[3]/'target/debug/rp'))
             def accepted(cmd, **kwargs):
                 self.assertIn('snapshot', cmd)
                 return subprocess.CompletedProcess(cmd, 0, snapshot, b'')

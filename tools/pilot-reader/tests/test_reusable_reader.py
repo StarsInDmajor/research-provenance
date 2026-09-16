@@ -17,7 +17,7 @@ import lookup
 from graph_projection import NODE, RELATION, BINDING
 
 HERE = Path(__file__).resolve().parent
-RP_BIN = HERE.parents[2] / 'target/debug/rp'
+RP_BIN = Path(os.environ.get('RP_BIN', HERE.parents[2] / 'target/debug/rp'))
 
 
 def create_project_alpha(root: Path):
