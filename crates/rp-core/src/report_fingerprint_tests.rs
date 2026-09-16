@@ -58,9 +58,7 @@ fn report_fingerprint_manifest_matches_actual_allowlisted_sources_and_resources(
             "{path}"
         );
         if let Some(relative) = path.strip_prefix("resources/schemas/v1/") {
-            let source = root
-                .join("../../schemas/v1")
-                .join(relative);
+            let source = root.join("schemas/v1").join(relative);
             assert_eq!(
                 bytes,
                 std::fs::read(source).unwrap(),

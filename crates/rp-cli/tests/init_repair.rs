@@ -29,11 +29,14 @@ impl Drop for Temp {
 
 fn init(root: &Path, cwd: &Path, expected_exit: i32) -> serde_json::Value {
     let output = Command::new(env!("CARGO_BIN_EXE_rp"))
-        .args(["init", "--project"]).arg(root).arg("--json")
+        .args(["init", "--project"])
+        .arg(root)
+        .arg("--json")
         .current_dir(cwd)
         // No git (or any other child executable) can be discovered via PATH.
         .env("PATH", "")
-        .output().unwrap();
+        .output()
+        .unwrap();
     assert_eq!(output.status.code(), Some(expected_exit), "{output:?}");
     assert!(output.stderr.is_empty());
     assert_eq!(output.stdout.last(), Some(&b'\n'));

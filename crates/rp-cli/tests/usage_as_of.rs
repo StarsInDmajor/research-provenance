@@ -52,8 +52,8 @@ const COMMANDS: &[(&str, &[&str])] = &[
 ];
 
 fn run(args: &[&str], as_of: Option<&str>, project_exists: bool) -> (i32, Value) {
-    let mut root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../fixtures/overview-v1/valid");
+    let mut root =
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/overview-v1/valid");
     if !project_exists {
         root = root.join("missing-time-envelope-project");
         assert!(!root.exists());

@@ -561,8 +561,7 @@ fn derived_report_is_contract_only_and_fresh_canonical_placement_fails_closed() 
 
 #[test]
 fn embedded_report_and_catalog_are_identical_and_reuse_v1_contract_properties() {
-    let source = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../schemas/v1");
+    let source = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../schemas/v1");
     for name in [FILE, "schema-catalog.json"] {
         let resource = SchemaBundle::resources()
             .iter()

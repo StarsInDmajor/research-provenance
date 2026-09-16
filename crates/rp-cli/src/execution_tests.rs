@@ -8,8 +8,7 @@ use std::{
     time::Duration,
 };
 fn fixture() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../fixtures/overview-v1/valid")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/overview-v1/valid")
 }
 fn result() -> CommandResult {
     CommandResult::new(

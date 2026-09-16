@@ -14,8 +14,7 @@ fn binary() -> Command {
 }
 
 fn fixtures_root() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../fixtures")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../fixtures")
 }
 
 #[test]

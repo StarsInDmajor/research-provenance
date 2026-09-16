@@ -8,8 +8,7 @@ use std::{
     time::Duration,
 };
 fn fixture() -> PathBuf {
-    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-        .join("../../fixtures/overview-v1/valid")
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/overview-v1/valid")
 }
 #[test]
 fn cancelled_validation_is_incomplete_no_index_and_not_findings_truncation() {
