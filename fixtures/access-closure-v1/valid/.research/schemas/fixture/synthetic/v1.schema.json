@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fixture.synthetic/v1",
+  "title": "Synthetic fixture extension payload",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "domain_neutral",
+    "scientific_claim",
+    "network_resolution_required"
+  ],
+  "properties": {
+    "domain_neutral": {
+      "const": true
+    },
+    "scientific_claim": {
+      "const": false
+    },
+    "network_resolution_required": {
+      "const": false
+    }
+  }
+}

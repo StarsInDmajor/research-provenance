@@ -1,0 +1,153 @@
+# Registry frozen with the G7-approved Phase 0 baseline.
+schema: rp/fixture-id-registry/v1
+fixture: overview-v1
+status: g7-approved-phase0-baseline
+id_policy:
+  format: typed-prefix-plus-ulid
+  allocation: deterministic-fixture-order
+  mutable_aliases: false
+objects:
+  candidate-support-relation-assessment:
+    id: asm_01J00000000000000000000024
+    path: valid/.research/assessments/candidate-support-relation-assessment--asm_01J00000000000000000000024.yaml
+  challenged-by-stress-measurement:
+    id: asm_01J00000000000000000000023
+    path: valid/.research/assessments/challenged-by-stress-measurement--asm_01J00000000000000000000023.yaml
+  proposed-broad-hypothesis:
+    id: asm_01J00000000000000000000021
+    path: valid/.research/assessments/proposed-broad-hypothesis--asm_01J00000000000000000000021.yaml
+  supported-by-standard-measurement:
+    id: asm_01J00000000000000000000022
+    path: valid/.research/assessments/supported-by-standard-measurement--asm_01J00000000000000000000022.yaml
+  project-drift-overview:
+    id: proj_01J00000000000000000000001
+    path: valid/.research/project.yaml
+  legacy-summary-claim:
+    id: clm_01J00000000000000000000024
+    path: valid/.research/records/paper-claims/legacy-summary-claim--clm_01J00000000000000000000024.yaml
+  defer-stress-adjudication:
+    id: dec_01J00000000000000000000020
+    path: valid/.research/records/decisions/defer-stress-adjudication--dec_01J00000000000000000000020.yaml
+  stress-adjudication:
+    id: blk_01J00000000000000000000017
+    path: valid/.research/records/blockers/stress-adjudication--blk_01J00000000000000000000017.yaml
+  hypothesis-drift-v1:
+    id: hyp_01J00000000000000000000011
+    path: valid/.research/records/hypotheses/hypothesis-drift-v1--hyp_01J00000000000000000000011.yaml
+  hypothesis-drift-v2-criteria:
+    id: hyp_01J00000000000000000000013
+    path: valid/.research/records/hypotheses/hypothesis-drift-v2-criteria--hyp_01J00000000000000000000013.yaml
+  hypothesis-drift-v2-scope:
+    id: hyp_01J00000000000000000000012
+    path: valid/.research/records/hypotheses/hypothesis-drift-v2-scope--hyp_01J00000000000000000000012.yaml
+  hypothesis-drift-v3-merged:
+    id: hyp_01J00000000000000000000014
+    path: valid/.research/records/hypotheses/hypothesis-drift-v3-merged--hyp_01J00000000000000000000014.yaml
+  stress-environment:
+    id: int_01J00000000000000000000015
+    path: valid/.research/records/interpretations/stress-environment--int_01J00000000000000000000015.yaml
+  stress-reference:
+    id: int_01J00000000000000000000016
+    path: valid/.research/records/interpretations/stress-reference--int_01J00000000000000000000016.yaml
+  candidate-standard:
+    id: meas_01J00000000000000000000025
+    path: valid/.research/records/measurements/candidate-standard--meas_01J00000000000000000000025.yaml
+  candidate-stress:
+    id: meas_01J00000000000000000000026
+    path: valid/.research/records/measurements/candidate-stress--meas_01J00000000000000000000026.yaml
+  independent-stress-test:
+    id: nxt_01J00000000000000000000018
+    path: valid/.research/records/next-actions/independent-stress-test--nxt_01J00000000000000000000018.yaml
+  protocol-repeatability-control:
+    id: obs_01J00000000000000000000019
+    path: valid/.research/records/observations/protocol-repeatability-control--obs_01J00000000000000000000019.yaml
+  core-drift-question:
+    id: qst_01J00000000000000000000010
+    path: valid/.research/records/questions/core-drift-question--qst_01J00000000000000000000010.yaml
+  legacy-summary:
+    id: ref_01J00000000000000000000004
+    path: valid/.research/references/legacy-summary--ref_01J00000000000000000000004.yaml
+  measurement-protocol-v3:
+    id: ref_01J00000000000000000000003
+    path: valid/.research/references/measurement-protocol-v3--ref_01J00000000000000000000003.yaml
+  candidate-support-v1:
+    id: rel_01J00000000000000000000043
+    path: valid/.research/relations/candidate-support-v1--rel_01J00000000000000000000043.yaml
+  candidate-support-v2-invalidated:
+    id: rel_01J00000000000000000000044
+    path: valid/.research/relations/candidate-support-v2-invalidated--rel_01J00000000000000000000044.yaml
+  environment-interpretation-next-step:
+    id: rel_01J00000000000000000000049
+    path: valid/.research/relations/environment-interpretation-next-step--rel_01J00000000000000000000049.yaml
+  next-action-blocked-by-adjudication:
+    id: rel_01J00000000000000000000048
+    path: valid/.research/relations/next-action-blocked-by-adjudication--rel_01J00000000000000000000048.yaml
+  question-motivates-hypothesis-v1:
+    id: rel_01J00000000000000000000041
+    path: valid/.research/relations/question-motivates-hypothesis-v1--rel_01J00000000000000000000041.yaml
+  question-motivates-hypothesis-v3:
+    id: rel_01J00000000000000000000042
+    path: valid/.research/relations/question-motivates-hypothesis-v3--rel_01J00000000000000000000042.yaml
+  stress-consistent-environment:
+    id: rel_01J00000000000000000000046
+    path: valid/.research/relations/stress-consistent-environment--rel_01J00000000000000000000046.yaml
+  stress-consistent-reference:
+    id: rel_01J00000000000000000000047
+    path: valid/.research/relations/stress-consistent-reference--rel_01J00000000000000000000047.yaml
+  stress-contradicts-broad:
+    id: rel_01J00000000000000000000045
+    path: valid/.research/relations/stress-contradicts-broad--rel_01J00000000000000000000045.yaml
+  drift-evaluation:
+    id: run_01J00000000000000000000002
+    path: valid/.research/runs/drift-evaluation--run_01J00000000000000000000002.yaml
+  diagnostic-blocker:
+    id: tbd_01J00000000000000000000074
+    path: valid/.research/thread-bindings/diagnostic-blocker--tbd_01J00000000000000000000074.yaml
+  diagnostic-criteria-hypothesis:
+    id: tbd_01J00000000000000000000072
+    path: valid/.research/thread-bindings/diagnostic-criteria-hypothesis--tbd_01J00000000000000000000072.yaml
+  diagnostic-question:
+    id: tbd_01J00000000000000000000071
+    path: valid/.research/thread-bindings/diagnostic-question--tbd_01J00000000000000000000071.yaml
+  diagnostic-reference-interpretation:
+    id: tbd_01J00000000000000000000073
+    path: valid/.research/thread-bindings/diagnostic-reference-interpretation--tbd_01J00000000000000000000073.yaml
+  primary-candidate-measurement:
+    id: tbd_01J00000000000000000000064
+    path: valid/.research/thread-bindings/primary-candidate-measurement--tbd_01J00000000000000000000064.yaml
+  primary-hypothesis-v1:
+    id: tbd_01J00000000000000000000062
+    path: valid/.research/thread-bindings/primary-hypothesis-v1--tbd_01J00000000000000000000062.yaml
+  primary-hypothesis-v3:
+    id: tbd_01J00000000000000000000063
+    path: valid/.research/thread-bindings/primary-hypothesis-v3--tbd_01J00000000000000000000063.yaml
+  primary-question:
+    id: tbd_01J00000000000000000000061
+    path: valid/.research/thread-bindings/primary-question--tbd_01J00000000000000000000061.yaml
+  primary-stress-measurement:
+    id: tbd_01J00000000000000000000065
+    path: valid/.research/thread-bindings/primary-stress-measurement--tbd_01J00000000000000000000065.yaml
+  sensitivity-blocker:
+    id: tbd_01J00000000000000000000069
+    path: valid/.research/thread-bindings/sensitivity-blocker--tbd_01J00000000000000000000069.yaml
+  sensitivity-environment-interpretation:
+    id: tbd_01J00000000000000000000067
+    path: valid/.research/thread-bindings/sensitivity-environment-interpretation--tbd_01J00000000000000000000067.yaml
+  sensitivity-next-action:
+    id: tbd_01J00000000000000000000070
+    path: valid/.research/thread-bindings/sensitivity-next-action--tbd_01J00000000000000000000070.yaml
+  sensitivity-reference-interpretation:
+    id: tbd_01J00000000000000000000068
+    path: valid/.research/thread-bindings/sensitivity-reference-interpretation--tbd_01J00000000000000000000068.yaml
+  sensitivity-stress-measurement:
+    id: tbd_01J00000000000000000000066
+    path: valid/.research/thread-bindings/sensitivity-stress-measurement--tbd_01J00000000000000000000066.yaml
+  data-integrity-diagnostic:
+    id: thd_01J00000000000000000000033
+    path: valid/.research/threads/data-integrity-diagnostic--thd_01J00000000000000000000033.yaml
+  environmental-sensitivity:
+    id: thd_01J00000000000000000000032
+    path: valid/.research/threads/environmental-sensitivity--thd_01J00000000000000000000032.yaml
+  primary-efficacy:
+    id: thd_01J00000000000000000000031
+    path: valid/.research/threads/primary-efficacy--thd_01J00000000000000000000031.yaml

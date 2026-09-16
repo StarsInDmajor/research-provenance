@@ -1,0 +1,20 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-revision-cycle
+fixture: overview-v1
+title: Revision DAG cycle
+description: Make the scope branch depend on its merged descendant, creating one directed cycle.
+expected_failure:
+  exit_code: 1
+  finding_family: revision_dag_cycle
+  error_code: RP_E_REVISION_DAG_CYCLE
+  target_file: .research/records/hypotheses/hypothesis-drift-v2-scope--hyp_01J00000000000000000000012.yaml
+  target_field: revision.parents
+mutation:
+  mode: structured_ast
+  target_file: .research/records/hypotheses/hypothesis-drift-v2-scope--hyp_01J00000000000000000000012.yaml
+  operation: set_value
+  path: /revision/parents
+  value:
+  - id: hyp_01J00000000000000000000014
+    change_type: branch_reconciliation

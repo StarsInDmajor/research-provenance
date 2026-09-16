@@ -1,0 +1,19 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-declassification-in-mvp
+fixture: access-closure-v1
+title: Declassification field is unavailable in MVP
+description: Attach a forbidden declassification field to a valid control node.
+expected_failure:
+  exit_code: 1
+  finding_family: deferred_governance_schema
+  error_code: RP_E_DECLASSIFICATION_UNSUPPORTED
+  target_file: .research/records/hypotheses/hypothesis-internal-control--hyp_01J00000000000000000000016.yaml
+  target_field: declassification_attestation
+mutation:
+  mode: structured_ast
+  target_file: .research/records/hypotheses/hypothesis-internal-control--hyp_01J00000000000000000000016.yaml
+  operation: add_field
+  path: /declassification_attestation
+  value:
+    id: decatt_not-supported

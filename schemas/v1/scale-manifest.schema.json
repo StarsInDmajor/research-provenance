@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "scale-manifest.schema.json",
+  "title": "rp/scale-manifest/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "generator_version",
+    "profile",
+    "seed",
+    "as_of",
+    "object_counts",
+    "relation_type_counts",
+    "kind_counts",
+    "access_counts",
+    "sorted_path_sha256_entries",
+    "aggregate_sha256"
+  ],
+  "properties": {
+    "schema": { "const": "rp/scale-manifest/v1" },
+    "generator_version": { "const": "rp/scale-generator/v1" },
+    "profile": { "enum": ["smoke", "workstation", "stress"] },
+    "seed": { "type": "integer", "minimum": 0, "maximum": 18446744073709551615 },
+    "as_of": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?Z$"
+    },
+    "object_counts": { "$ref": "#/$defs/countMap" },
+    "relation_type_counts": { "$ref": "#/$defs/countMap" },
+    "kind_counts": { "$ref": "#/$defs/countMap" },
+    "access_counts": { "$ref": "#/$defs/countMap" },
+    "sorted_path_sha256_entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^(?!scale-manifest\\.json$)(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "aggregate_sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  },
+  "$defs": {
+    "countMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    }
+  },
+  "$comment": "sorted_path_sha256_entries excludes scale-manifest.json itself. Entry order and aggregate computation are defined by scale-generator-contract.yaml."
+}

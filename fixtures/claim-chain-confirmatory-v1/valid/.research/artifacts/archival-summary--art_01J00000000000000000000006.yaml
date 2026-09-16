@@ -1,0 +1,11 @@
+schema: rp/artifact-manifest/v1
+id: art_01J00000000000000000000006
+title: Synthetic retrospective archival summary table
+uri: file:data/archival-summary.csv
+media_type: text/csv
+size_bytes: 117
+sha256: sha256:a6b79e1ebe3bdf1c14b9e41ca6309ca6ab051c7dcc17c93f5e808a155327b7f2
+created_at: '2026-01-10T12:08:00Z'
+access:
+  level: internal
+  compartments: []

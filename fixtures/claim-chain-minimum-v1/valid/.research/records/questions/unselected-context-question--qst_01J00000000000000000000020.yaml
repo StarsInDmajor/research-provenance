@@ -1,0 +1,34 @@
+schema: rp/node-revision/v1
+id: qst_01J00000000000000000000020
+logical_id: question-unselected-context
+kind: Question
+record_state: frozen
+title: Unselected contextual question
+statement: Would an unconnected exact revision invalidate a selected formal snapshot?
+scope:
+  statement: Synthetic minimum-profile structural validation only.
+question:
+  resolution_criteria:
+  - Selecting this node without an edge must fail single-component validation.
+  evidence_requirements:
+  - A single-mutation overlay adds this exact revision to the snapshot.
+assumptions:
+- The positive snapshot does not select this node.
+limitations:
+- Exists only as test context.
+revision:
+  parents: []
+  summary: Unselected node reserved for connectivity testing.
+created_at: '2026-01-01T08:12:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  external_references:
+  - ref_01J00000000000000000000003
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-minimum-v1
+- synthetic

@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "research-thread.schema.json",
+  "title": "rp/research-thread/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "title",
+    "objective",
+    "root_question_revision",
+    "created_at",
+    "created_by",
+    "access"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/research-thread/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/thread"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "root_question_revision": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/question"
+    },
+    "parent_thread_id": {
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/thread"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "forked_from_thread_id": {
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/thread"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fork_reason": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "created_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "access": {
+      "$ref": "common.schema.json#/$defs/access"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  }
+}

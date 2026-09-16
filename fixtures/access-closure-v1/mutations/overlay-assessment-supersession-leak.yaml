@@ -1,0 +1,21 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-assessment-supersession-leak
+fixture: access-closure-v1
+title: Assessment drops superseded restriction
+description: Lower an Assessment whose own target and provenance are internal/public but which supersedes
+  a restricted Assessment.
+expected_failure:
+  exit_code: 1
+  finding_family: access_assessment_supersession
+  error_code: RP_E_ACCESS_ASSESSMENT_SUPERSESSION
+  target_file: .research/assessments/supersession-restricted-control--asm_01J00000000000000000000071.yaml
+  target_field: access
+mutation:
+  mode: structured_ast
+  target_file: .research/assessments/supersession-restricted-control--asm_01J00000000000000000000071.yaml
+  operation: set_value
+  path: /access
+  value:
+    level: internal
+    compartments: []

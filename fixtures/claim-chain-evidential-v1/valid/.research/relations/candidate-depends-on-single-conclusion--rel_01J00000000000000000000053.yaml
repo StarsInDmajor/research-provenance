@@ -1,0 +1,30 @@
+schema: rp/scientific-relation-revision/v1
+id: rel_01J00000000000000000000053
+logical_id: relation-non-evaluative-single-target
+record_state: frozen
+type: depends-on
+from_revision: meas_01J00000000000000000000025
+to_revision: con_01J00000000000000000000030
+scope:
+  statement: Synthetic evidential-profile relation.
+  conditions:
+  - Use exact frozen endpoints.
+  exclusions:
+  - No scientific authority is implied.
+assertion_mode: asserted
+relation_state: active
+rationale: Unselected non-evaluative edge reserved for the evidential whitelist overlay.
+revision:
+  parents: []
+  summary: Initial synthetic relation revision.
+created_at: '2026-01-01T08:55:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - meas_01J00000000000000000000025
+  - con_01J00000000000000000000030
+access:
+  level: internal
+  compartments: []

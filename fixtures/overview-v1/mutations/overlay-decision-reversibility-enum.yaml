@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-decision-reversibility-enum
+fixture: overview-v1
+title: Decision uses an unknown reversibility value
+description: Replace the closed Decision reversibility enum with an undeclared value.
+expected_failure:
+  exit_code: 1
+  finding_family: schema_enum
+  error_code: RP_E_SCHEMA_ENUM
+  target_file: .research/records/decisions/defer-stress-adjudication--dec_01J00000000000000000000020.yaml
+  target_field: decision.reversibility
+mutation:
+  mode: structured_ast
+  target_file: .research/records/decisions/defer-stress-adjudication--dec_01J00000000000000000000020.yaml
+  operation: set_value
+  path: /decision/reversibility
+  value: conditionally-reversible

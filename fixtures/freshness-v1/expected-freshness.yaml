@@ -1,0 +1,67 @@
+# Hand-audited additive Phase 1 query oracle; not a canonical research fact.
+schema: rp/fixture-expectations/v1
+fixture: freshness-v1
+status: phase1-task0-additive
+contract: rp/freshness/v1
+as_of: '2027-01-01T00:00:00Z'
+object_counts:
+  project: 1
+  external_reference: 2
+  node_revision: 5
+positive_cases:
+  - id: fresh-future-review
+    object_id: qst_01J00000000000000000000110
+    expected_status: fresh
+    reason: The applicable review check is complete and review_due_at is after as_of.
+    must_not_be: [review-due, stale, unknown]
+  - id: review-due-boundary-passed
+    object_id: qst_01J00000000000000000000111
+    expected_status: review-due
+    reason: No stale condition exists and review_due_at is before as_of.
+    must_not_be: [fresh, stale, unknown]
+  - id: stale-effective-until-precedence
+    object_id: qst_01J00000000000000000000112
+    expected_status: stale
+    reason: effective_until is before as_of and stale takes precedence over the future review deadline.
+    must_not_be: [fresh, review-due, unknown]
+  - id: unknown-missing-required-source-check
+    object_id: qst_01J00000000000000000000113
+    expected_status: unknown
+    reason: The applicable policy requires source-version comparison but the object has no matching ExternalReference.
+    must_not_be: [fresh, review-due, stale]
+  - id: stale-newer-tracked-source-version
+    object_id: qst_01J00000000000000000000114
+    expected_status: stale
+    reason: The object pins protocol-v2 while separately tracked protocol-v3 matches an invalidates_on_change rule.
+    must_not_be: [fresh, review-due, unknown]
+negative_cases:
+  - id: future-deadline-is-not-review-due
+    object_id: qst_01J00000000000000000000110
+    as_of: '2027-01-01T00:00:00Z'
+    forbidden_status: review-due
+    expected_status: fresh
+    reason: review_due_at is strictly after as_of.
+  - id: due-deadline-is-not-fresh
+    object_id: qst_01J00000000000000000000111
+    as_of: '2027-01-01T00:00:00Z'
+    forbidden_status: fresh
+    expected_status: review-due
+    reason: review_due_at <= as_of.
+  - id: stale-outranks-future-review
+    object_id: qst_01J00000000000000000000112
+    as_of: '2027-01-01T00:00:00Z'
+    forbidden_status: fresh
+    expected_status: stale
+    reason: A stale condition exists even though review_due_at is later.
+  - id: missing-required-check-is-not-fresh
+    object_id: qst_01J00000000000000000000113
+    as_of: '2027-01-01T00:00:00Z'
+    forbidden_status: fresh
+    expected_status: unknown
+    reason: Required source-version evidence is unavailable.
+  - id: current-source-at-earlier-as-of-is-not-stale
+    object_id: qst_01J00000000000000000000114
+    as_of: '2026-05-01T00:00:00Z'
+    forbidden_status: stale
+    expected_status: fresh
+    reason: The tracked newer protocol-v3 release is after this earlier as_of and the review deadline remains future.

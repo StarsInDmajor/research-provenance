@@ -1,0 +1,29 @@
+schema: rp/assessment/v1
+id: asm_01J00000000000000000000021
+target:
+  type: node_revision
+  id: hyp_01J00000000000000000000011
+assessment_scope: overall-claim
+epistemic_status: proposed
+evidence_evaluation:
+  evidence_quality: unknown
+  agreement: isolated
+  independence: unknown
+  directness: indirect
+  decision_confidence: unknown
+  rationale: Initial pre-evidence assessment of the broad hypothesis.
+  limitations:
+  - No result measurement existed at assessment time.
+quantitative_assessment: null
+assessed_at: '2026-01-01T09:10:00Z'
+assessed_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - qst_01J00000000000000000000010
+supersedes_assessments: []
+review_assurance: human-reviewed
+access:
+  level: internal
+  compartments: []

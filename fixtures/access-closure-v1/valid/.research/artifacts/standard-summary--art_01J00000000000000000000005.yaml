@@ -1,0 +1,11 @@
+schema: rp/artifact-manifest/v1
+id: art_01J00000000000000000000005
+title: Synthetic internal standard summary
+uri: file:data/standard-summary.csv
+media_type: text/csv
+size_bytes: 250
+sha256: sha256:159cb654c2db9fdeafd8a168e0bb6efbb57770a345a20b26f75f819898606174
+created_at: '2026-01-10T12:00:00Z'
+access:
+  level: internal
+  compartments: []

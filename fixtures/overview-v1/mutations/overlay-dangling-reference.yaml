@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-dangling-reference
+fixture: overview-v1
+title: Dangling relation endpoint
+description: Replace one frozen relation endpoint with a type-correct ID absent from the project.
+expected_failure:
+  exit_code: 1
+  finding_family: reference_integrity
+  error_code: RP_E_DANGLING_REVISION_REFERENCE
+  target_file: .research/relations/candidate-support-v1--rel_01J00000000000000000000043.yaml
+  target_field: to_revision
+mutation:
+  mode: structured_ast
+  target_file: .research/relations/candidate-support-v1--rel_01J00000000000000000000043.yaml
+  operation: set_value
+  path: /to_revision
+  value: hyp_01J00000000000000000000099

@@ -1,0 +1,2 @@
+fixture,procedure,envelope,median_absolute_drift,p95_absolute_drift,comparison_delta_vs_b,run_count,reference_batch
+synthetic-drift-v1,C,stress,0.88,1.10,-0.16,16,reference-batch-s2

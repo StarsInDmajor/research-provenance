@@ -1,0 +1,15 @@
+schema: rp/external-reference/v1
+id: ref_01J00000000000000000000003
+type: https
+canonical_uri: https://example.invalid/claim-chain-minimum-v1/structural-protocol-v1
+foreign_key: null
+display_label: Synthetic structural protocol v1
+retrieved_at: '2026-01-01T08:05:00Z'
+source_version:
+  identifier: fixture-structural-v1
+  released_at: '2025-12-01T00:00:00Z'
+trust_tags:
+- synthetic-fixture
+access:
+  level: public
+  compartments: []

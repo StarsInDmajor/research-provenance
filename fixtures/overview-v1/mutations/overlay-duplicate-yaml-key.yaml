@@ -1,0 +1,28 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-duplicate-yaml-key
+fixture: overview-v1
+title: Duplicate YAML mapping key
+description: Inject a second access mapping using a raw-text mutation so the descriptor itself
+  remains valid YAML.
+expected_failure:
+  exit_code: 1
+  finding_family: yaml_parser_compliance
+  error_code: RP_E_YAML_DUPLICATE_KEY
+  target_file: .research/records/hypotheses/hypothesis-drift-v1--hyp_01J00000000000000000000011.yaml
+  target_field: access
+mutation:
+  mode: raw_text
+  target_file: .research/records/hypotheses/hypothesis-drift-v1--hyp_01J00000000000000000000011.yaml
+  operation: text_replace
+  search: |
+    access:
+      level: internal
+      compartments: []
+  replace: |
+    access:
+      level: internal
+      compartments: []
+    access:
+      level: exclusive
+      compartments: []

@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim-chain-snapshot.schema.json",
+  "title": "rp/claim-chain-snapshot/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "title",
+    "root_node_revisions",
+    "target_node_revision",
+    "validation_policy",
+    "node_revisions",
+    "relation_revisions",
+    "source_closure_sha256",
+    "created_at",
+    "created_by",
+    "access"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/claim-chain-snapshot/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/claim_chain"
+    },
+    "thread_id": {
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/thread"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "root_node_revisions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.schema.json#/$defs/ids/$defs/node"
+      }
+    },
+    "target_node_revision": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/node"
+    },
+    "validation_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile",
+        "version"
+      ],
+      "properties": {
+        "profile": {
+          "enum": [
+            "minimum-v1",
+            "evidential-v1",
+            "confirmatory-v1"
+          ]
+        },
+        "version": {
+          "const": 1
+        },
+        "execution_provenance": {
+          "enum": [
+            "none",
+            "artifact-backed",
+            "event-backed",
+            "artifact-and-event"
+          ]
+        }
+      }
+    },
+    "node_revisions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.schema.json#/$defs/ids/$defs/node"
+      }
+    },
+    "relation_revisions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "common.schema.json#/$defs/ids/$defs/relation"
+      }
+    },
+    "source_closure_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "validation_report": {
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/artifact"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "created_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "access": {
+      "$ref": "common.schema.json#/$defs/access"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  }
+}

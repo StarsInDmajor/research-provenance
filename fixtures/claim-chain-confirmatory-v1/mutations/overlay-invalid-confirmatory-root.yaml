@@ -1,0 +1,25 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-invalid-confirmatory-root
+fixture: claim-chain-confirmatory-v1
+title: Confirmatory root is not a Question
+description: Replace the root with a selected Measurement while preserving exact identity and minimum-profile
+  containment.
+expected_failure:
+  exit_code: 1
+  finding_family: confirmatory_root_kind
+  error_code: RP_E_CONFIRMATORY_ROOT_KIND
+  target_file: .research/claim-chains/confirmatory-mixed-outcome-chain--cch_01J00000000000000000000053.yaml
+  target_field: root_node_revisions
+mutation:
+  mode: structured_ast
+  target_file: .research/claim-chains/confirmatory-mixed-outcome-chain--cch_01J00000000000000000000053.yaml
+  operation: set_value
+  path: /root_node_revisions
+  value:
+  - meas_01J00000000000000000000024
+allowed_secondary_findings:
+- finding_family: confirmatory_backbone
+  error_code: RP_E_CONFIRMATORY_BACKBONE_MISSING
+  rationale: A validator that binds the backbone start to the declared root may also report the
+    consequent root-to-backbone mismatch.

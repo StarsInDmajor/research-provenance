@@ -1,0 +1,214 @@
+# Stable v1 Finding code registry. Messages are non-normative; codes, stages,
+# severities, and families are normative within v1.
+schema: rp/finding-registry/v1
+status: phase1-task0-frozen
+version: 1
+ordering:
+  severity: [error, warning, info]
+  then: [source_file, json_pointer, error_code]
+
+codes:
+  # CLI/project discovery and canonical scan.
+  - {code: RP_E_CLI_USAGE, stage: launcher, severity: error, family: cli_usage}
+  - {code: RP_E_INIT_PROJECT_EXISTS, stage: launcher, severity: error, family: init_conflict}
+  - {code: RP_E_PROJECT_DESCRIPTOR_NOT_FOUND, stage: scan, severity: error, family: project_discovery}
+  - {code: RP_E_PROJECT_DESCRIPTOR_MULTIPLE, stage: scan, severity: error, family: project_discovery}
+  - {code: RP_E_OBJECT_NOT_FOUND, stage: query, severity: error, family: object_lookup}
+  - {code: RP_E_OBJECT_DUPLICATE_ID, stage: project-semantics, severity: error, family: object_identity}
+  - {code: RP_E_OBJECT_FILENAME_ID_MISMATCH, stage: project-semantics, severity: error, family: object_identity}
+  - {code: RP_E_OBJECT_SCHEMA_DISPATCH_UNKNOWN, stage: draft-2020-12, severity: error, family: schema_dispatch}
+  - {code: RP_E_CANONICAL_DRAFT_FORBIDDEN, stage: project-semantics, severity: error, family: canonical_state}
+  - {code: RP_E_PATH_PROJECT_ESCAPE, stage: scan, severity: error, family: path_containment}
+  - {code: RP_E_PATH_SYMLINK_FORBIDDEN, stage: scan, severity: error, family: path_containment}
+  - {code: RP_E_PATH_NON_REGULAR_FILE, stage: scan, severity: error, family: path_containment}
+  - {code: RP_E_IO_READ_FAILED, stage: scan, severity: error, family: io}
+
+  # Restricted YAML Gate.
+  - {code: RP_E_YAML_INVALID_UTF8, stage: restricted-yaml-parser, severity: error, family: yaml_parser_compliance}
+  - {code: RP_E_YAML_MULTIPLE_DOCUMENTS, stage: restricted-yaml-parser, severity: error, family: yaml_parser_compliance}
+  - {code: RP_E_YAML_ROOT_NOT_MAPPING, stage: restricted-yaml-parser, severity: error, family: yaml_parser_compliance}
+  - {code: RP_E_YAML_DUPLICATE_KEY, stage: restricted-yaml-parser, severity: error, family: yaml_parser_compliance}
+  - {code: RP_E_YAML_ALIAS_FORBIDDEN, stage: restricted-yaml-parser, severity: error, family: yaml_parser_compliance}
+  - {code: RP_E_YAML_MERGE_KEY_FORBIDDEN, stage: restricted-yaml-parser, severity: error, family: yaml_parser_compliance}
+  - {code: RP_E_YAML_CUSTOM_TAG_FORBIDDEN, stage: restricted-yaml-parser, severity: error, family: yaml_parser_compliance}
+  - {code: RP_E_YAML_COMPLEX_KEY_FORBIDDEN, stage: restricted-yaml-parser, severity: error, family: yaml_parser_compliance}
+
+  # Draft 2020-12 mapping.
+  - {code: RP_E_CLOSED_SCHEMA_UNKNOWN_PROPERTY, stage: draft-2020-12, severity: error, family: closed_schema_violation}
+  - {code: RP_E_SCHEMA_REQUIRED_PROPERTY, stage: draft-2020-12, severity: error, family: schema_required_property}
+  - {code: RP_E_SCHEMA_ENUM, stage: draft-2020-12, severity: error, family: schema_enum}
+  - {code: RP_E_SCHEMA_CONST, stage: draft-2020-12, severity: error, family: schema_const}
+  - {code: RP_E_SCHEMA_PATTERN, stage: draft-2020-12, severity: error, family: schema_pattern}
+  - {code: RP_E_SCHEMA_FORMAT, stage: draft-2020-12, severity: error, family: schema_format}
+  - {code: RP_E_SCHEMA_TYPE, stage: draft-2020-12, severity: error, family: schema_type}
+  - {code: RP_E_SCHEMA_MIN_ITEMS, stage: draft-2020-12, severity: error, family: schema_min_items}
+  - {code: RP_E_SCHEMA_MAX_ITEMS, stage: draft-2020-12, severity: error, family: schema_max_items}
+  - {code: RP_E_SCHEMA_MIN_PROPERTIES, stage: draft-2020-12, severity: error, family: schema_min_properties}
+  - {code: RP_E_SCHEMA_MAX_PROPERTIES, stage: draft-2020-12, severity: error, family: schema_max_properties}
+  - {code: RP_E_SCHEMA_MIN_LENGTH, stage: draft-2020-12, severity: error, family: schema_min_length}
+  - {code: RP_E_SCHEMA_MAX_LENGTH, stage: draft-2020-12, severity: error, family: schema_max_length}
+  - {code: RP_E_SCHEMA_NUMBER_RANGE, stage: draft-2020-12, severity: error, family: schema_number_range}
+  - {code: RP_E_SCHEMA_UNIQUE_ITEMS, stage: draft-2020-12, severity: error, family: schema_unique_items}
+  - {code: RP_E_SCHEMA_DISCRIMINATOR, stage: draft-2020-12, severity: error, family: schema_discriminator}
+  - {code: RP_E_SCHEMA_TARGET_ID_TYPE, stage: draft-2020-12, severity: error, family: schema_target_id_type}
+  - {code: RP_E_DECLASSIFICATION_UNSUPPORTED, stage: draft-2020-12, severity: error, family: deferred_governance_schema}
+
+  # Exact references, lineage, relations, assessments, and threads.
+  - {code: RP_E_REFERENCE_NOT_FOUND, stage: project-semantics, severity: error, family: reference_integrity}
+  - {code: RP_E_REFERENCE_TYPE_MISMATCH, stage: project-semantics, severity: error, family: reference_integrity}
+  - {code: RP_E_DANGLING_REVISION_REFERENCE, stage: project-semantics, severity: error, family: reference_integrity}
+  - {code: RP_E_REVISION_DAG_CYCLE, stage: project-semantics, severity: error, family: revision_dag_cycle}
+  - {code: RP_E_RELATION_DAG_CYCLE, stage: project-semantics, severity: error, family: relation_dag_cycle}
+  - {code: RP_E_BINDING_DAG_CYCLE, stage: project-semantics, severity: error, family: binding_dag_cycle}
+  - {code: RP_E_THREAD_DAG_CYCLE, stage: project-semantics, severity: error, family: thread_dag_cycle}
+  - {code: RP_E_NODE_LINEAGE_LOGICAL_ID_MISMATCH, stage: project-semantics, severity: error, family: node_lineage}
+  - {code: RP_E_NODE_LINEAGE_KIND_MISMATCH, stage: project-semantics, severity: error, family: node_lineage}
+  - {code: RP_E_RELATION_LINEAGE_LOGICAL_ID_MISMATCH, stage: project-semantics, severity: error, family: relation_lineage}
+  - {code: RP_E_RELATION_LINEAGE_TYPE_MISMATCH, stage: project-semantics, severity: error, family: relation_lineage}
+  - {code: RP_E_BINDING_LINEAGE_LOGICAL_ID_MISMATCH, stage: project-semantics, severity: error, family: binding_lineage}
+  - {code: RP_E_BINDING_LINEAGE_CONTEXT_MISMATCH, stage: project-semantics, severity: error, family: binding_lineage}
+  - {code: RP_E_RELATION_KIND_INCOMPATIBLE, stage: project-semantics, severity: error, family: relation_compatibility}
+  - {code: RP_E_ASSESSMENT_SUPERSESSION_CYCLE, stage: project-semantics, severity: error, family: assessment_supersession}
+  - {code: RP_E_ASSESSMENT_SUPERSESSION_LANE_MISMATCH, stage: project-semantics, severity: error, family: assessment_supersession}
+  - {code: RP_E_ORPHAN_THREAD_BINDING, stage: project-semantics, severity: error, family: thread_binding_integrity}
+
+  # Extensions and unsupported Layer A links.
+  - {code: RP_E_EXTENSION_NAMESPACE_NOT_ALLOWED, stage: project-semantics, severity: error, family: extension_namespace}
+  - {code: RP_E_EXTENSION_KIND_NAMESPACE_MISMATCH, stage: project-semantics, severity: error, family: extension_namespace}
+  - {code: RP_E_EXTENSION_SCHEMA_NOT_FOUND, stage: project-semantics, severity: error, family: extension_schema}
+  - {code: RP_E_EXTENSION_SCHEMA_INVALID, stage: project-semantics, severity: error, family: extension_schema}
+  - {code: RP_E_EXTENSION_PAYLOAD_SCHEMA_MISMATCH, stage: project-semantics, severity: error, family: extension_payload}
+  - {code: RP_E_EXTENSION_REF_FORBIDDEN, stage: project-semantics, severity: error, family: extension_schema_ref}
+  - {code: RP_E_EXTENSION_REFERENCE_DECLARATION_INVALID, stage: project-semantics, severity: error, family: extension_semantic_reference}
+  - {code: RP_E_EVENT_PROVENANCE_UNSUPPORTED, stage: project-semantics, severity: error, family: layer_a_unsupported}
+
+  # Artifact, narrative, policy, and digest integrity.
+  - {code: RP_E_POLICY_NOT_FOUND, stage: project-semantics, severity: error, family: policy_integrity}
+  - {code: RP_E_NARRATIVE_NOT_FOUND, stage: project-semantics, severity: error, family: narrative_integrity}
+  - {code: RP_E_NARRATIVE_DIGEST_MISMATCH, stage: project-semantics, severity: error, family: narrative_integrity}
+  - {code: RP_E_ARTIFACT_NOT_FOUND, stage: project-semantics, severity: error, family: artifact_integrity}
+  - {code: RP_E_ARTIFACT_SIZE_MISMATCH, stage: project-semantics, severity: error, family: artifact_integrity}
+  - {code: RP_E_ARTIFACT_DIGEST_MISMATCH, stage: project-semantics, severity: error, family: artifact_integrity}
+  - {code: RP_E_ARTIFACT_CHANGED_DURING_VERIFICATION, stage: project-semantics, severity: error, family: artifact_integrity}
+  - {code: RP_E_SOURCE_CLOSURE_DIGEST_MISMATCH, stage: project-semantics, severity: error, family: source_closure_integrity}
+  - {code: RP_E_SOURCE_CLOSURE_UNRESOLVABLE, stage: project-semantics, severity: error, family: source_closure_integrity}
+
+  # Access closure. Overlay-specific families remain frozen as declared.
+  - {code: RP_E_ACCESS_LEVEL_UNKNOWN, stage: draft-2020-12, severity: error, family: access_level_enum}
+  - {code: RP_E_ACCESS_COMPARTMENTS_UNSORTED, stage: project-semantics, severity: error, family: access_compartment_normalization}
+  - {code: RP_E_ACCESS_LEVEL_DOWNGRADE, stage: project-semantics, severity: error, family: access_level_downgrade}
+  - {code: RP_E_ACCESS_COMPARTMENT_MISSING, stage: project-semantics, severity: error, family: access_compartment_drop}
+  - {code: RP_E_ACCESS_STRUCTURAL_ENDPOINT, stage: project-semantics, severity: error, family: access_structural_endpoint}
+  - {code: RP_E_ACCESS_REVISION_PARENT, stage: project-semantics, severity: error, family: access_revision_parent}
+  - {code: RP_E_ACCESS_RELATION_PARENT, stage: project-semantics, severity: error, family: access_relation_parent}
+  - {code: RP_E_ACCESS_ASSESSMENT_TARGET, stage: project-semantics, severity: error, family: access_assessment_target}
+  - {code: RP_E_ACCESS_ASSESSMENT_SUPERSESSION, stage: project-semantics, severity: error, family: access_assessment_supersession}
+  - {code: RP_E_ACCESS_THREAD_ROOT, stage: project-semantics, severity: error, family: access_thread_root}
+  - {code: RP_E_ACCESS_THREAD_PARENT, stage: project-semantics, severity: error, family: access_thread_parent}
+  - {code: RP_E_ACCESS_BINDING_TARGET, stage: project-semantics, severity: error, family: access_binding_target}
+  - {code: RP_E_ACCESS_CLAIM_SELECTION, stage: project-semantics, severity: error, family: access_claim_chain_selection}
+  - {code: RP_E_ACCESS_SEMANTIC_REFERENCE, stage: project-semantics, severity: error, family: access_semantic_reference}
+  - {code: RP_E_ACCESS_DEPENDENCY_UNRESOLVABLE, stage: project-semantics, severity: error, family: access_dependency}
+
+  # ClaimChain profile and source-closure semantics.
+  - {code: RP_E_CLAIM_CHAIN_REQUIRES_EXACT_REVISION, stage: project-semantics, severity: error, family: claim_chain_identity}
+  - code: RP_E_CLAIM_CHAIN_ENDPOINT_NOT_SELECTED
+    stage: project-semantics
+    severity: error
+    family: endpoint_containment
+    description: >-
+      A selected relation has an endpoint outside node_revisions, or a root/target
+      resolves to a NodeRevision outside node_revisions. Report on the snapshot:
+      /node_revisions for each offending relation, /root_node_revisions/<index>
+      for each offending root, and /target_node_revision for an offending target.
+      Unresolved or wrong-type roots/target retain reference diagnostics without
+      an additional membership finding.
+  - {code: RP_E_CLAIM_CHAIN_MULTIPLE_COMPONENTS, stage: project-semantics, severity: error, family: graph_connectivity}
+  - {code: RP_E_CLAIM_CHAIN_DIRECTED_CYCLE, stage: project-semantics, severity: error, family: claim_chain_cycle}
+  - {code: RP_E_CLAIM_CHAIN_RELATION_NOT_ACTIVE, stage: project-semantics, severity: error, family: relation_state}
+  - {code: RP_E_CLAIM_CHAIN_PROFILE_MISMATCH, stage: project-semantics, severity: error, family: claim_chain_profile}
+  - {code: RP_E_CLAIM_CHAIN_VALIDATION_REPORT_MISMATCH, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+  - {code: RP_E_EVIDENTIAL_TARGET_PATH_MISSING, stage: project-semantics, severity: error, family: evidential_target_path}
+  - {code: RP_E_EVIDENTIAL_SYNTHESIS_REQUIRED, stage: project-semantics, severity: error, family: evidential_synthesis_requirement}
+  - {code: RP_E_EVIDENTIAL_RELATION_NOT_ALLOWED, stage: project-semantics, severity: error, family: evidential_relation_whitelist}
+  - {code: RP_E_CONFIRMATORY_ROOT_KIND, stage: project-semantics, severity: error, family: confirmatory_root_kind}
+  - {code: RP_E_CONFIRMATORY_BACKBONE_MISSING, stage: project-semantics, severity: error, family: confirmatory_backbone}
+  - {code: RP_E_CONFIRMATORY_RESULT_TEST_REQUIRED, stage: project-semantics, severity: error, family: confirmatory_result_mapping}
+  - code: RP_E_CONFIRMATORY_RESULT_REQUIRED
+    stage: project-semantics
+    severity: error
+    family: confirmatory_required_result
+    description: >-
+      Schema-v1 section 6.3(2) requires at least one selected Observation or
+      Measurement. Report on the snapshot at /node_revisions. This new identity
+      distinguishes absent results from an existing result lacking a Test mapping;
+      it does not redefine RP_E_CONFIRMATORY_RESULT_TEST_REQUIRED.
+  - code: RP_E_CONFIRMATORY_EVALUATION_REQUIRED
+    stage: project-semantics
+    severity: error
+    family: confirmatory_scientific_evaluation
+    description: >-
+      Schema-v1 section 6.3(5) requires a selected active supports, weakens,
+      contradicts or consistent-with from Observation, Measurement or Synthesis
+      to Hypothesis, Prediction or the target Conclusion. Report on the snapshot
+      at /relation_revisions. A generated/derived-from path satisfies a different
+      evidential rule, so RP_E_EVIDENTIAL_RELATION_NOT_ALLOWED is not reused.
+      Suppress this absence cascade when results are absent or a selected
+      otherwise qualifying evaluation has an inactive state or unselected endpoint;
+      retain those primary diagnoses and all independent errors.
+  - {code: RP_E_CONFIRMATORY_PREDECLARATION_ORDER, stage: project-semantics, severity: error, family: confirmatory_temporal_predeclaration}
+  - {code: RP_E_CONFIRMATORY_ARTIFACT_REQUIRED, stage: project-semantics, severity: error, family: confirmatory_provenance}
+
+  # C2 outer acquisition checks; never a snapshot binding verdict.
+  - {code: RP_E_REPORT_JSON_INVALID, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+  - {code: RP_E_REPORT_SCHEMA_INVALID, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+  - {code: RP_E_REPORT_BODY_UNAVAILABLE, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+
+  # C3 outer pair binding; no embedded outcome contamination.
+  - {code: RP_E_REPORT_SOURCE_SEPARATION, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+  - {code: RP_E_REPORT_LABEL_REJECTED, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+  - {code: RP_E_REPORT_SUBJECT_INDEX_INCOMPLETE, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+  - {code: RP_E_REPORT_SUBJECT_CONTENT_INCOMPLETE, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+  - {code: RP_E_REPORT_SUBJECT_ATTRIBUTION, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+  - {code: RP_E_REPORT_SUBJECT_WIRE_CONTRACT, stage: project-semantics, severity: error, family: claim_chain_validation_report}
+
+  # Bounded execution.
+  - {code: RP_E_RESOURCE_REPORT_PAIRS_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_REPORT_SUBJECT_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_REPORT_SIZE_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_REPORT_CAPTURE_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_REPORT_NODES_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_REPORT_COUNT_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_SCANNED_FILES_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_SCANNED_DIRECTORIES_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_FILE_SIZE_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_TOTAL_BYTES_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_NESTING_DEPTH_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_SCALAR_LENGTH_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_COLLECTION_SIZE_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_MAPPING_KEYS_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_SEQUENCE_ITEMS_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_ARTIFACT_SIZE_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_ARTIFACT_AGGREGATE_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_GRAPH_NODES_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_GRAPH_EDGES_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_TRAVERSAL_DEPTH_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_RESULT_ROWS_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_OUTPUT_SIZE_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_EXTENSION_SCHEMAS_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_EXTENSION_SCHEMA_BYTES_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_SCHEMA_REF_DEPTH_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_SCHEMA_EVALUATION_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_REGEX_INPUT_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  # Cooperative elapsed-time stop at a checkpoint, not a hard wall-clock timeout.
+  # Sticky incomplete; no index/body success; terminal invalid/1/data:null.
+  # Separate reason from findings-cap exhaustion, never a truncation warning.
+  - {code: RP_E_RESOURCE_DEADLINE_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_E_RESOURCE_DIRECTORY_ENTRIES_EXCEEDED, stage: resource-limit, severity: error, family: resource_limit}
+  - {code: RP_W_FINDINGS_TRUNCATED, stage: resource-limit, severity: warning, family: finding_truncation}
+
+  # Process-level terminal conditions.
+  # Explicit caller-token cancellation; OS signal installation is deferred.
+  # Sticky terminal interrupted/130/data:null; wins a simultaneous expiry check.
+  - {code: RP_E_INTERRUPTED, stage: launcher, severity: error, family: interrupted}
+  - {code: RP_E_INTERNAL_INVARIANT, stage: launcher, severity: error, family: internal_error}

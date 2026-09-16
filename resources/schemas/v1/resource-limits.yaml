@@ -1,0 +1,274 @@
+# Phase 1A default and maximum resource budgets. Byte values are exact.
+schema: rp/resource-limits/v1
+status: phase1-task0-frozen
+version: 1
+
+override_policy:
+  explicit_cli_override_required: true
+  defaults_may_be_lowered: true
+  maxima_must_not_be_exceeded: true
+  test_only_limits_require_fixture_harness: true
+  artifact_budget_exhaustion_invalidates_verification_not_research_data: true
+
+limits:
+  canonical_files:
+    default: 100000
+    maximum: 500000
+    unit: files
+    finding: RP_E_RESOURCE_SCANNED_FILES_EXCEEDED
+  scanned_directories:
+    default: 20000
+    maximum: 100000
+    unit: directories
+    finding: RP_E_RESOURCE_SCANNED_DIRECTORIES_EXCEEDED
+  directory_entries:
+    default: 100000
+    maximum: 100000
+    minimum: 0
+    unit: inventoried-names-per-directory-excluding-dot-and-dotdot
+    finding: RP_E_RESOURCE_DIRECTORY_ENTRIES_EXCEEDED
+    admission: before-cloning-name-including-noncanonical-invalid-and-symlink-names
+    overflow: abort-whole-canonical-scan-with-generic-unattributed-error; discard-prefix; no-tail-count
+    overrides: lower-only-ProjectLimits-API; clamp-to-hard-maximum
+  yaml_bytes_per_object:
+    default: 4194304
+    maximum: 4194304
+    unit: bytes
+    finding: RP_E_RESOURCE_FILE_SIZE_EXCEEDED
+  whole_project_yaml_bytes:
+    default: 536870912
+    maximum: 2147483648
+    unit: bytes
+    finding: RP_E_RESOURCE_TOTAL_BYTES_EXCEEDED
+  yaml_nesting_depth:
+    default: 64
+    maximum: 64
+    unit: levels
+    finding: RP_E_RESOURCE_NESTING_DEPTH_EXCEEDED
+  scalar_bytes:
+    default: 262144
+    maximum: 1048576
+    unit: bytes
+    finding: RP_E_RESOURCE_SCALAR_LENGTH_EXCEEDED
+  mapping_keys:
+    default: 4096
+    maximum: 16384
+    unit: keys-per-mapping
+    finding: RP_E_RESOURCE_MAPPING_KEYS_EXCEEDED
+  sequence_items:
+    default: 65536
+    maximum: 100000
+    unit: items-per-sequence
+    finding: RP_E_RESOURCE_SEQUENCE_ITEMS_EXCEEDED
+  graph_nodes:
+    default: 100000
+    maximum: 500000
+    unit: nodes
+    finding: RP_E_RESOURCE_GRAPH_NODES_EXCEEDED
+  graph_edges:
+    default: 1000000
+    maximum: 8000000
+    unit: edges
+    finding: RP_E_RESOURCE_GRAPH_EDGES_EXCEEDED
+  traversal_depth:
+    default: 4096
+    maximum: 65536
+    unit: edges
+    finding: RP_E_RESOURCE_TRAVERSAL_DEPTH_EXCEEDED
+  query_rows:
+    default: 10000
+    maximum: 100000
+    unit: rows
+    finding: RP_E_RESOURCE_RESULT_ROWS_EXCEEDED
+  findings:
+    default: 1000
+    maximum: 10000
+    maximum_scope: fixture-harness-only
+    unit: findings
+    finding: RP_W_FINDINGS_TRUNCATED
+    marker_included_in_total: true
+    ordinary_api_range: [1, 1000]
+    ordinary_api_out_of_range: clamp-to-range
+    zero_request: use-positive-minimum-1
+    fixture_harness_raise_api: not-yet-exposed
+    scope: one-validation-including-files-phases-and-nested-subject-helper-production
+    boundary: preserve-all-at-exact-cap; first-overflow-replaces-final-retained-slot-with-one-marker
+    retention_order: deterministic-producer-order-before-existing-presentation-sort
+    admission_metadata: monotonic-sequence-preserved-across-forks-dedup-and-presentation-sort
+    duplicate_policy: retain-first-admitted-copy-without-refunding-production
+    command_continuation: carry-original-consumed-allowance-and-admission-metadata-not-displayed-length
+    marker_space: evict-last-admitted-retained-finding-only-if-output-is-full; otherwise-append-marker
+    on_overflow: cancel-diagnostic-production; sticky-incomplete-and-observed-error; never-success
+    nested_subjects: isolated-transcripts-share-nonrefundable-enclosing-allowance; incomplete-body-unavailable
+    note: >-
+      The marker is a warning, not evidence of successful validation. Retained
+      Findings are not a validity oracle: an error can be displaced by the marker,
+      and cancelled checks can be incomplete even without a displayed error.
+      No independent fresh allowance is granted per file, phase or nested helper.
+      Ordinary API requests cannot raise the default; the 10000 ceiling remains
+      reserved for a future explicit fixture-harness-only entrypoint.
+  rendered_output_bytes:
+    default: 33554432
+    maximum: 134217728
+    unit: bytes
+    finding: RP_E_RESOURCE_OUTPUT_SIZE_EXCEEDED
+  extension_schemas:
+    default: 256
+    maximum: 256
+    unit: schemas
+    finding: RP_E_RESOURCE_EXTENSION_SCHEMAS_EXCEEDED
+  extension_schema_aggregate_bytes:
+    default: 16777216
+    maximum: 16777216
+    unit: bytes
+    finding: RP_E_RESOURCE_EXTENSION_SCHEMA_BYTES_EXCEEDED
+  extension_ref_depth:
+    default: 32
+    maximum: 32
+    unit: references
+    finding: RP_E_RESOURCE_SCHEMA_REF_DEPTH_EXCEEDED
+  schema_branch_evaluations:
+    default: 1000000
+    maximum: 8000000
+    unit: evaluated-branches-per-project
+    finding: RP_E_RESOURCE_SCHEMA_EVALUATION_EXCEEDED
+  regex_input_bytes:
+    default: 262144
+    maximum: 1048576
+    unit: bytes-per-input
+    finding: RP_E_RESOURCE_REGEX_INPUT_EXCEEDED
+  local_artifact_bytes_per_item:
+    default: 1073741824
+    maximum: 1099511627776
+    maximum_scope: explicit-artifact-policy
+    unit: bytes
+    finding: RP_E_RESOURCE_ARTIFACT_SIZE_EXCEEDED
+  local_artifact_aggregate_bytes:
+    default: 4294967296
+    maximum: 4398046511104
+    maximum_scope: explicit-artifact-policy
+    unit: bytes
+    finding: RP_E_RESOURCE_ARTIFACT_AGGREGATE_EXCEEDED
+  report_document_bytes:
+    default: 4194304
+    maximum: 4194304
+    unit: bytes
+    finding: RP_E_RESOURCE_REPORT_SIZE_EXCEEDED
+  report_captured_bytes:
+    default: 16777216
+    maximum: 16777216
+    unit: actual-captured-bytes-per-project-including-failures
+    finding: RP_E_RESOURCE_REPORT_CAPTURE_EXCEEDED
+  report_parsed_nodes:
+    default: 524288
+    maximum: 524288
+    unit: attempted-value-nodes-per-project-including-failures
+    finding: RP_E_RESOURCE_REPORT_NODES_EXCEEDED
+  report_distinct_references:
+    default: 256
+    maximum: 256
+    unit: distinct-artifact-ids-including-unresolved-and-https
+    finding: RP_E_RESOURCE_REPORT_COUNT_EXCEEDED
+  report_document_nodes:
+    default: 131072
+    maximum: 131072
+    unit: attempted-value-nodes-per-document
+    finding: RP_E_RESOURCE_REPORT_NODES_EXCEEDED
+  report_binding_pairs:
+    default: 256
+    maximum: 256
+    unit: snapshot-artifact-pairs-including-shared-missing-and-https
+    finding: RP_E_RESOURCE_REPORT_PAIRS_EXCEEDED
+  report_subject_batch_work:
+    default: 2000000
+    maximum: 2000000
+    unit: conservative-work-reservations-per-project-including-failures
+    finding: RP_E_RESOURCE_REPORT_SUBJECT_EXCEEDED
+  report_subject_batch_bytes:
+    default: 16777216
+    maximum: 16777216
+    unit: conservative-logical-byte-reservations-per-project-including-failures
+    finding: RP_E_RESOURCE_REPORT_SUBJECT_EXCEEDED
+  command_deadline_seconds:
+    default: 60
+    maximum: 600
+    unit: seconds
+    finding: RP_E_RESOURCE_DEADLINE_EXCEEDED
+    enforcement: cooperative-monotonic-checkpoints-not-hard-wall-time
+    scope: one-command-including-validation-navigation-and-rendering
+    caller_api: ExecutionBudget-duration-clamped-to-1ms-through-600s
+    cli_override: none
+    token: explicit-caller-owned-Arc-AtomicBool; no-OS-signal-handler
+    latch: first-observed-stop-sticky; cancellation-wins-if-both-observed-at-one-checkpoint
+
+report_acquisition:
+  scope: C2-unbound-candidates-only
+  byte_order: scientific-artifacts-then-reports-stable-id-order-within-class
+  shared_actual_artifact_byte_allowance: true
+  capture_work_refunded_on_failure: false
+  parser_work_refunded_on_failure: false
+  distinct_reference_overflow: artifact-phase-aborted-before-any-artifact-read
+  distinct_reference_overflow_rationale: incomplete-bounded-id-set-must-not-trigger-unbounded-allocation-or-quadratic-membership-scans
+  distinct_reference_overflow_verification: no-artifact-byte-verification-or-report-candidates
+  independent_non_artifact_diagnostics_on_overflow: continue
+  raw_bytes_retained_after_parsing: false
+  capture_and_hash: same-chunks-one-secure-descriptor
+  candidate_admission: stable-descriptor-and-manifest-size-sha256-then-strict-json-and-wire-schema
+  parser_hard_ceilings:
+    container_depth: 64
+    decoded_scalar_or_key_bytes: 262144
+    keys_per_mapping: 4096
+    items_per_sequence: 65536
+  limits_are_not_heap_or_rss_guarantees: true
+  broad_deadline_and_finding_caps: enclosing-validation-context-shared-with-C2
+
+report_binding:
+  scope: C3-runtime-per-snapshot-artifact-pair
+  pair_overflow: abort-binding-batch-before-any-subject-evaluation-no-pair-success
+  expected_body_retention: one-pair-at-a-time-no-report-or-body-cache-duplication
+  subject_budget: one-shared-meter-per-project-validation-no-failure-refund
+  subject_graph_caps: {objects: 128, edges: 1024, serialized_value_and_edge_bytes: 4194304}
+  compact_subject_finding_cap: 16384
+  expected_body_bytes: 4194304
+  expected_body_json_retention_precharge: 16-times-serialized-size
+  expected_body_serialization_and_equality_work_precharge: 16-times-serialized-size
+  same_read_observation_caps: {records: 4096, owner_consumer_slots: 16384, compact_findings: 16384, logical_bytes: 4194304}
+  observation_retention_exhaustion: RP_E_RESOURCE_REPORT_SUBJECT_EXCEEDED
+  prerequisite_and_profile_helper_work: precharged-before-evaluation
+  label_checks: reuse-role-cut-effective-access-store-with-metered-comparison
+  limits_are_not_heap_or_rss_guarantees: true
+  execution_and_findings: enclosing-command-state-shared-with-C3; stopped-body-unavailable; no-binding-success
+
+cancellation:
+  implementation: cooperative-execution-budget-slice
+  signal_handling: deferred; explicit-caller-token-only
+  terminal_findings: distinct-from-findings-cap; never-RP_W_FINDINGS_TRUNCATED-for-execution-stop
+  completion: stopped-validation-is-incomplete-and-withholds-index
+  rendering: buffer-with-byte-cap-and-checkpoints-on-writes; newline-inside-32MiB; discard-before-stdout-on-stop
+  terminal_rendering: one-small-envelope-bypasses-stopped-budget-without-replenishing-ordinary-allowance
+  stdout: selected-envelope-written-to-completion-without-midwrite-cancellation; blocking-write-not-interruptible
+  init: check-before-staging-between-steps-before-publication; after-publication-stop-leaves-complete-tree-no-rollback
+  limitations: >-
+    This is not a hard 60s wall-clock limit. jsonschema 0.54 Validator::iter_errors
+    eagerly collects a Vec of all errors before returning its iterator; no public
+    evaluation callback exists. Checkpoints before/after calls cannot interrupt
+    in-progress compilation/evaluation, eager error allocation or regex execution.
+    schema_branch_evaluations and eager allocation ceilings are not implemented by
+    this budget. Blocking filesystem syscalls and stdout cannot be interrupted.
+    NONBLOCK target opens avoid FIFO-open traps before regular-file fstat, not all
+    filesystem stalls. JCS serialization, DTO construction/cloning, some helper
+    collection/sorting and schema registry building remain indivisible boundary
+    work; existing pre-DTO heap/allocation limits are not silently solved. Legacy
+    Option/infallible ProjectIndex APIs are not universally typed stop APIs: CLI
+    uses checked navigation/access paths plus command-final and render checks.
+  check_points:
+    - directory-scan
+    - file-read
+    - yaml-event-construction
+    - schema-evaluation
+    - graph-edge-insertion
+    - graph-traversal
+    - artifact-hash-chunk
+    - query-row-production
+    - output-render-chunk
+  partial_success_forbidden: true

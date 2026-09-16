@@ -1,0 +1,40 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-result-without-test
+fixture: claim-chain-confirmatory-v1
+title: Selected stress result has no result-of Test mapping
+description: Remove only the stress result-of relation; the result stays connected through outcome
+  and Synthesis edges.
+expected_failure:
+  exit_code: 1
+  finding_family: confirmatory_result_mapping
+  error_code: RP_E_CONFIRMATORY_RESULT_TEST_REQUIRED
+  target_file: .research/claim-chains/confirmatory-mixed-outcome-chain--cch_01J00000000000000000000053.yaml
+  target_field: relation_revisions
+mutation:
+  mode: structured_ast
+  target_file: .research/claim-chains/confirmatory-mixed-outcome-chain--cch_01J00000000000000000000053.yaml
+  operation: set_value
+  path: /relation_revisions
+  value:
+  - rel_01J00000000000000000000041
+  - rel_01J00000000000000000000047
+  - rel_01J00000000000000000000048
+  - rel_01J00000000000000000000064
+  - rel_01J00000000000000000000058
+  - rel_01J00000000000000000000059
+  - rel_01J00000000000000000000049
+  - rel_01J00000000000000000000050
+  - rel_01J00000000000000000000056
+  - rel_01J00000000000000000000060
+  - rel_01J00000000000000000000052
+  - rel_01J00000000000000000000053
+  - rel_01J00000000000000000000057
+  - rel_01J00000000000000000000061
+  - rel_01J00000000000000000000062
+  - rel_01J00000000000000000000063
+  - rel_01J00000000000000000000054
+  - rel_01J00000000000000000000055
+maintenance:
+  recompute_source_closure_sha256:
+  - .research/claim-chains/confirmatory-mixed-outcome-chain--cch_01J00000000000000000000053.yaml

@@ -1,0 +1,35 @@
+schema: rp/scientific-relation-revision/v1
+id: rel_01J00000000000000000000044
+logical_id: relation-candidate-support
+record_state: frozen
+type: supports
+from_revision: meas_01J00000000000000000000025
+to_revision: hyp_01J00000000000000000000011
+scope:
+  statement: Synthetic overview relation scoped to this fixture.
+  conditions:
+  - Use only exact frozen revision endpoints.
+  exclusions:
+  - Does not represent a real scientific claim.
+assertion_mode: asserted
+relation_state: invalidated
+rationale: The stress conflict and shared reference source prevent treating the candidate measurement
+  as broad independent support.
+revision:
+  parents:
+  - id: rel_01J00000000000000000000043
+    change_type: evidence_incorporation
+  summary: Invalidates the support assertion as evidence for the broad all-envelope claim.
+created_at: '2026-02-02T12:30:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - meas_01J00000000000000000000025
+  - meas_01J00000000000000000000026
+  external_references:
+  - ref_01J00000000000000000000004
+access:
+  level: internal
+  compartments: []

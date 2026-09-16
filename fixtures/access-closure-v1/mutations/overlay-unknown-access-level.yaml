@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-unknown-access-level
+fixture: access-closure-v1
+title: Unknown access level
+description: Replace an internal control node level with undeclared confidential.
+expected_failure:
+  exit_code: 1
+  finding_family: access_level_enum
+  error_code: RP_E_ACCESS_LEVEL_UNKNOWN
+  target_file: .research/records/hypotheses/hypothesis-internal-control--hyp_01J00000000000000000000016.yaml
+  target_field: access.level
+mutation:
+  mode: structured_ast
+  target_file: .research/records/hypotheses/hypothesis-internal-control--hyp_01J00000000000000000000016.yaml
+  operation: set_value
+  path: /access/level
+  value: confidential

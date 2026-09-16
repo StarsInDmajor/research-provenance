@@ -1,0 +1,34 @@
+schema: rp/assessment/v1
+id: asm_01J00000000000000000000073
+target:
+  type: node_revision
+  id: hyp_01J00000000000000000000016
+assessment_scope: access-fixture
+epistemic_status: proposed
+evidence_evaluation:
+  evidence_quality: unknown
+  agreement: unknown
+  independence: unknown
+  directness: unknown
+  decision_confidence: unknown
+  rationale: Synthetic same-lane predecessor used only to isolate Assessment supersession access closure.
+  limitations:
+  - No epistemic judgement is asserted.
+quantitative_assessment: null
+assessed_at: '2026-01-26T10:00:00Z'
+assessed_by:
+  type: human
+  id: researcher
+source:
+  revisions: []
+  relations: []
+  artifacts: []
+  external_references:
+  - ref_01J00000000000000000000003
+  events: []
+supersedes_assessments: []
+review_assurance: human-reviewed
+access:
+  level: restricted
+  compartments:
+  - partner-beta

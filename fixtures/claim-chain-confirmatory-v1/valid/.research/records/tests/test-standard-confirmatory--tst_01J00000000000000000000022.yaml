@@ -1,0 +1,43 @@
+schema: rp/node-revision/v1
+id: tst_01J00000000000000000000022
+logical_id: test-standard-confirmatory
+kind: Test
+record_state: frozen
+title: Standard-envelope confirmatory test
+statement: Evaluate standard and retrospective results against the frozen prediction.
+scope:
+  research_run_id: run_01J00000000000000000000002
+  statement: Synthetic confirmatory fixture only.
+test:
+  target_revision_ids:
+  - hyp_01J00000000000000000000011
+  - pred_01J00000000000000000000020
+  method_revision: mth_01J00000000000000000000021
+  evaluation_criteria:
+  - Classify each result as consistent, weakening, or contradictory relative to the frozen thresholds.
+assumptions:
+- Result computation follows the frozen method.
+limitations:
+- The archival analysis is retrospective with respect to observation, not computation.
+revision:
+  parents: []
+  summary: Frozen standard and retrospective test.
+created_at: '2026-01-02T09:30:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - hyp_01J00000000000000000000011
+  - pred_01J00000000000000000000020
+  - mth_01J00000000000000000000021
+  artifacts: []
+  external_references:
+  - ref_01J00000000000000000000003
+  events: []
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-confirmatory-v1
+- synthetic

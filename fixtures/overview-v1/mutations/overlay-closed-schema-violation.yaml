@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-closed-schema-violation
+fixture: overview-v1
+title: Closed-schema unknown property
+description: Add one undeclared top-level Project property outside extensions.
+expected_failure:
+  exit_code: 1
+  finding_family: closed_schema_violation
+  error_code: RP_E_CLOSED_SCHEMA_UNKNOWN_PROPERTY
+  target_file: .research/project.yaml
+  target_field: experimental_unregistered_flag
+mutation:
+  mode: structured_ast
+  target_file: .research/project.yaml
+  operation: set_value
+  path: /experimental_unregistered_flag
+  value: true

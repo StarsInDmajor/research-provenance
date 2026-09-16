@@ -1,0 +1,306 @@
+# Deterministic, non-normative workload generator contract for Phase 1 benchmarks.
+schema: rp/scale-generator-contract/v1
+status: phase1-task0-frozen
+version: 1
+resource_limits: resource-limits.yaml
+benchmark_budget: benchmark-budget.yaml
+
+purpose:
+  normative_scientific_fixture: false
+  generated_output_committed: false
+  uses:
+    - parser and schema throughput benchmark
+    - bounded file-scan benchmark
+    - in-memory graph construction benchmark
+    - overview and query latency benchmark
+    - optional SQLite Phase 1B comparison
+    - runtime ADR evidence
+  forbidden_uses:
+    - conformance authority
+    - scientific evidence
+    - replacement for hand-audited conformance fixture modules
+    - runtime-specific optimization assumptions
+
+invocation_model:
+  conceptual_command: >-
+    rp-scale-generate --profile <smoke|workstation|stress>
+    --output <empty-directory> --seed 20260830
+  output: self-contained synthetic project root
+  overwrite_existing_output: false
+  network_required: false
+  current_clock_allowed: false
+
+reproducibility:
+  default_seed: 20260830
+  generator_version: rp/scale-generator/v1
+  timestamp_epoch: "2026-01-01T00:00:00Z"
+  as_of: "2027-01-01T00:00:00Z"
+  pseudorandom_stream:
+    algorithm: sha256-counter-v1
+    input_bytes: >-
+      UTF-8 bytes of "rp-scale-generator/v1\u0000<seed-decimal>\u0000<stream-name>\u0000<counter-decimal>".
+    seed_decimal: unsigned base-10 with no leading zero except zero
+    counter_decimal: unsigned base-10 with no leading zero except zero
+    counter_start: 0
+    block_bytes: 32
+    stream_bytes: concatenate SHA-256 digest bytes in increasing counter order
+    stream_names: stable ASCII slugs declared by the generator source
+  bounded_integer:
+    algorithm: unsigned-64-rejection-v1
+    byte_order: big-endian
+    draw_bytes: 8
+    requested_range: half-open [minimum, maximum)
+    procedure:
+      - Let width = maximum - minimum; reject width <= 0.
+      - Let limit = 2^64 - (2^64 mod width).
+      - Draw the next unsigned 64-bit stream value x.
+      - If x >= limit, discard x and draw again.
+      - Return minimum + (x mod width).
+  weighted_apportionment:
+    algorithm: largest-remainder-v1
+    procedure:
+      - For each key compute numerator = total * positive integer weight.
+      - Assign floor(numerator / sum_weights).
+      - Distribute remaining units by descending fractional remainder.
+      - Break equal remainders by UTF-8 bytewise lexicographic key order.
+  deterministic_permutation:
+    algorithm: fisher-yates-v1
+    procedure:
+      - Iterate i from length - 1 down to 1.
+      - Draw j with bounded_integer range [0, i + 1).
+      - Swap positions i and j.
+  id_generation:
+    algorithm: typed-ulid-v1
+    timestamp_epoch: "2026-01-01T00:00:00.000Z"
+    timestamp_offset: global object ordinal in milliseconds, starting at zero
+    timestamp_component: low 48 bits of Unix epoch milliseconds; overflow is an error
+    randomness_component: first 10 bytes from stream name "ulid/<schema>/<ordinal>"
+    encoding: uppercase Crockford Base32, 26 characters, canonical leading-bit constraint
+    prefix: schema-specific prefix from the v1 ID registry plus underscore
+    uniqueness: duplicate generated IDs are an internal error; no retry
+    cross_runtime_identity_required: true
+  path_generation:
+    slug: stable lowercase ASCII slug from object role and ordinal
+    filename: <slug>--<typed-id>.yaml
+    directory: canonical directory for the object schema and built-in kind
+    collision: internal-error
+  serialization:
+    yaml_subset: restricted YAML 1.2 Core
+    presentation_order: presentation-order.yaml
+    timestamps: quoted RFC 3339
+    line_endings: LF
+    terminal_newline: true
+  output_manifest:
+    path: scale-manifest.json
+    json_schema: scale-manifest.schema.json
+    fields:
+      - schema: rp/scale-manifest/v1
+      - generator_version
+      - profile
+      - seed
+      - as_of
+      - object_counts
+      - relation_type_counts
+      - kind_counts
+      - access_counts
+      - sorted_path_sha256_entries
+      - aggregate_sha256
+    path_entry_scope:
+      includes: every generated file except scale-manifest.json
+      excludes:
+        - scale-manifest.json
+      path_representation: normalized project-relative slash-separated UTF-8
+      entry_order: UTF-8 bytewise lexicographic path order
+      digest: SHA-256 over exact generated file bytes, represented as sha256:<lowercase-hex>
+    aggregate:
+      input: sorted_path_sha256_entries array only
+      serialization: RFC 8785 JCS
+      digest: SHA-256 over serialized UTF-8 bytes, represented as sha256:<lowercase-hex>
+    self_inclusion_forbidden: true
+
+profiles:
+  smoke:
+    intent: fast correctness and developer iteration
+    canonical_counts:
+      project: 1
+      research_run: 5
+      external_reference: 25
+      artifact_manifest: 50
+      node_revision: 1000
+      scientific_relation_revision: 2500
+      assessment: 250
+      research_thread: 25
+      thread_binding: 1000
+      claim_chain_snapshot: 20
+    approximate_total_objects: 4876
+    required_for_runtime_adr: true
+
+  workstation:
+    intent: representative long-lived single-researcher repository
+    canonical_counts:
+      project: 1
+      research_run: 50
+      external_reference: 250
+      artifact_manifest: 500
+      node_revision: 10000
+      scientific_relation_revision: 30000
+      assessment: 5000
+      research_thread: 200
+      thread_binding: 15000
+      claim_chain_snapshot: 100
+    approximate_total_objects: 61101
+    required_for_runtime_adr: true
+
+  stress:
+    intent: bounded upper stress case, not an expected median project
+    canonical_counts:
+      project: 1
+      research_run: 200
+      external_reference: 1000
+      artifact_manifest: 2500
+      node_revision: 50000
+      scientific_relation_revision: 150000
+      assessment: 25000
+      research_thread: 1000
+      thread_binding: 75000
+      claim_chain_snapshot: 500
+    approximate_total_objects: 305201
+    required_for_runtime_adr: false
+    required_before_optional_sqlite_decision: true
+
+semantic_distribution:
+  built_in_kinds:
+    coverage: all-15
+    minimum_each: 1-percent-of-node-revisions
+    weights:
+      Dataset: 8
+      Question: 7
+      Hypothesis: 10
+      Observation: 12
+      Measurement: 18
+      Method: 7
+      Test: 6
+      Prediction: 6
+      Synthesis: 7
+      Interpretation: 6
+      Decision: 3
+      Conclusion: 4
+      Blocker: 2
+      NextAction: 3
+      PaperClaim: 1
+
+  node_revision_dag:
+    roots_percent: 70
+    linear_child_percent: 20
+    branch_child_percent: 8
+    merge_percent: 2
+    max_parents: 3
+    cycles: 0
+    multiple_heads_required: true
+    resolved_merges_required: true
+
+  relation_graph:
+    compatibility_matrix: schema-v1 relation matrix
+    compatible_only: true
+    all_relation_types_present: true
+    active_percent: 95
+    invalidated_lineage_percent: 5
+    endpoint_selection: deterministic-degree-bounded
+    maximum_generated_out_degree: 64
+
+  assessments:
+    target_node_percent: 80
+    target_relation_percent: 20
+    concurrent_disagreement_groups_required: true
+    last_timestamp_wins_aggregation: false
+
+  access:
+    declared_distribution_percent:
+      public: 10
+      internal: 60
+      restricted: 25
+      exclusive: 5
+    compartment_vocabulary:
+      - analysis-alpha
+      - collaboration-beta
+      - control-room
+      - embargo-2027
+      - instrument-gamma
+      - lineage-delta
+      - pipeline-epsilon
+      - proposal-zeta
+    dependency_closure_valid: true
+    declared_access_must_dominate_required_floor: true
+    downgrade_cases: 0
+
+  threads:
+    root_and_nested_branches_required: true
+    all_binding_roles_present: true
+    multi_thread_same_target_required: true
+
+  claim_chains:
+    profile_distribution_percent:
+      minimum-v1: 50
+      evidential-v1: 35
+      confirmatory-v1: 15
+    selected_node_count_range: [4, 64]
+    selected_relation_count_range: [3, 128]
+    valid_only: true
+    source_closure_digest_required: true
+
+  freshness:
+    as_of: "2027-01-01T00:00:00Z"
+    statuses_required:
+      - unknown
+      - fresh
+      - review-due
+      - stale
+    currentness_independent: true
+
+artifacts:
+  payload_mode: deterministic-small-files
+  payload_size_bytes: 64
+  media_type: application/octet-stream
+  path_prefix: data/generated/
+  digest_required: true
+  no_base64_in_yaml: true
+
+benchmark_protocol:
+  host_metadata_required:
+    - runtime and exact version
+    - operating system
+    - CPU model and logical core count
+    - memory total
+    - filesystem type
+    - cold or warm page-cache condition
+  candidates:
+    - Node 22 plus TypeScript
+    - Rust
+    - Python
+  operations:
+    - parse-and-schema-validate
+    - whole-project-semantic-validate
+    - build-in-memory-projection
+    - overview
+    - show-exact-id
+    - history-logical-id
+    - query-kind-and-thread
+    - chain-validate
+    - access-explain
+    - export-check
+  repetitions:
+    warmup: 2
+    measured: 7
+    reported:
+      - median-wall-time
+      - p95-wall-time
+      - peak-resident-memory
+      - objects-per-second
+  correctness_before_timing: true
+  same_generated_manifest_across_candidates: true
+  timeout_and_resource_values: resource-limits.yaml
+  acceptance_thresholds: benchmark-budget.yaml
+  winner_rule: >-
+    Runtime selection is based on correctness, operational simplicity,
+    bounded latency, memory, concurrency isolation, and packaging together;
+    fastest single measurement does not automatically win.

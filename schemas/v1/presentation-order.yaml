@@ -1,0 +1,186 @@
+# Human-readable serialization order; mapping order does not affect JCS digests.
+schema: rp/presentation-order/v1
+status: g7-approved-phase0-baseline
+version: 1
+
+contract:
+  parser_order_sensitive: false
+  canonical_writer_must_emit_declared_order: true
+  hand_authored_files_should_normalize_before_commit: true
+  omitted_optional_fields_are_skipped: true
+  digest_uses_rfc8785_jcs_not_yaml_order: true
+
+objects:
+  rp/project/v1:
+    - schema
+    - id
+    - slug
+    - title
+    - created_at
+    - schema_policy
+    - repository_policy
+    - access_defaults
+    - redaction_policy
+    - validation_policy
+    - extensions
+
+  rp/node-revision/v1:
+    - schema
+    - id
+    - logical_id
+    - kind
+    - record_state
+    - title
+    - statement
+    - scope
+    - $kind_payload
+    - assumptions
+    - limitations
+    - revision
+    - created_at
+    - created_by
+    - temporal
+    - source
+    - access
+    - tags
+    - narrative
+    - extensions
+
+  rp/assessment/v1:
+    - schema
+    - id
+    - target
+    - assessment_scope
+    - epistemic_status
+    - evidence_evaluation
+    - quantitative_assessment
+    - assessed_at
+    - assessed_by
+    - source
+    - supersedes_assessments
+    - review_assurance
+    - access
+    - extensions
+
+  rp/scientific-relation-revision/v1:
+    - schema
+    - id
+    - logical_id
+    - record_state
+    - type
+    - from_revision
+    - to_revision
+    - scope
+    - assertion_mode
+    - relation_state
+    - rationale
+    - revision
+    - created_at
+    - created_by
+    - source
+    - access
+    - extensions
+
+  rp/research-thread/v1:
+    - schema
+    - id
+    - title
+    - objective
+    - root_question_revision
+    - parent_thread_id
+    - forked_from_thread_id
+    - fork_reason
+    - created_at
+    - created_by
+    - access
+    - extensions
+
+  rp/thread-binding/v1:
+    - schema
+    - id
+    - logical_id
+    - record_state
+    - thread_id
+    - target
+    - role
+    - rationale
+    - revision
+    - created_at
+    - created_by
+    - access
+    - extensions
+
+  rp/claim-chain-snapshot/v1:
+    - schema
+    - id
+    - thread_id
+    - title
+    - root_node_revisions
+    - target_node_revision
+    - validation_policy
+    - node_revisions
+    - relation_revisions
+    - source_closure_sha256
+    - validation_report
+    - created_at
+    - created_by
+    - access
+    - extensions
+
+  rp/external-reference/v1:
+    - schema
+    - id
+    - type
+    - canonical_uri
+    - foreign_key
+    - display_label
+    - retrieved_at
+    - source_version
+    - trust_tags
+    - access
+    - extensions
+
+  rp/artifact-manifest/v1:
+    - schema
+    - id
+    - title
+    - uri
+    - media_type
+    - size_bytes
+    - sha256
+    - created_at
+    - access
+    - extensions
+
+  rp/research-run/v1:
+    - schema
+    - id
+    - project_id
+    - title
+    - objective
+    - created_at
+    - created_by
+    - parent_run_id
+    - planned_inputs
+    - planned_outputs
+    - limitations
+    - access
+    - tags
+    - extensions
+
+kind_payload_keys:
+  Dataset: dataset
+  Question: question
+  Hypothesis: hypothesis
+  Observation: observation
+  Measurement: measurement
+  Method: method
+  Test: test
+  Prediction: prediction
+  Synthesis: synthesis
+  Interpretation: interpretation
+  Decision: decision
+  Conclusion: conclusion
+  Blocker: blocker
+  NextAction: next_action
+  PaperClaim: paper_claim

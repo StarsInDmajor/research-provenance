@@ -1,0 +1,41 @@
+schema: rp/node-revision/v1
+id: pred_01J00000000000000000000020
+logical_id: prediction-confirmatory-thresholds
+kind: Prediction
+record_state: frozen
+title: Predeclared quantitative prediction
+statement: Candidate median drift will be below 0.50 and P95 drift below 0.75 in the standard envelope.
+scope:
+  research_run_id: run_01J00000000000000000000002
+  statement: Synthetic confirmatory fixture only.
+prediction:
+  expected_outcome: Both standard-envelope candidate thresholds are satisfied.
+  test_conditions:
+  - Use protocol v3 and the declared standard-envelope selection.
+  acceptance_criteria:
+  - median_absolute_drift < 0.50
+  - p95_absolute_drift < 0.75
+assumptions:
+- The normalized thresholds are fixture-local.
+limitations:
+- The Prediction does not claim stress-envelope validity.
+revision:
+  parents: []
+  summary: Frozen prediction before any selected result computation.
+created_at: '2026-01-02T09:00:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - hyp_01J00000000000000000000011
+  artifacts: []
+  external_references:
+  - ref_01J00000000000000000000003
+  events: []
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-confirmatory-v1
+- synthetic

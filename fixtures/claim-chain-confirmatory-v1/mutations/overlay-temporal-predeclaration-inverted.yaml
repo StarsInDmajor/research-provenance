@@ -1,0 +1,21 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-temporal-predeclaration-inverted
+fixture: claim-chain-confirmatory-v1
+title: Test frozen after applicable results
+description: Move the standard Test creation time after its selected result-computation times.
+expected_failure:
+  exit_code: 1
+  finding_family: confirmatory_temporal_predeclaration
+  error_code: RP_E_CONFIRMATORY_PREDECLARATION_ORDER
+  target_file: .research/records/tests/test-standard-confirmatory--tst_01J00000000000000000000022.yaml
+  target_field: created_at
+mutation:
+  mode: structured_ast
+  target_file: .research/records/tests/test-standard-confirmatory--tst_01J00000000000000000000022.yaml
+  operation: set_value
+  path: /created_at
+  value: '2026-01-11T00:00:00Z'
+maintenance:
+  recompute_source_closure_sha256:
+  - .research/claim-chains/confirmatory-mixed-outcome-chain--cch_01J00000000000000000000053.yaml

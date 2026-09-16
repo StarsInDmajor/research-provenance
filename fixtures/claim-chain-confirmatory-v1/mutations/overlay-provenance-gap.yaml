@@ -1,0 +1,22 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-provenance-gap
+fixture: claim-chain-confirmatory-v1
+title: Selected result lacks a direct ArtifactManifest source
+description: Remove the candidate result direct source.artifacts entry; its Dataset remains referenced
+  but cannot satisfy artifact-backed result policy.
+expected_failure:
+  exit_code: 1
+  finding_family: confirmatory_provenance
+  error_code: RP_E_CONFIRMATORY_ARTIFACT_REQUIRED
+  target_file: .research/records/measurements/measurement-standard-candidate--meas_01J00000000000000000000025.yaml
+  target_field: source.artifacts
+mutation:
+  mode: structured_ast
+  target_file: .research/records/measurements/measurement-standard-candidate--meas_01J00000000000000000000025.yaml
+  operation: set_value
+  path: /source/artifacts
+  value: []
+maintenance:
+  recompute_source_closure_sha256:
+  - .research/claim-chains/confirmatory-mixed-outcome-chain--cch_01J00000000000000000000053.yaml

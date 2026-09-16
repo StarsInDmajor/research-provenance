@@ -1,0 +1,290 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cli-data.schema.json",
+  "title": "RP Phase 1A command-specific data envelopes",
+  "oneOf": [
+    { "$ref": "#/$defs/init" },
+    { "$ref": "#/$defs/validate" },
+    { "$ref": "#/$defs/overview" },
+    { "$ref": "#/$defs/show" },
+    { "$ref": "#/$defs/history" },
+    { "$ref": "#/$defs/diff" },
+    { "$ref": "#/$defs/query" },
+    { "$ref": "#/$defs/threadList" },
+    { "$ref": "#/$defs/threadShow" },
+    { "$ref": "#/$defs/chainValidate" },
+    { "$ref": "#/$defs/accessExplain" },
+    { "$ref": "#/$defs/exportCheck" },
+    { "$ref": "#/$defs/snapshot" },
+    { "$ref": "#/$defs/fixtureTest" }
+  ],
+  "$defs": {
+    "id": { "type": "string", "minLength": 1 },
+    "count": { "type": "integer", "minimum": 0 },
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "compartments"],
+      "properties": {
+        "level": { "enum": ["public", "internal", "restricted", "exclusive"] },
+        "compartments": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+        }
+      }
+    },
+    "freshness": { "enum": ["unknown", "fresh", "review-due", "stale"] },
+    "relativePath": {
+      "type": "string",
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+    },
+    "init": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "created_paths"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/init/v1" },
+        "project_id": { "$ref": "#/$defs/id" },
+        "created_paths": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/relativePath" }
+        }
+      }
+    },
+    "validate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "valid", "canonical_object_count", "stage3_ran"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/validate/v1" },
+        "valid": { "type": "boolean" },
+        "canonical_object_count": { "$ref": "#/$defs/count" },
+        "stage3_ran": { "type": "boolean" }
+      }
+    },
+    "overview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "object_counts", "unresolved_forks", "blockers", "next_actions", "freshness_counts"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/overview/v1" },
+        "object_counts": { "type": "object", "additionalProperties": { "$ref": "#/$defs/count" } },
+        "unresolved_forks": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "blockers": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "next_actions": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+        "freshness_counts": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["unknown", "fresh", "review-due", "stale"],
+          "properties": {
+            "unknown": { "$ref": "#/$defs/count" },
+            "fresh": { "$ref": "#/$defs/count" },
+            "review-due": { "$ref": "#/$defs/count" },
+            "stale": { "$ref": "#/$defs/count" }
+          }
+        }
+      }
+    },
+    "show": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "object", "derived"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/show/v1" },
+        "object": { "type": "object" },
+        "derived": { "type": "object" }
+      }
+    },
+    "history": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "logical_id", "revisions", "heads"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/history/v1" },
+        "logical_id": { "$ref": "#/$defs/id" },
+        "revisions": { "type": "array", "items": { "type": "object" } },
+        "heads": { "type": "array", "items": { "$ref": "#/$defs/id" } }
+      }
+    },
+    "diff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "revision_id_a", "revision_id_b", "changes"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/diff/v1" },
+        "revision_id_a": { "$ref": "#/$defs/id" },
+        "revision_id_b": { "$ref": "#/$defs/id" },
+        "changes": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "query": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "rows", "returned_count", "truncated"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/query/v1" },
+        "rows": { "type": "array", "items": { "type": "object" } },
+        "returned_count": { "$ref": "#/$defs/count" },
+        "truncated": { "type": "boolean" }
+      }
+    },
+    "threadList": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "threads", "returned_count"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/thread-list/v1" },
+        "threads": { "type": "array", "items": { "type": "object" } },
+        "returned_count": { "$ref": "#/$defs/count" }
+      }
+    },
+    "threadShow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "thread", "bindings"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/thread-show/v1" },
+        "thread": { "type": "object" },
+        "bindings": { "type": "array", "items": { "type": "object" } }
+      }
+    },
+    "chainValidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "snapshot_id", "profile", "valid"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/chain-validate/v1" },
+        "snapshot_id": { "$ref": "#/$defs/id" },
+        "profile": { "enum": ["minimum-v1", "evidential-v1", "confirmatory-v1"] },
+        "valid": { "type": "boolean" }
+      }
+    },
+    "dependencyStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from_id", "edge", "to_id"],
+      "properties": {
+        "from_id": { "$ref": "#/$defs/id" },
+        "edge": { "type": "string", "minLength": 1 },
+        "to_id": { "$ref": "#/$defs/id" }
+      }
+    },
+    "accessExplain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "target_id", "declared_access", "required_dependency_floor", "effective_access", "dependency_count", "ordered_dependency_explanation"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/access-explain/v1" },
+        "target_id": { "$ref": "#/$defs/id" },
+        "declared_access": { "$ref": "#/$defs/access" },
+        "required_dependency_floor": { "$ref": "#/$defs/access" },
+        "effective_access": { "$ref": "#/$defs/access" },
+        "dependency_count": { "$ref": "#/$defs/count" },
+        "ordered_dependency_explanation": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/dependencyStep" }
+        }
+      }
+    },
+    "exportCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "target_id", "eligible", "effective_access", "request"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/export-check/v1" },
+        "target_id": { "$ref": "#/$defs/id" },
+        "eligible": { "type": "boolean" },
+        "effective_access": { "$ref": "#/$defs/access" },
+        "request": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["level_ceiling", "allowed_compartments"],
+          "properties": {
+            "level_ceiling": { "enum": ["public", "internal", "restricted", "exclusive"] },
+            "allowed_compartments": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+            }
+          }
+        }
+      }
+    },
+    "fixtureTest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema", "fixture", "overlay", "expectation_matched", "observed_exit_code", "observed_error_codes"],
+      "properties": {
+        "schema": { "const": "rp/cli-data/fixture-test/v1" },
+        "fixture": { "type": "string", "minLength": 1 },
+        "overlay": { "type": "string", "minLength": 1 },
+        "expectation_matched": { "type": "boolean" },
+        "observed_exit_code": { "type": "integer" },
+        "observed_error_codes": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^RP_[EWI]_[A-Z0-9_]+$" }
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema",
+        "project",
+        "threads",
+        "objects",
+        "heads",
+        "relation_heads",
+        "assessments",
+        "thread_bindings",
+        "freshness",
+        "canonical_count"
+      ],
+      "properties": {
+        "schema": { "const": "rp/cli-data/snapshot/v1" },
+        "project": { "type": "object" },
+        "threads": {
+          "type": "array",
+          "items": { "type": "object" }
+        },
+        "objects": {
+          "type": "object",
+          "additionalProperties": { "type": "object" }
+        },
+        "heads": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/id" }
+          }
+        },
+        "relation_heads": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "assessments": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/id" }
+          }
+        },
+        "thread_bindings": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/id" }
+          }
+        },
+        "freshness": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/freshness" }
+        },
+        "canonical_count": { "$ref": "#/$defs/count" }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+schema: rp/node-revision/v1
+id: meas_01J00000000000000000000026
+logical_id: measurement-candidate-stress
+kind: Measurement
+record_state: frozen
+title: Candidate stress-envelope measurement
+statement: Procedure C has median normalized drift 0.88 in the stress envelope.
+scope:
+  statement: Synthetic high-humidity stress-envelope summary measurement.
+measurement:
+  quantity: median_absolute_drift
+  value: '0.88'
+  unit: normalized-unit
+  uncertainty:
+    kind: not-reported
+  method:
+    description: Synthetic summary calculation under the stress envelope.
+    protocol_reference: ref_01J00000000000000000000003
+assumptions:
+- The stress run and standard run share the same reference preparation.
+limitations:
+- Shared reference preparation prevents an independence claim.
+revision:
+  parents: []
+  summary: Initial synthetic stress measurement.
+created_at: '2026-02-01T12:10:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  external_references:
+  - ref_01J00000000000000000000003
+  - ref_01J00000000000000000000004
+access:
+  level: internal
+  compartments: []
+tags:
+- overview-v1
+- synthetic
+- stress-envelope

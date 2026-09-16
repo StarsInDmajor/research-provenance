@@ -1,0 +1,16 @@
+schema: rp/project/v1
+id: proj_01J00000000000000000000101
+slug: freshness-v1
+title: Additive Phase 1 freshness conformance fixture
+created_at: '2026-01-01T00:00:00Z'
+schema_policy:
+  core_version: v1
+  kind_registry: rp/kinds/v1
+  allowed_extensions: []
+repository_policy:
+  visibility: private
+  allowed_remotes: []
+access_defaults:
+  level: internal
+  compartments: []
+validation_policy: .research/policies/freshness-v1.yaml

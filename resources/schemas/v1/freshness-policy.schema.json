@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "freshness-policy.schema.json",
+  "title": "rp/freshness-policy/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "version", "default_status", "rules"],
+  "properties": {
+    "schema": { "const": "rp/freshness-policy/v1" },
+    "version": { "const": 1 },
+    "default_status": { "const": "unknown" },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "selector", "required_checks", "invalidates_on_change"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "selector": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["tags_any"],
+            "properties": {
+              "tags_any": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "required_checks": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": ["review-deadline", "external-source-version", "artifact-digest"]
+            }
+          },
+          "invalidates_on_change": { "type": "boolean" }
+        }
+      }
+    }
+  },
+  "$comment": "A policy rule applies when any selector tag is present. Stale conditions retain precedence even if another required check is unavailable."
+}

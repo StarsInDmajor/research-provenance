@@ -1,0 +1,41 @@
+schema: rp/node-revision/v1
+id: syn_01J00000000000000000000030
+logical_id: synthesis-exclusive-combined
+kind: Synthesis
+record_state: frozen
+title: Exclusive multi-branch synthesis
+statement: Combine partner, analysis, and exclusive control inputs.
+scope:
+  statement: Synthetic access-closure fixture only.
+synthesis:
+  combination_method: Join the three access branches without lowering any label.
+  rationale: The exclusive branch tests maximum level and compartment union together.
+assumptions:
+- All input labels are preserved.
+limitations:
+- No declassification is available.
+revision:
+  parents: []
+  summary: Initial exclusive synthesis.
+created_at: '2026-01-25T14:00:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - dset_01J00000000000000000000009
+  - dset_01J0000000000000000000000A
+  - mth_01J00000000000000000000021
+  relations: []
+  artifacts: []
+  external_references: []
+  events: []
+access:
+  level: exclusive
+  compartments:
+  - analysis-alpha
+  - control-room
+  - partner-beta
+tags:
+- access-closure-v1
+- synthetic

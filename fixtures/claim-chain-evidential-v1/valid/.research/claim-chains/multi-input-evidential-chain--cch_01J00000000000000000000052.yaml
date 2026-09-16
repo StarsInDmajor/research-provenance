@@ -1,0 +1,32 @@
+schema: rp/claim-chain-snapshot/v1
+id: cch_01J00000000000000000000052
+thread_id: null
+title: Multi-input evidential ClaimChain snapshot
+root_node_revisions:
+- qst_01J00000000000000000000010
+target_node_revision: con_01J00000000000000000000029
+validation_policy:
+  profile: evidential-v1
+  version: 1
+node_revisions:
+- qst_01J00000000000000000000010
+- hyp_01J00000000000000000000014
+- meas_01J00000000000000000000024
+- meas_01J00000000000000000000025
+- syn_01J00000000000000000000028
+- con_01J00000000000000000000029
+relation_revisions:
+- rel_01J00000000000000000000041
+- rel_01J00000000000000000000043
+- rel_01J00000000000000000000044
+- rel_01J00000000000000000000045
+- rel_01J00000000000000000000046
+source_closure_sha256: sha256:deaa09d39541888d29c9818bed2863177335f773c0f7b7d984ee103a89cbd916
+validation_report: null
+created_at: '2026-01-01T09:00:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: internal
+  compartments: []

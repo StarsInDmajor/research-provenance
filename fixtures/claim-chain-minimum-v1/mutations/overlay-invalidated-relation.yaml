@@ -1,0 +1,21 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-invalidated-relation
+fixture: claim-chain-minimum-v1
+title: Invalidated selected relation
+description: Replace the direct active relation with an endpoint-equivalent invalidated relation.
+expected_failure:
+  exit_code: 1
+  finding_family: relation_state
+  error_code: RP_E_CLAIM_CHAIN_RELATION_NOT_ACTIVE
+  target_file: .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml
+  target_field: relation_revisions.2
+mutation:
+  mode: structured_ast
+  target_file: .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml
+  operation: set_value
+  path: /relation_revisions/2
+  value: rel_01J00000000000000000000045
+maintenance:
+  recompute_source_closure_sha256:
+    - .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN" data-style="solarized-light-hc">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="@@CSP@@">
+<meta name="referrer" content="no-referrer">
+<title>项目逻辑 · 节点探索</title>
+<style>@@CSS@@</style>
+</head>
+<body data-app-state="loading">
+<a class="skip" href="#workspace">跳到节点图</a>
+<main class="page">
+<header class="page-header">
+<h1>项目逻辑 · 节点探索</h1>
+<p class="meta">私有 · 归档快照 · @@CASE_META@@ · 只读探索。</p>
+<p id="app-status" class="notice" role="status" aria-live="polite">交互尚未启动。如果控件持续灰显，脚本可能被安全策略或预览容器阻止；请在独立浏览器中打开原文件或使用浏览器重新加载。下方完整规范记录原文仍可阅读；图需脚本成功启动。重新加载不会更新快照。</p>
+</header>
+<section id="workspace" aria-label="节点图与详情" data-canvas-mode="normal">
+<div class="workspace-heading"><h2>节点与关系</h2><p>从细节逐步探索；仅显示已记录关系，不代表项目全貌</p></div>
+<div class="toolbar" id="toolbar">
+<label class="search-label">定位节点或关系<input id="search" type="search" placeholder="中文标题、原始标题或 exact ID" autocomplete="off" aria-controls="search-results" aria-expanded="false" disabled></label>
+<label>视图<select id="filter" disabled><option value="all">全部</option><option value="mainline">主线</option><option value="alternative">备选 / 支线</option></select></label>
+<label class="check"><input id="history" type="checkbox" disabled> 显示历史</label>
+<button id="zoom-in" aria-label="放大画布" disabled>＋</button>
+<button id="zoom-out" aria-label="缩小画布" disabled>−</button>
+<button id="fit" disabled>适配视野</button>
+<button id="back" disabled>返回</button>
+<button id="start" aria-controls="start-choices" disabled>从问题开始</button>
+<button id="restore-all" disabled>恢复全图</button>
+<button id="reset" disabled>重置</button>
+<button id="show-all" disabled>展开全部与历史</button>
+<button id="fullscreen" type="button" aria-controls="workspace" aria-pressed="false" disabled>全屏画布</button>
+<button id="domains" type="button" aria-controls="domain-panel" aria-expanded="false" disabled>领域</button>
+<button id="help" type="button" aria-controls="reading-guide" disabled>说明</button>
+<button id="toggle-details" type="button" aria-controls="details" aria-expanded="true" disabled>收起详情</button>
+</div>
+<section id="domain-panel" aria-label="领域/标签导航" hidden>
+<h2>领域/标签</h2><p class="meta">仅按已记录标签导航，不是科研关系；多标签节点可重复出现，各组计数不相加。未映射标签单列，不推定科学领域。</p>
+<p id="domain-counts" class="meta"></p><label><input id="domain-history" type="checkbox" disabled> 显示历史修订（列表独立开关）</label>
+<div id="domain-groups"></div>
+</section>
+<p id="canvas-status" class="notice" role="status" aria-live="polite">普通画布 · 全屏画布可填满窗口；浏览器原生全屏不可用时保留窗口模式。</p>
+<div id="start-choices" class="search-results" aria-label="选择建议问题入口"></div>
+<div id="search-results" class="search-results" aria-label="搜索结果"></div>
+<p id="notice" class="notice" role="status" aria-live="polite">选择细节后沿关系探索；依赖箭头指向依赖来源，位置不表示证据强弱。</p>
+<div class="workspace-grid">
+<div class="panel canvas-panel">
+<div class="canvas-meta"><p id="counts" aria-live="polite">@@COUNTS@@</p><span id="zoom-level">100%</span></div>
+<div class="chart-wrap">@@SVG@@</div>
+<div class="legend" aria-label="图例">
+<span>箭头 → 已记录关系；颜色 / 线型按类型，完整图例在阅读说明</span>
+<span class="revision-key">紫色点划线 ⇢ 修订，旧 → 新</span>
+<span class="source-key">灰色点线卡片 · SOURCE 来源，非科研关系</span>
+<span>角色聚焦 = 角色种子；淡化 = 一跳上下文（不赋予角色）；隐藏数量见上方</span>
+<span>角色看文字徽标；无连线 = 未记录连接</span>
+</div>
+<p class="canvas-help">拖动画布而非节点 · 滚轮缩放 · Tab / Enter 选择 · 搜索 ↑ ↓ / Enter 定位、Esc 收起 · 画布 Esc 清除 · 原文与依据在右侧</p>
+</div>
+<aside id="details" class="panel detail-panel" aria-label="所选记录详情" tabindex="-1">
+<details id="reading-guide" open><summary id="reading-guide-summary">阅读说明 · 字母与关系图例（可收起）</summary>@@GUIDE@@</details>
+<div id="detail-content"><p class="eyebrow">DETAILS</p><h2>从一个细节开始</h2><p>搜索或选择一个细节，查看其内容、来源、去向与历史</p><p class="meta">未记录 Assessment，不编造可信度；时效未判定不等于可靠或不可靠。</p></div>
+</aside>
+</div>
+</section>
+<noscript><p class="callout">JavaScript 已禁用：不生成节点图，不支持交互。下方完整规范记录 JSON 与来源信息仍可阅读；包含全部记录（含绑定、评价和历史），不是图形或等效无障碍导航。</p></noscript>
+<footer class="footnotes">
+<details id="briefing"><summary>项目背景</summary>
+<p>@@BACKGROUND@@</p>
+</details>
+<details><summary>来源信息 · 元数据引用或已包含摘录</summary><p>默认仅列元数据，不读取正文；显式包含本地来源时核对摘要和大小。旧试点摘录来自已核验的历史复制文件，不是本次重新测试。URI 不执行，也不获取网络正文；具体读取与核验状态以每条来源说明为准。</p>@@SOURCES@@</details>
+<details id="canonical-fallback"><summary>无脚本后备 · 全部规范记录原文 JSON</summary><p>完整记录仅在此序列化一次；脚本从相同文本读取。即使交互启动失败，这个原生折叠区仍可展开查阅。</p>@@FALLBACK@@</details>
+<details><summary>技术信息、快照身份与重建</summary>
+<p>展示版本 <code>compact-wire-v1</code>（保留 reading-clarity-user4 展示语义；不是冻结记录修订）。快照求值 <code>@@AS_OF@@</code>；页面生成 <code>@@GENERATED_AT@@</code>。生成时间不是事件时间；事件时间若有记录，以来源中的原始消息时间为准；未记录则不推定。</p>
+<p>这是归档、非实时页面。显式重建实际调用已锁定路径和 SHA-256 的 rp。@@VALIDATION_MODE@@ validate 不支持 as_of；as_of 仅标识本例求值约定，不伪装为历史重建。</p>
+<p>通用模式从 rp 校验通过的有界 snapshot JSON 读取规范记录；旧试点模式仍使用显式准入清单，不另行实现 YAML 解析器。验证、投影及最终发布前重复核对输入清单；这些是观察一致性检查，不是原子工作树快照或 TOCTOU 安全保证。已包含来源的校验与摘录使用同一份观察到的字节。</p>
+<p>重建命令见源码目录 tools/pilot-reader/README.md；旧例需要 before；CSP 例显式使用 case manifest 和单快照模式。失败保留旧页面，本页没有假刷新按钮；也不会联网、存储浏览状态或写入 canonical。</p>
+<p>尚未进行浏览器、窄屏、键盘或打印视觉验收。自动状态/结构测试不替代真实阅读；不代表 Phase 1A 全面验收或公开导出批准。</p>
+<pre>@@EVIDENCE@@</pre>
+</details>
+</footer>
+</main>
+@@DATA_TAG@@
+<script>@@JS@@</script>
+<script>@@BOOTSTRAP@@</script>
+</body>
+</html>

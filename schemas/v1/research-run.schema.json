@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "research-run.schema.json",
+  "title": "rp/research-run/v1 (Layer A bridge)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "project_id",
+    "title",
+    "objective",
+    "created_at",
+    "created_by",
+    "parent_run_id",
+    "planned_inputs",
+    "planned_outputs",
+    "limitations",
+    "access",
+    "tags"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/research-run/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/run"
+    },
+    "project_id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/project"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "created_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "parent_run_id": {
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/run"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "planned_inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revisions",
+        "artifacts"
+      ],
+      "properties": {
+        "revisions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/ids/$defs/node"
+          }
+        },
+        "artifacts": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/ids/$defs/artifact"
+          }
+        }
+      }
+    },
+    "planned_outputs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "Dataset",
+          "Question",
+          "Hypothesis",
+          "Observation",
+          "Measurement",
+          "Method",
+          "Test",
+          "Prediction",
+          "Synthesis",
+          "Interpretation",
+          "Decision",
+          "Conclusion",
+          "Blocker",
+          "NextAction",
+          "PaperClaim"
+        ]
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "access": {
+      "$ref": "common.schema.json#/$defs/access"
+    },
+    "tags": {
+      "$ref": "common.schema.json#/$defs/tags"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  },
+  "$comment": "This bridge schema exists because Phase 0 semantic fixtures reference logical runs; WriterInstance, Segment, Event, and ingest remain outside this bundle."
+}

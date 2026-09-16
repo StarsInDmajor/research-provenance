@@ -1,0 +1,90 @@
+# Normative Phase 1A acceptance and conditional Phase 1B trigger budget.
+schema: rp/benchmark-budget/v1
+status: phase1-task0-frozen
+version: 1
+
+reference_host:
+  name: vega
+  normative: true
+  other_hosts: informational-only
+  metadata_required:
+    - runtime-and-exact-version
+    - operating-system
+    - cpu-model
+    - logical-core-count
+    - memory-total
+    - filesystem-type
+    - page-cache-condition
+
+corpus:
+  generator_contract: scale-generator-contract.yaml
+  seed: 20260830
+  profiles:
+    smoke:
+      required: true
+    workstation:
+      required: true
+    stress:
+      required_before_phase1b_decision: true
+
+measurement:
+  warmup_repetitions: 2
+  measured_repetitions: 7
+  report:
+    - median-wall-time
+    - p95-wall-time
+    - peak-resident-memory
+    - objects-per-second
+  correctness_before_timing: true
+  single_thread_baseline_required: true
+  same_manifest_required: true
+
+phase1a_acceptance:
+  smoke_stage_1_and_2_p95_milliseconds_max: 500
+  workstation_stage_1_and_2_p95_milliseconds_max: 5000
+  workstation_integrated_validation_p95_milliseconds_max: 5000
+  workstation_graph_query_kernel_p95_milliseconds_max: 250
+  workstation_peak_rss_bytes_max: 536870912
+  all_ten_operations_complete_within_command_deadline: true
+  deterministic_output_under_scan_permutation: true
+  installed_binary_fixture_parity: true
+
+operations:
+  - parse-and-schema-validate
+  - whole-project-semantic-validate
+  - build-in-memory-projection
+  - overview
+  - show-exact-id
+  - history-logical-id
+  - query-kind-and-thread
+  - chain-validate
+  - access-explain
+  - export-check
+
+interactive_operations_for_phase1b_trigger:
+  - overview
+  - show-exact-id
+  - history-logical-id
+  - query-kind-and-thread
+  - chain-validate
+  - access-explain
+  - export-check
+
+phase1b_trigger:
+  optimization_passes_before_decision: 1
+  trigger_requires:
+    any:
+      - common_interactive_operation_p95_milliseconds_greater_than: 2000
+      - stress_profile_demonstrates_credible_near_term_need: true
+    and_sqlite_prototype_shows:
+      any:
+        - p95_speedup_at_least: 3.0
+        - material_peak_memory_reduction: true
+      exact_json_jcs_parity: true
+  otherwise: not-triggered
+
+failure_policy:
+  correctness_failure_invalidates_measurement: true
+  timeout_is_failure: true
+  resource_limit_finding_is_failure_for_acceptance: true
+  benchmark_results_do_not_change_contract_limits_implicitly: true

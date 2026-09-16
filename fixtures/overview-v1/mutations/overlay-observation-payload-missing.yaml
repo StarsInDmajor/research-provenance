@@ -1,0 +1,17 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-observation-payload-missing
+fixture: overview-v1
+title: Observation omits reproducibility criteria
+description: Remove a required field from the closed Observation payload.
+expected_failure:
+  exit_code: 1
+  finding_family: schema_required_property
+  error_code: RP_E_SCHEMA_REQUIRED_PROPERTY
+  target_file: .research/records/observations/protocol-repeatability-control--obs_01J00000000000000000000019.yaml
+  target_field: observation.reproducibility_criteria
+mutation:
+  mode: structured_ast
+  target_file: .research/records/observations/protocol-repeatability-control--obs_01J00000000000000000000019.yaml
+  operation: delete_field
+  path: /observation/reproducibility_criteria

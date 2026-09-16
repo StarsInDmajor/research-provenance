@@ -1,0 +1,41 @@
+schema: rp/node-revision/v1
+id: mth_01J00000000000000000000021
+logical_id: method-confirmatory-analysis
+kind: Method
+record_state: frozen
+title: Confirmatory analysis method
+statement: Apply the versioned protocol to each selected summary and compare values with frozen
+  criteria.
+scope:
+  research_run_id: run_01J00000000000000000000002
+  statement: Synthetic confirmatory fixture only.
+method:
+  version: confirmatory-method-v1
+  procedure: Read versioned CSV rows without re-estimating or altering the synthetic values.
+  applicable_inputs:
+  - Standard, stress, and archival synthetic summary tables.
+  protocol_references:
+  - ref_01J00000000000000000000003
+assumptions:
+- CSV rows and units are internally consistent.
+limitations:
+- No raw-run reanalysis is possible.
+revision:
+  parents: []
+  summary: Frozen analysis method.
+created_at: '2026-01-02T09:10:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions: []
+  artifacts: []
+  external_references:
+  - ref_01J00000000000000000000003
+  events: []
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-confirmatory-v1
+- synthetic

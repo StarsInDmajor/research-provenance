@@ -1,0 +1,22 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-claim-chain-cycle
+fixture: claim-chain-minimum-v1
+title: Directed cycle in selected graph
+description: Replace the direct acyclic edge with an active reverse dependency, creating Q ->
+  H -> C -> Q.
+expected_failure:
+  exit_code: 1
+  finding_family: claim_chain_cycle
+  error_code: RP_E_CLAIM_CHAIN_DIRECTED_CYCLE
+  target_file: .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml
+  target_field: relation_revisions.2
+mutation:
+  mode: structured_ast
+  target_file: .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml
+  operation: set_value
+  path: /relation_revisions/2
+  value: rel_01J00000000000000000000044
+maintenance:
+  recompute_source_closure_sha256:
+    - .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml

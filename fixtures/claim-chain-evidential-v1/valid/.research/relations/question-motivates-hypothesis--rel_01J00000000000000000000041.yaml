@@ -1,0 +1,30 @@
+schema: rp/scientific-relation-revision/v1
+id: rel_01J00000000000000000000041
+logical_id: relation-evidential-motivates
+record_state: frozen
+type: motivates
+from_revision: qst_01J00000000000000000000010
+to_revision: hyp_01J00000000000000000000014
+scope:
+  statement: Synthetic evidential-profile relation.
+  conditions:
+  - Use exact frozen endpoints.
+  exclusions:
+  - No scientific authority is implied.
+assertion_mode: asserted
+relation_state: active
+rationale: The comparison question motivates the scoped hypothesis.
+revision:
+  parents: []
+  summary: Initial synthetic relation revision.
+created_at: '2026-01-01T08:55:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - qst_01J00000000000000000000010
+  - hyp_01J00000000000000000000014
+access:
+  level: internal
+  compartments: []

@@ -1,0 +1,49 @@
+schema: rp/node-revision/v1
+id: dset_01J0000000000000000000000A
+logical_id: dataset-exclusive-control
+kind: Dataset
+record_state: frozen
+title: Exclusive control dataset
+statement: Synthetic exclusive-control access dataset.
+scope:
+  statement: Synthetic access-closure fixture only.
+dataset:
+  version: access-exclusive-v1
+  selection:
+    description: Select the exclusive-control synthetic summary.
+    criteria:
+    - field: access_branch
+      operator: equals
+      values:
+      - exclusive-control
+      unit: null
+  variables:
+  - name: median_absolute_drift
+    role: measure
+    unit: normalized-unit
+assumptions:
+- The referenced summary is interpreted only within this fixture.
+limitations:
+- No real restricted information is represented.
+revision:
+  parents: []
+  summary: Initial access fixture dataset.
+created_at: '2026-01-25T12:05:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions: []
+  relations: []
+  artifacts:
+  - art_01J00000000000000000000007
+  external_references:
+  - ref_01J00000000000000000000003
+  events: []
+access:
+  level: exclusive
+  compartments:
+  - control-room
+tags:
+- access-closure-v1
+- synthetic

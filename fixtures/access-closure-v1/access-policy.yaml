@@ -1,0 +1,47 @@
+# Phase 0 design data; not an installed policy.
+schema: rp/access-policy/v1
+version: 1
+lattice:
+- public
+- internal
+- restricted
+- exclusive
+compartments:
+  format: lowercase-slug
+  sorted: true
+  unique: true
+closure:
+  algorithm: rp/access-closure/v1
+  include_object_in_required_floor: false
+  include_declared_label_in_effective_access: true
+  dependencies:
+  - source.revisions
+  - source.relations
+  - source.artifacts
+  - source.external_references
+  - source.events
+  - NodeRevision.revision.parents[].id
+  - ScientificRelationRevision.revision.parents[].id
+  - ScientificRelationRevision.from_revision
+  - ScientificRelationRevision.to_revision
+  - Assessment.target.id
+  - Assessment.supersedes_assessments[]
+  - ResearchThread.root_question_revision
+  - ResearchThread.parent_thread_id
+  - ResearchThread.forked_from_thread_id
+  - ThreadBinding.thread_id
+  - ThreadBinding.target.id
+  - ClaimChainSnapshot.thread_id
+  - ClaimChainSnapshot.node_revisions[]
+  - ClaimChainSnapshot.relation_revisions[]
+  recursive: true
+validation:
+  declared_level_must_dominate_required_floor: true
+  declared_compartments_must_superset_required_floor: true
+  downgrade: reject-unconditionally
+  declassification_supported: false
+export_guard:
+  evaluate: effective-access
+  eligible_when:
+  - effective.level <= request.level_ceiling
+  - effective.compartments subset-of request.allowed_compartments

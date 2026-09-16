@@ -1,0 +1,162 @@
+# Registry frozen with the G7-approved Phase 0 baseline.
+schema: rp/fixture-id-registry/v1
+fixture: access-closure-v1
+status: g7-approved-phase0-baseline
+id_policy:
+  format: typed-prefix-plus-ulid
+  allocation: deterministic-fixture-order
+  mutable_aliases: false
+objects:
+  control-summary:
+    id: art_01J00000000000000000000007
+    path: valid/.research/artifacts/control-summary--art_01J00000000000000000000007.yaml
+  partner-summary:
+    id: art_01J00000000000000000000006
+    path: valid/.research/artifacts/partner-summary--art_01J00000000000000000000006.yaml
+  standard-summary:
+    id: art_01J00000000000000000000005
+    path: valid/.research/artifacts/standard-summary--art_01J00000000000000000000005.yaml
+  supersession-predecessor-restricted-control:
+    id: asm_01J00000000000000000000073
+    path: valid/.research/assessments/supersession-predecessor-restricted-control--asm_01J00000000000000000000073.yaml
+  supersession-restricted-control:
+    id: asm_01J00000000000000000000071
+    path: valid/.research/assessments/supersession-restricted-control--asm_01J00000000000000000000071.yaml
+  target-exclusive-control:
+    id: asm_01J00000000000000000000072
+    path: valid/.research/assessments/target-exclusive-control--asm_01J00000000000000000000072.yaml
+  target-restricted-control:
+    id: asm_01J00000000000000000000070
+    path: valid/.research/assessments/target-restricted-control--asm_01J00000000000000000000070.yaml
+  exclusive-structural-access-chain:
+    id: cch_01J00000000000000000000081
+    path: valid/.research/claim-chains/exclusive-structural-access-chain--cch_01J00000000000000000000081.yaml
+  restricted-structural-access-chain:
+    id: cch_01J00000000000000000000080
+    path: valid/.research/claim-chains/restricted-structural-access-chain--cch_01J00000000000000000000080.yaml
+  project-access-closure:
+    id: proj_01J00000000000000000000001
+    path: valid/.research/project.yaml
+  conclusion-exclusive-combined:
+    id: con_01J00000000000000000000031
+    path: valid/.research/records/conclusions/conclusion-exclusive-combined--con_01J00000000000000000000031.yaml
+  conclusion-restricted-combined:
+    id: con_01J00000000000000000000029
+    path: valid/.research/records/conclusions/conclusion-restricted-combined--con_01J00000000000000000000029.yaml
+  dataset-exclusive-control:
+    id: dset_01J0000000000000000000000A
+    path: valid/.research/records/datasets/dataset-exclusive-control--dset_01J0000000000000000000000A.yaml
+  dataset-internal-standard:
+    id: dset_01J00000000000000000000008
+    path: valid/.research/records/datasets/dataset-internal-standard--dset_01J00000000000000000000008.yaml
+  dataset-restricted-partner:
+    id: dset_01J00000000000000000000009
+    path: valid/.research/records/datasets/dataset-restricted-partner--dset_01J00000000000000000000009.yaml
+  hypothesis-access-lineage:
+    id: hyp_01J00000000000000000000011
+    path: valid/.research/records/hypotheses/hypothesis-access-lineage--hyp_01J00000000000000000000011.yaml
+  hypothesis-access-lineage-hyp-12:
+    id: hyp_01J00000000000000000000012
+    path: valid/.research/records/hypotheses/hypothesis-access-lineage--hyp_01J00000000000000000000012.yaml
+  hypothesis-access-lineage-hyp-17:
+    id: hyp_01J00000000000000000000017
+    path: valid/.research/records/hypotheses/hypothesis-access-lineage--hyp_01J00000000000000000000017.yaml
+  hypothesis-internal-control:
+    id: hyp_01J00000000000000000000016
+    path: valid/.research/records/hypotheses/hypothesis-internal-control--hyp_01J00000000000000000000016.yaml
+  method-analysis-compartment:
+    id: mth_01J00000000000000000000021
+    path: valid/.research/records/methods/method-analysis-compartment--mth_01J00000000000000000000021.yaml
+  question-exclusive-branch:
+    id: qst_01J00000000000000000000014
+    path: valid/.research/records/questions/question-exclusive-branch--qst_01J00000000000000000000014.yaml
+  question-internal-base:
+    id: qst_01J00000000000000000000010
+    path: valid/.research/records/questions/question-internal-base--qst_01J00000000000000000000010.yaml
+  question-public-control:
+    id: qst_01J00000000000000000000015
+    path: valid/.research/records/questions/question-public-control--qst_01J00000000000000000000015.yaml
+  question-restricted-branch:
+    id: qst_01J00000000000000000000013
+    path: valid/.research/records/questions/question-restricted-branch--qst_01J00000000000000000000013.yaml
+  synthesis-exclusive-combined:
+    id: syn_01J00000000000000000000030
+    path: valid/.research/records/syntheses/synthesis-exclusive-combined--syn_01J00000000000000000000030.yaml
+  synthesis-restricted-combined:
+    id: syn_01J00000000000000000000028
+    path: valid/.research/records/syntheses/synthesis-restricted-combined--syn_01J00000000000000000000028.yaml
+  public-protocol:
+    id: ref_01J00000000000000000000003
+    path: valid/.research/references/public-protocol--ref_01J00000000000000000000003.yaml
+  control-input-exclusive-synthesis:
+    id: rel_01J00000000000000000000046
+    path: valid/.research/relations/control-input-exclusive-synthesis--rel_01J00000000000000000000046.yaml
+  exclusive-question-motivates-hypothesis:
+    id: rel_01J00000000000000000000052
+    path: valid/.research/relations/exclusive-question-motivates-hypothesis--rel_01J00000000000000000000052.yaml
+  exclusive-synthesis-generated-conclusion:
+    id: rel_01J00000000000000000000047
+    path: valid/.research/relations/exclusive-synthesis-generated-conclusion--rel_01J00000000000000000000047.yaml
+  exclusive-synthesis-supports-hypothesis:
+    id: rel_01J00000000000000000000053
+    path: valid/.research/relations/exclusive-synthesis-supports-hypothesis--rel_01J00000000000000000000053.yaml
+  internal-input-restricted-synthesis:
+    id: rel_01J00000000000000000000041
+    path: valid/.research/relations/internal-input-restricted-synthesis--rel_01J00000000000000000000041.yaml
+  method-input-exclusive-synthesis:
+    id: rel_01J00000000000000000000048
+    path: valid/.research/relations/method-input-exclusive-synthesis--rel_01J00000000000000000000048.yaml
+  method-input-restricted-synthesis:
+    id: rel_01J00000000000000000000043
+    path: valid/.research/relations/method-input-restricted-synthesis--rel_01J00000000000000000000043.yaml
+  partner-input-exclusive-synthesis:
+    id: rel_01J00000000000000000000045
+    path: valid/.research/relations/partner-input-exclusive-synthesis--rel_01J00000000000000000000045.yaml
+  partner-input-restricted-synthesis:
+    id: rel_01J00000000000000000000042
+    path: valid/.research/relations/partner-input-restricted-synthesis--rel_01J00000000000000000000042.yaml
+  partner-lineage-dependency:
+    id: rel_01J00000000000000000000060
+    path: valid/.research/relations/partner-lineage-dependency--rel_01J00000000000000000000060.yaml
+  partner-lineage-dependency-rel-61:
+    id: rel_01J00000000000000000000061
+    path: valid/.research/relations/partner-lineage-dependency--rel_01J00000000000000000000061.yaml
+  public-to-internal-endpoint-control:
+    id: rel_01J00000000000000000000070
+    path: valid/.research/relations/public-to-internal-endpoint-control--rel_01J00000000000000000000070.yaml
+  restricted-question-motivates-hypothesis:
+    id: rel_01J00000000000000000000050
+    path: valid/.research/relations/restricted-question-motivates-hypothesis--rel_01J00000000000000000000050.yaml
+  restricted-relation-lineage-control:
+    id: rel_01J00000000000000000000071
+    path: valid/.research/relations/restricted-relation-lineage-control--rel_01J00000000000000000000071.yaml
+  restricted-relation-lineage-control-rel-72:
+    id: rel_01J00000000000000000000072
+    path: valid/.research/relations/restricted-relation-lineage-control--rel_01J00000000000000000000072.yaml
+  restricted-synthesis-generated-conclusion:
+    id: rel_01J00000000000000000000044
+    path: valid/.research/relations/restricted-synthesis-generated-conclusion--rel_01J00000000000000000000044.yaml
+  restricted-synthesis-supports-hypothesis:
+    id: rel_01J00000000000000000000051
+    path: valid/.research/relations/restricted-synthesis-supports-hypothesis--rel_01J00000000000000000000051.yaml
+  binding-exclusive-thread-target:
+    id: tbd_01J00000000000000000000091
+    path: valid/.research/thread-bindings/binding-exclusive-thread-target--tbd_01J00000000000000000000091.yaml
+  binding-internal-thread-restricted-target:
+    id: tbd_01J00000000000000000000090
+    path: valid/.research/thread-bindings/binding-internal-thread-restricted-target--tbd_01J00000000000000000000090.yaml
+  binding-restricted-thread-analysis-target:
+    id: tbd_01J00000000000000000000092
+    path: valid/.research/thread-bindings/binding-restricted-thread-analysis-target--tbd_01J00000000000000000000092.yaml
+  exclusive-child:
+    id: thd_01J00000000000000000000083
+    path: valid/.research/threads/exclusive-child--thd_01J00000000000000000000083.yaml
+  internal-base:
+    id: thd_01J00000000000000000000080
+    path: valid/.research/threads/internal-base--thd_01J00000000000000000000080.yaml
+  internal-child:
+    id: thd_01J00000000000000000000081
+    path: valid/.research/threads/internal-child--thd_01J00000000000000000000081.yaml
+  restricted-root:
+    id: thd_01J00000000000000000000082
+    path: valid/.research/threads/restricted-root--thd_01J00000000000000000000082.yaml

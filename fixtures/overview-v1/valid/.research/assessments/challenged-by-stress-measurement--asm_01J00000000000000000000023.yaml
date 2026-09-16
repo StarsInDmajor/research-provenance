@@ -1,0 +1,33 @@
+schema: rp/assessment/v1
+id: asm_01J00000000000000000000023
+target:
+  type: node_revision
+  id: hyp_01J00000000000000000000011
+assessment_scope: overall-claim
+epistemic_status: challenged
+evidence_evaluation:
+  evidence_quality: medium
+  agreement: conflicting
+  independence: shared_data
+  directness: direct
+  decision_confidence: low
+  rationale: The stress measurement conflicts with the broad all-envelope statement.
+  limitations:
+  - The stress cause remains confounded by shared reference preparation.
+quantitative_assessment: null
+assessed_at: '2026-02-02T13:00:00Z'
+assessed_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - meas_01J00000000000000000000026
+  relations:
+  - rel_01J00000000000000000000045
+  external_references:
+  - ref_01J00000000000000000000004
+supersedes_assessments: []
+review_assurance: human-reviewed
+access:
+  level: internal
+  compartments: []

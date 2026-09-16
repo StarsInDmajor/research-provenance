@@ -1,0 +1,20 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-thread-parent-leak
+fixture: access-closure-v1
+title: Child Thread drops internal parent label
+description: Lower a public-root child Thread below its internal parent/fork Thread.
+expected_failure:
+  exit_code: 1
+  finding_family: access_thread_parent
+  error_code: RP_E_ACCESS_THREAD_PARENT
+  target_file: .research/threads/internal-child--thd_01J00000000000000000000081.yaml
+  target_field: access
+mutation:
+  mode: structured_ast
+  target_file: .research/threads/internal-child--thd_01J00000000000000000000081.yaml
+  operation: set_value
+  path: /access
+  value:
+    level: public
+    compartments: []

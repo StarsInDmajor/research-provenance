@@ -1,0 +1,31 @@
+schema: rp/claim-chain-snapshot/v1
+id: cch_01J00000000000000000000081
+thread_id: thd_01J00000000000000000000083
+title: Exclusive structural access chain
+root_node_revisions:
+- qst_01J00000000000000000000014
+target_node_revision: con_01J00000000000000000000031
+validation_policy:
+  profile: minimum-v1
+  version: 1
+node_revisions:
+- qst_01J00000000000000000000014
+- hyp_01J00000000000000000000012
+- syn_01J00000000000000000000030
+- con_01J00000000000000000000031
+relation_revisions:
+- rel_01J00000000000000000000052
+- rel_01J00000000000000000000053
+- rel_01J00000000000000000000047
+source_closure_sha256: sha256:c860fc5352c7e15faf06fb8241c0fe3e93e8682c5cf5e9b38a8a9ab495780f4c
+validation_report: null
+created_at: '2026-01-29T10:00:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: exclusive
+  compartments:
+  - analysis-alpha
+  - control-room
+  - partner-beta

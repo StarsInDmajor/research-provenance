@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cli-result.schema.json",
+  "title": "rp/cli-result/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "command",
+    "status",
+    "exit_code",
+    "as_of",
+    "findings",
+    "data"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/cli-result/v1"
+    },
+    "command": {
+      "enum": [
+        "init",
+        "validate",
+        "overview",
+        "show",
+        "history",
+        "diff",
+        "query",
+        "thread list",
+        "thread show",
+        "chain validate",
+        "access explain",
+        "export check",
+        "snapshot",
+        "rp-fixture-test"
+      ]
+    },
+    "status": {
+      "enum": [
+        "ok",
+        "invalid",
+        "denied",
+        "not-found",
+        "conflict",
+        "usage-error",
+        "io-error",
+        "internal-error",
+        "interrupted"
+      ]
+    },
+    "exit_code": {
+      "enum": [0, 1, 2, 3, 4, 130]
+    },
+    "as_of": {
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "$ref": "finding.schema.json"
+      }
+    },
+    "data": {
+      "oneOf": [
+        {
+          "$ref": "cli-data.schema.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "ok" } }, "required": ["status"] },
+      "then": { "properties": { "exit_code": { "const": 0 } } }
+    },
+    {
+      "if": { "properties": { "status": { "enum": ["invalid", "denied", "not-found", "conflict"] } }, "required": ["status"] },
+      "then": { "properties": { "exit_code": { "const": 1 } } }
+    },
+    {
+      "if": { "properties": { "status": { "const": "usage-error" } }, "required": ["status"] },
+      "then": { "properties": { "exit_code": { "const": 2 } } }
+    },
+    {
+      "if": { "properties": { "status": { "const": "io-error" } }, "required": ["status"] },
+      "then": { "properties": { "exit_code": { "const": 3 } } }
+    },
+    {
+      "if": { "properties": { "status": { "const": "internal-error" } }, "required": ["status"] },
+      "then": { "properties": { "exit_code": { "const": 4 } } }
+    },
+    {
+      "if": { "properties": { "status": { "const": "interrupted" } }, "required": ["status"] },
+      "then": { "properties": { "exit_code": { "const": 130 } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "init" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/init" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "validate" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/validate" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "overview" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/overview" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "show" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/show" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "history" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/history" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "diff" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/diff" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "query" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/query" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "thread list" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/threadList" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "thread show" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/threadShow" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "chain validate" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/chainValidate" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "access explain" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/accessExplain" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "export check" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/exportCheck" }, { "type": "null" }] } } }
+    },
+    {
+      "if": { "properties": { "command": { "const": "snapshot" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/snapshot" }, { "type": "null" }] } } }
+    },
+    {
+      "if": {
+        "properties": { "command": { "const": "snapshot" }, "status": { "const": "ok" } },
+        "required": ["command", "status"]
+      },
+      "then": {
+        "properties": { "data": { "$ref": "cli-data.schema.json#/$defs/snapshot" } }
+      }
+    },
+    {
+      "if": {
+        "properties": { "command": { "const": "snapshot" }, "status": { "not": { "const": "ok" } } },
+        "required": ["command", "status"]
+      },
+      "then": {
+        "properties": { "data": { "type": "null" } }
+      }
+    },
+    {
+      "if": { "properties": { "command": { "const": "rp-fixture-test" } }, "required": ["command"] },
+      "then": { "properties": { "data": { "oneOf": [{ "$ref": "cli-data.schema.json#/$defs/fixtureTest" }, { "type": "null" }] } } }
+    }
+  ]
+}

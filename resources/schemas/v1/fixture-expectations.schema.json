@@ -1,0 +1,242 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "fixture-expectations.schema.json",
+  "title": "rp/fixture-expectations/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "fixture",
+    "status"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/fixture-expectations/v1"
+    },
+    "fixture": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9][0-9]*$"
+    },
+    "status": {
+      "enum": [
+        "g7-approved-phase0-baseline",
+        "phase1-task0-additive"
+      ]
+    },
+    "profile": {
+      "enum": [
+        "minimum-v1",
+        "evidential-v1",
+        "confirmatory-v1"
+      ]
+    },
+    "snapshot_id": {
+      "type": "string"
+    },
+    "algorithm": {
+      "type": "string"
+    },
+    "contract": {
+      "type": "string"
+    },
+    "as_of": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "object_counts": {
+      "$ref": "#/$defs/nonnegativeIntegerMap"
+    },
+    "revision_heads": {
+      "type": "object"
+    },
+    "assessment_history": {
+      "type": "object"
+    },
+    "relation_history": {
+      "type": "object"
+    },
+    "thread_overview": {
+      "type": "object"
+    },
+    "current_work": {
+      "type": "object"
+    },
+    "freshness": {
+      "type": "object"
+    },
+    "validation": {
+      "type": "object"
+    },
+    "selection": {
+      "type": "object"
+    },
+    "source_closure": {
+      "type": "object"
+    },
+    "snapshot": {
+      "type": "object"
+    },
+    "snapshots": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "access": {
+      "type": "object"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "key_assertions": {
+      "type": "object"
+    },
+    "claim_chain_source_closures": {
+      "type": "object"
+    },
+    "export_queries": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "positive_cases": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/freshnessPositiveCase"
+      }
+    },
+    "negative_cases": {
+      "type": "array",
+      "minItems": 4,
+      "items": {
+        "$ref": "#/$defs/freshnessNegativeCase"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "fixture": {
+            "const": "freshness-v1"
+          }
+        },
+        "required": [
+          "fixture"
+        ]
+      },
+      "then": {
+        "required": [
+          "contract",
+          "as_of",
+          "object_counts",
+          "positive_cases",
+          "negative_cases"
+        ],
+        "properties": {
+          "contract": {
+            "const": "rp/freshness/v1"
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-9]{2})$"
+    },
+    "nonnegativeIntegerMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "freshnessStatus": {
+      "enum": [
+        "unknown",
+        "fresh",
+        "review-due",
+        "stale"
+      ]
+    },
+    "freshnessPositiveCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "object_id",
+        "expected_status",
+        "reason",
+        "must_not_be"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "object_id": {
+          "type": "string"
+        },
+        "as_of": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "expected_status": {
+          "$ref": "#/$defs/freshnessStatus"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "must_not_be": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/freshnessStatus"
+          }
+        }
+      }
+    },
+    "freshnessNegativeCase": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "object_id",
+        "as_of",
+        "forbidden_status",
+        "expected_status",
+        "reason"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "object_id": {
+          "type": "string"
+        },
+        "as_of": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "forbidden_status": {
+          "$ref": "#/$defs/freshnessStatus"
+        },
+        "expected_status": {
+          "$ref": "#/$defs/freshnessStatus"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

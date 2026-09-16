@@ -1,0 +1,20 @@
+schema: rp/thread-binding/v1
+id: tbd_01J00000000000000000000066
+logical_id: binding-sensitivity-stress-measurement
+record_state: frozen
+thread_id: thd_01J00000000000000000000032
+target:
+  type: node_revision
+  id: meas_01J00000000000000000000026
+role: primary
+rationale: The same stress measurement is primary in the sensitivity thread.
+revision:
+  parents: []
+  summary: Initial thread-role binding.
+created_at: '2026-02-03T10:30:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: internal
+  compartments: []

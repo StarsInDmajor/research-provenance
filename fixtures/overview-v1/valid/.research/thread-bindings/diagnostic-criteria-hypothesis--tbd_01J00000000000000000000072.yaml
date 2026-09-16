@@ -1,0 +1,20 @@
+schema: rp/thread-binding/v1
+id: tbd_01J00000000000000000000072
+logical_id: binding-diagnostic-criteria-hypothesis
+record_state: frozen
+thread_id: thd_01J00000000000000000000033
+target:
+  type: node_revision
+  id: hyp_01J00000000000000000000013
+role: diagnostic
+rationale: Decomposed criteria support diagnostic inspection.
+revision:
+  parents: []
+  summary: Initial thread-role binding.
+created_at: '2026-02-03T10:30:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: internal
+  compartments: []

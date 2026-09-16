@@ -1,0 +1,40 @@
+schema: rp/research-run/v1
+
+id: run_01J00000000000000000000002
+project_id: proj_01J00000000000000000000001
+
+title: Synthetic drift evaluation
+objective: >-
+  Evaluate whether candidate procedure C satisfies the predeclared drift
+  criteria in the standard envelope and record the stress-envelope limitation.
+
+created_at: "2026-01-01T08:30:00Z"
+created_by:
+  type: software
+  id: fixture-builder
+
+parent_run_id: null
+
+planned_inputs:
+  revisions: []
+  artifacts: []
+
+planned_outputs:
+  - Dataset
+  - Measurement
+  - Observation
+  - Interpretation
+  - Synthesis
+  - Conclusion
+
+limitations:
+  - All values and actors are synthetic fixture data.
+  - Layer A Events and Segments are deferred to the Slice 2 fixture extension.
+
+access:
+  level: internal
+  compartments: []
+
+tags:
+  - overview-v1
+  - synthetic

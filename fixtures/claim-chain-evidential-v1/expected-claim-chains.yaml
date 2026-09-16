@@ -1,0 +1,130 @@
+# Noncanonical test oracle; not a research fact source.
+schema: rp/fixture-expectations/v1
+fixture: claim-chain-evidential-v1
+status: g7-approved-phase0-baseline
+profile: evidential-v1
+snapshots:
+- id: cch_01J00000000000000000000052
+  mode: multi-input
+  validation:
+    outcome: passed
+    evidence_input_count: 2
+    explicit_synthesis: syn_01J00000000000000000000028
+    all_evidence_paths_reach_target: true
+    temporal_predeclaration_checked: false
+  selection:
+    root_node_revisions:
+    - qst_01J00000000000000000000010
+    target_node_revision: con_01J00000000000000000000029
+    node_revisions:
+    - qst_01J00000000000000000000010
+    - hyp_01J00000000000000000000014
+    - meas_01J00000000000000000000024
+    - meas_01J00000000000000000000025
+    - syn_01J00000000000000000000028
+    - con_01J00000000000000000000029
+    relation_revisions:
+    - rel_01J00000000000000000000041
+    - rel_01J00000000000000000000043
+    - rel_01J00000000000000000000044
+    - rel_01J00000000000000000000045
+    - rel_01J00000000000000000000046
+  source_closure:
+    algorithm: rp/source-closure/v1
+    entries:
+    - object_type: rp/artifact-manifest/v1
+      id: art_01J00000000000000000000005
+      canonical_digest: sha256:05a0fbf1fc7dd35a357ff7fb9f93b1ca7f4c367cfc5ece2c6e1a838e797bf384
+    - object_type: rp/external-reference/v1
+      id: ref_01J00000000000000000000003
+      canonical_digest: sha256:cb7ea4318b88b762a52a310fa7e6c7481fb9b399961218401e67831723f5c54c
+    - object_type: rp/node-revision/v1
+      id: con_01J00000000000000000000029
+      canonical_digest: sha256:e0886340df32ce4f2abf4682c63d04db031e1e0a731dc000a4cec4c934ee8021
+    - object_type: rp/node-revision/v1
+      id: hyp_01J00000000000000000000014
+      canonical_digest: sha256:a0c092a583ee59667b75fff8256650e589b814f8087f932fe53a9d1e38202a0b
+    - object_type: rp/node-revision/v1
+      id: meas_01J00000000000000000000024
+      canonical_digest: sha256:9a45866817f951c8ae5cd60079ed55f4632048fe4602adb602e224c42b6068c2
+    - object_type: rp/node-revision/v1
+      id: meas_01J00000000000000000000025
+      canonical_digest: sha256:d76aeae9dd39a9c2db8d427a07c9d32e478efcbd9442ebdaae385f1ffc51ae94
+    - object_type: rp/node-revision/v1
+      id: qst_01J00000000000000000000010
+      canonical_digest: sha256:0ca4649b96dcda806008f1b756dc3eb01c39fa5940cb1d6ec46fed72241cc573
+    - object_type: rp/node-revision/v1
+      id: syn_01J00000000000000000000028
+      canonical_digest: sha256:89a2c29194cbb0e84c7c0a1f98a942d31434d7d1617432e8098e09dc39130e0e
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000041
+      canonical_digest: sha256:62d847a6c0bbabcd111da7390cf7354f2b69e50840fbd941ea3ba579d88b7906
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000043
+      canonical_digest: sha256:21da9eec3f67a0b21de3290a4657dfaa76c926dbe2d5ca6fb937d5f7dbf6dfc3
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000044
+      canonical_digest: sha256:e8d2fe429ed7a7c2660c3700d858df1876afbcbe68f189a007812ce1f7704fad
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000045
+      canonical_digest: sha256:085a0902f54b174048a966fd7f6cc0d2a87e58d9d3c2b278779bede0bb8b438c
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000046
+      canonical_digest: sha256:bdbe5058024f94e42e657edacb82df478e107ede31591feadba63ddd8a43e270
+    sha256: sha256:deaa09d39541888d29c9818bed2863177335f773c0f7b7d984ee103a89cbd916
+- id: cch_01J00000000000000000000053
+  mode: single-input
+  validation:
+    outcome: passed
+    evidence_input_count: 1
+    explicit_synthesis: null
+    direct_scoped_relation: rel_01J00000000000000000000048
+    all_evidence_paths_reach_target: true
+    temporal_predeclaration_checked: false
+  selection:
+    root_node_revisions:
+    - qst_01J00000000000000000000010
+    target_node_revision: con_01J00000000000000000000030
+    node_revisions:
+    - qst_01J00000000000000000000010
+    - hyp_01J00000000000000000000014
+    - meas_01J00000000000000000000025
+    - con_01J00000000000000000000030
+    relation_revisions:
+    - rel_01J00000000000000000000041
+    - rel_01J00000000000000000000047
+    - rel_01J00000000000000000000048
+  source_closure:
+    algorithm: rp/source-closure/v1
+    entries:
+    - object_type: rp/artifact-manifest/v1
+      id: art_01J00000000000000000000005
+      canonical_digest: sha256:05a0fbf1fc7dd35a357ff7fb9f93b1ca7f4c367cfc5ece2c6e1a838e797bf384
+    - object_type: rp/external-reference/v1
+      id: ref_01J00000000000000000000003
+      canonical_digest: sha256:cb7ea4318b88b762a52a310fa7e6c7481fb9b399961218401e67831723f5c54c
+    - object_type: rp/node-revision/v1
+      id: con_01J00000000000000000000030
+      canonical_digest: sha256:e7e6384031078db035d7cea2811256987b2f94e64d2701fe5735ecf84b351330
+    - object_type: rp/node-revision/v1
+      id: hyp_01J00000000000000000000014
+      canonical_digest: sha256:a0c092a583ee59667b75fff8256650e589b814f8087f932fe53a9d1e38202a0b
+    - object_type: rp/node-revision/v1
+      id: meas_01J00000000000000000000025
+      canonical_digest: sha256:d76aeae9dd39a9c2db8d427a07c9d32e478efcbd9442ebdaae385f1ffc51ae94
+    - object_type: rp/node-revision/v1
+      id: qst_01J00000000000000000000010
+      canonical_digest: sha256:0ca4649b96dcda806008f1b756dc3eb01c39fa5940cb1d6ec46fed72241cc573
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000041
+      canonical_digest: sha256:62d847a6c0bbabcd111da7390cf7354f2b69e50840fbd941ea3ba579d88b7906
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000047
+      canonical_digest: sha256:4fd072d161ab10777b7ff3416a53a9fcbad88ef6404202876a7ecdc692c925b3
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000048
+      canonical_digest: sha256:c65381bd01166b6c649adf0ecc0ad11939266643e59019a857ad1debad634eb8
+    sha256: sha256:1808d73b6c608a261ff86d4a256d1c5de85cde3fea9959d60dc9db0a33d24538
+access:
+  level: internal
+  compartments: []

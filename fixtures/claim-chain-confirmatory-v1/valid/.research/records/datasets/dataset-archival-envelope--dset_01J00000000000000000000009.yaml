@@ -1,0 +1,56 @@
+schema: rp/node-revision/v1
+id: dset_01J00000000000000000000009
+logical_id: dataset-archival-envelope
+kind: Dataset
+record_state: frozen
+title: Synthetic archival dataset
+statement: Archival summary selected for a preregistered retrospective analysis.
+scope:
+  research_run_id: run_01J00000000000000000000002
+  statement: Synthetic confirmatory fixture only.
+dataset:
+  version: confirmatory-archival-v1
+  selection:
+    description: Archival summary selected for a preregistered retrospective analysis.
+    criteria:
+    - field: observed_window
+      operator: equals
+      values:
+      - 2025-11-01/2025-11-02
+      unit: null
+  variables:
+  - name: median_absolute_drift
+    role: measure
+    unit: normalized-unit
+  - name: p95_absolute_drift
+    role: measure
+    unit: normalized-unit
+assumptions:
+- Summary values are interpreted only within this fixture.
+limitations:
+- Contains summary values rather than raw observations.
+revision:
+  parents: []
+  summary: Initial synthetic dataset revision.
+created_at: '2026-01-10T12:10:00Z'
+created_by:
+  type: human
+  id: researcher
+temporal:
+  observed_from: '2025-11-01T00:00:00Z'
+  observed_to: '2025-11-02T00:00:00Z'
+  recorded_at: '2026-01-10T12:10:00Z'
+
+source:
+  revisions: []
+  artifacts:
+  - art_01J00000000000000000000006
+  external_references:
+  - ref_01J00000000000000000000004
+  events: []
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-confirmatory-v1
+- synthetic

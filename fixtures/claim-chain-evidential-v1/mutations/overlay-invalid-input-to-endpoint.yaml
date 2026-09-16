@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-invalid-input-to-endpoint
+fixture: claim-chain-evidential-v1
+title: input-to targets a non-Synthesis node
+description: Mutate one unselected valid control relation so input-to targets the selected Hypothesis.
+expected_failure:
+  exit_code: 1
+  finding_family: relation_compatibility
+  error_code: RP_E_RELATION_KIND_INCOMPATIBLE
+  target_file: .research/relations/candidate-input-overlay-control--rel_01J00000000000000000000052.yaml
+  target_field: to_revision
+mutation:
+  mode: structured_ast
+  target_file: .research/relations/candidate-input-overlay-control--rel_01J00000000000000000000052.yaml
+  operation: set_value
+  path: /to_revision
+  value: hyp_01J00000000000000000000014

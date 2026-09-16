@@ -1,0 +1,33 @@
+schema: rp/scientific-relation-revision/v1
+id: rel_01J00000000000000000000059
+logical_id: method-implements-stress-test
+record_state: frozen
+type: implements
+from_revision: mth_01J00000000000000000000021
+to_revision: tst_01J00000000000000000000023
+scope:
+  statement: Synthetic confirmatory-profile relation.
+  conditions:
+  - Use exact frozen endpoints.
+  exclusions:
+  - No scientific authority is implied.
+assertion_mode: asserted
+relation_state: active
+rationale: The frozen Method implements the stress Test.
+revision:
+  parents: []
+  summary: Initial synthetic relation revision.
+created_at: '2026-02-04T12:10:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - mth_01J00000000000000000000021
+  - tst_01J00000000000000000000023
+  artifacts: []
+  external_references: []
+  events: []
+access:
+  level: internal
+  compartments: []

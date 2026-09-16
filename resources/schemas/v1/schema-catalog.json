@@ -1,0 +1,49 @@
+{
+  "schema": "rp/schema-catalog/v1",
+  "status": "phase1-task0-frozen",
+  "draft": "2020-12",
+  "entrypoints": {
+    "layer_b": "layer-b.schema.json",
+    "fixture_object": "fixture-object.schema.json"
+  },
+  "presentation_order": "presentation-order.yaml",
+  "validation_stages": "validation-stages.yaml",
+  "finding_registry": "finding-registry.yaml",
+  "resource_limits": "resource-limits.yaml",
+  "benchmark_budget": "benchmark-budget.yaml",
+  "cli_contract": "cli-contract.yaml",
+  "scale_generator_contract": "scale-generator-contract.yaml",
+  "security_review": "security-review.md",
+  "resources": {
+    "common.schema.json": "common.schema.json"
+  },
+  "schemas": {
+    "rp/project/v1": "project.schema.json",
+    "rp/node-revision/v1": "node-revision.schema.json",
+    "rp/assessment/v1": "assessment.schema.json",
+    "rp/scientific-relation-revision/v1": "scientific-relation-revision.schema.json",
+    "rp/research-thread/v1": "research-thread.schema.json",
+    "rp/thread-binding/v1": "thread-binding.schema.json",
+    "rp/claim-chain-snapshot/v1": "claim-chain-snapshot.schema.json",
+    "rp/external-reference/v1": "external-reference.schema.json",
+    "rp/artifact-manifest/v1": "artifact-manifest.schema.json",
+    "rp/research-run/v1": "research-run.schema.json"
+  },
+  "contracts": {
+    "rp/claim-chain-validation-report/v1": "claim-chain-validation-report.schema.json",
+    "rp/finding/v1": "finding.schema.json",
+    "rp/cli-result/v1": "cli-result.schema.json",
+    "rp/cli-data/v1": "cli-data.schema.json",
+    "rp/test-overlay/v1": "test-overlay.schema.json",
+    "rp/fixture-expectations/v1": "fixture-expectations.schema.json",
+    "rp/access-closure-expectations/v1": "access-closure-expectations.schema.json",
+    "rp/freshness-policy/v1": "freshness-policy.schema.json",
+    "rp/scale-manifest/v1": "scale-manifest.schema.json"
+  },
+  "dispatch_rules": {
+    "canonical_layer_b_uses": "schemas",
+    "fixture_canonical_bridge_uses": "schemas plus fixture-object.schema.json",
+    "test_result_policy_and_manifest_documents_use": "contracts",
+    "contracts_are_never_layer_b_dispatch_candidates": true
+  }
+}

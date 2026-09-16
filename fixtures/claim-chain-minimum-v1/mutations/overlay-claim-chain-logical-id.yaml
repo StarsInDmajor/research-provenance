@@ -1,0 +1,22 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-claim-chain-logical-id
+fixture: claim-chain-minimum-v1
+title: Logical ID in frozen selection
+description: Replace one exact selected relation revision ID with its mutable logical ID.
+expected_failure:
+  exit_code: 1
+  finding_family: claim_chain_identity
+  error_code: RP_E_CLAIM_CHAIN_REQUIRES_EXACT_REVISION
+  target_file: .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml
+  target_field: relation_revisions.2
+mutation:
+  mode: structured_ast
+  target_file: .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml
+  operation: set_value
+  path: /relation_revisions/2
+  value: relation-minimum-direct-path
+allowed_secondary_findings:
+  - finding_family: source_closure_integrity
+    error_code: RP_E_SOURCE_CLOSURE_UNRESOLVABLE
+    rationale: The intentional logical-ID substitution cannot participate in an exact revision closure.

@@ -1,0 +1,37 @@
+schema: rp/scientific-relation-revision/v1
+id: rel_01J00000000000000000000053
+logical_id: exclusive-synthesis-supports-hypothesis
+record_state: frozen
+type: supports
+from_revision: syn_01J00000000000000000000030
+to_revision: hyp_01J00000000000000000000012
+scope:
+  statement: Synthetic access-closure relation.
+  conditions:
+  - Use exact frozen endpoints.
+  exclusions:
+  - No scientific authority is implied.
+assertion_mode: asserted
+relation_state: active
+rationale: Exclusive Synthesis supports the exclusive Hypothesis.
+revision:
+  parents: []
+  summary: Synthetic access relation revision.
+created_at: '2026-01-26T10:00:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - syn_01J00000000000000000000030
+  - hyp_01J00000000000000000000012
+  relations: []
+  artifacts: []
+  external_references: []
+  events: []
+access:
+  level: exclusive
+  compartments:
+  - analysis-alpha
+  - control-room
+  - partner-beta

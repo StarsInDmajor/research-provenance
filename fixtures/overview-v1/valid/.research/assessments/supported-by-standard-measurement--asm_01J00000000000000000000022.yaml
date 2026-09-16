@@ -1,0 +1,32 @@
+schema: rp/assessment/v1
+id: asm_01J00000000000000000000022
+target:
+  type: node_revision
+  id: hyp_01J00000000000000000000011
+assessment_scope: overall-claim
+epistemic_status: supported
+evidence_evaluation:
+  evidence_quality: medium
+  agreement: consistent
+  independence: same_run
+  directness: direct
+  decision_confidence: medium
+  rationale: The standard-envelope candidate measurement supports the broad statement within one
+    envelope.
+  limitations:
+  - The assessment does not establish stress-envelope generality.
+quantitative_assessment: null
+assessed_at: '2026-01-10T13:00:00Z'
+assessed_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - meas_01J00000000000000000000025
+  relations:
+  - rel_01J00000000000000000000043
+supersedes_assessments: []
+review_assurance: human-reviewed
+access:
+  level: internal
+  compartments: []

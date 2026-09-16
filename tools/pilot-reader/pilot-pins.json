@@ -1,0 +1,97 @@
+{
+  "as_of": "2026-09-08T23:59:59Z",
+  "rp_path": "/nix/store/rrblc2vg0h7q915mprqq864zl7322hlj-research-provenance-0.1.0/bin/rp",
+  "rp_sha256": "sha256:95e811d9bf78ed00fae494a210d559cf2c0aae5241bfe497dd8a13d2d365ce21",
+  "inventories": {
+    "before": "sha256:8ff84feb1241afb4195dc01a7c0e2fc8e218bc5d3edba336fb41c1f598c88949",
+    "after": "sha256:7b816a25f54ae2dd348503a8d55ad679166b61ac2cf6a56d4744d324965eb4e5"
+  },
+  "sources": {
+    "design": {
+      "artifact_id": "art_00000000000000000000000001",
+      "original_path": "docs/plans/2026-09-07-research-provenance-revised-roadmap.md",
+      "original_sha256": "sha256:c90c4b48c225eaa3ceaa4a27b952cc76683773e19e6692b94734bd7f0304462a",
+      "sections": [
+        {
+          "heading": "## 1. 结论与不变项",
+          "start_line": 8,
+          "end_line": 20
+        }
+      ],
+      "copied_path": "sources/design.md",
+      "sha256": "sha256:531350a2f0dc63fba7ee92cba3bd2dd42a1f67e75beb6aec0601049aa4695973",
+      "size_bytes": 848,
+      "extraction": "concatenated exact original sections, in listed order"
+    },
+    "performance": {
+      "artifact_id": "art_00000000000000000000000002",
+      "original_path": "docs/plans/2026-09-07-research-provenance-phase-1a-review.md",
+      "original_sha256": "sha256:e0f746f49ed11af5c4fd5ac25235d3fe7144625bde7403ca16773bd51e0db2c7",
+      "sections": [
+        {
+          "heading": "## Final workstation measurements",
+          "start_line": 56,
+          "end_line": 76
+        }
+      ],
+      "copied_path": "sources/performance.md",
+      "sha256": "sha256:432599b464049315886eaab1d6f0262d7b524d5daf6970bc858b5b1fabf8c813",
+      "size_bytes": 923,
+      "extraction": "concatenated exact original sections, in listed order"
+    },
+    "repairs": {
+      "artifact_id": "art_00000000000000000000000003",
+      "original_path": "docs/plans/2026-09-07-research-provenance-r0-progress.md",
+      "original_sha256": "sha256:05369c993b8f06aa2c03c03d5fce70699246c3fb97719776c8bd695eea5da838",
+      "sections": [
+        {
+          "heading": "## C3 runtime binding — integrated and verified",
+          "start_line": 311,
+          "end_line": 339
+        },
+        {
+          "heading": "## Cooperative command execution budget — integrated, final checks pending",
+          "start_line": 450,
+          "end_line": 478
+        }
+      ],
+      "copied_path": "sources/repairs.md",
+      "sha256": "sha256:1a2de7189630b86c6219ad573deb5e118a07cab48953ac7e7ffc59bf9b5a19a4",
+      "size_bytes": 3937,
+      "extraction": "concatenated exact original sections, in listed order"
+    },
+    "resource": {
+      "artifact_id": "art_00000000000000000000000004",
+      "original_path": "docs/plans/2026-09-07-research-provenance-r0-progress.md",
+      "original_sha256": "sha256:05369c993b8f06aa2c03c03d5fce70699246c3fb97719776c8bd695eea5da838",
+      "sections": [
+        {
+          "heading": "## Deadline preparation — verified external-library limitation",
+          "start_line": 435,
+          "end_line": 449
+        }
+      ],
+      "copied_path": "sources/resource.md",
+      "sha256": "sha256:a8c91a4d6104b901298725f9873e55a3bf6da4fdee60d2343adc90d325b27a7c",
+      "size_bytes": 939,
+      "extraction": "concatenated exact original sections, in listed order"
+    },
+    "approval": {
+      "artifact_id": "art_00000000000000000000000005",
+      "original_path": "docs/plans/2026-09-08-research-provenance-pilot-checkpoint.md",
+      "original_sha256": "sha256:4497c9891e906757e9693652f68028dd17f0b18182675c3b924f2f14681a37f3",
+      "sections": [
+        {
+          "heading": "## Approved pilot-only scope",
+          "start_line": 36,
+          "end_line": 54
+        }
+      ],
+      "copied_path": "sources/approval.md",
+      "sha256": "sha256:c139ec464a73efaa9a3a43cd521b13f3b439c139866be622beef5a042aeaa03f",
+      "size_bytes": 1161,
+      "extraction": "concatenated exact original sections, in listed order"
+    }
+  },
+  "thread": "thd_00000000000000000000000030"
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "thread-binding.schema.json",
+  "title": "rp/thread-binding/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "logical_id",
+    "record_state",
+    "thread_id",
+    "target",
+    "role",
+    "rationale",
+    "revision",
+    "created_at",
+    "created_by",
+    "access"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/thread-binding/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/binding"
+    },
+    "logical_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "record_state": {
+      "enum": [
+        "draft",
+        "frozen"
+      ]
+    },
+    "thread_id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/thread"
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "id"
+      ],
+      "properties": {
+        "type": {
+          "const": "node_revision"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/node"
+        }
+      }
+    },
+    "role": {
+      "enum": [
+        "primary",
+        "alternative",
+        "diagnostic",
+        "sensitivity",
+        "exploratory",
+        "replication",
+        "counterfactual",
+        "failed",
+        "historical",
+        "follow-up"
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "$ref": "common.schema.json#/$defs/binding_revision"
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "created_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "access": {
+      "$ref": "common.schema.json#/$defs/access"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  },
+  "$comment": "Canonical .research project validation permits frozen bindings only."
+}

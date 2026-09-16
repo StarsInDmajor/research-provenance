@@ -1,0 +1,87 @@
+# Phase 0 design data. This is not yet an installed Core schema.
+schema: rp/claim-chain-policy/v1
+
+profile: evidential-v1
+version: 1
+extends: minimum-v1
+
+minimum_v1:
+  identity:
+    references: exact-frozen-revision-ids
+    allow_logical_ids: false
+    follow_future_heads: false
+    duplicate_ids: reject
+  roots:
+    minimum_count: 1
+    kinds: any-node-revision
+    must_be_selected: true
+  target:
+    count: 1
+    kinds: any-node-revision
+    must_be_selected: true
+  relations:
+    require_active: true
+    allow_invalidated_as_formal_support: false
+    endpoints_must_be_selected: true
+    compatibility_policy_required: true
+  shape:
+    connectivity: weak
+    require_single_component: true
+    allow_orphan_selected_nodes: false
+    directed_cycles: reject
+  access:
+    expected_label: join-of-dependency-closure
+    downgrade: reject-unconditionally
+  validation_report:
+    required: false
+
+evidential_v1:
+  require_target_evaluation_path: true
+  evidence_bearing_kinds:
+    - Dataset
+    - Observation
+    - Measurement
+    - PaperClaim
+  allowed_evaluative_or_derivational_relations:
+    - supports
+    - weakens
+    - contradicts
+    - consistent-with
+    - derived-from
+    - generated
+  multi_input_inference:
+    grouping: shared-inference-target
+    minimum_inputs_requiring_synthesis: 2
+    synthesis_kind: Synthesis
+    input_relation: input-to
+    output_relation: generated
+    require_every_group_input: true
+  single_input_inference:
+    allow_direct_scoped_relation: true
+  temporal_predeclaration_required: false
+
+source_closure:
+  algorithm: rp/source-closure/v1
+  roots:
+    - selected_node_revisions
+    - selected_relation_revisions
+  recursive_fields:
+    - source.revisions
+    - source.relations
+    - source.artifacts
+    - source.external_references
+    - source.events
+  entry_tuple:
+    - object_type
+    - id
+    - canonical_digest
+  ordering:
+    - object_type
+    - id
+  serialization: RFC-8785
+  digest: sha256
+
+fixture_expected:
+  access:
+    level: internal
+    compartments: []

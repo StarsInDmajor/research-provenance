@@ -1,0 +1,17 @@
+schema: rp/external-reference/v1
+id: ref_01J00000000000000000000104
+type: https
+canonical_uri: https://example.invalid/freshness-v1/protocol
+foreign_key: null
+display_label: Synthetic protocol tracked newer version
+retrieved_at: '2026-06-01T00:00:00Z'
+source_version:
+  identifier: protocol-v3
+  released_at: '2026-06-01T00:00:00Z'
+  digest: null
+trust_tags:
+  - synthetic-fixture
+  - freshness-newer-tracked-version
+access:
+  level: public
+  compartments: []

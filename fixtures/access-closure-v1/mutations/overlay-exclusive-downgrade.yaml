@@ -1,0 +1,21 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-exclusive-downgrade
+fixture: access-closure-v1
+title: Exclusive Conclusion declares restricted level
+description: Lower an exclusive derived Conclusion while retaining all compartments.
+expected_failure:
+  exit_code: 1
+  finding_family: access_level_downgrade
+  error_code: RP_E_ACCESS_LEVEL_DOWNGRADE
+  target_file: .research/records/conclusions/conclusion-exclusive-combined--con_01J00000000000000000000031.yaml
+  target_field: access.level
+mutation:
+  mode: structured_ast
+  target_file: .research/records/conclusions/conclusion-exclusive-combined--con_01J00000000000000000000031.yaml
+  operation: set_value
+  path: /access/level
+  value: restricted
+maintenance:
+  recompute_source_closure_sha256:
+  - .research/claim-chains/exclusive-structural-access-chain--cch_01J00000000000000000000081.yaml

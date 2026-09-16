@@ -1,0 +1,30 @@
+schema: rp/claim-chain-snapshot/v1
+id: cch_01J00000000000000000000080
+thread_id: thd_01J00000000000000000000082
+title: Restricted structural access chain
+root_node_revisions:
+- qst_01J00000000000000000000013
+target_node_revision: con_01J00000000000000000000029
+validation_policy:
+  profile: minimum-v1
+  version: 1
+node_revisions:
+- qst_01J00000000000000000000013
+- hyp_01J00000000000000000000011
+- syn_01J00000000000000000000028
+- con_01J00000000000000000000029
+relation_revisions:
+- rel_01J00000000000000000000050
+- rel_01J00000000000000000000051
+- rel_01J00000000000000000000044
+source_closure_sha256: sha256:2adca4be1773f43b3c7a0e32cdfebdf1e86fe262e217d3c8e976a7031cef624f
+validation_report: null
+created_at: '2026-01-29T10:00:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: restricted
+  compartments:
+  - analysis-alpha
+  - partner-beta

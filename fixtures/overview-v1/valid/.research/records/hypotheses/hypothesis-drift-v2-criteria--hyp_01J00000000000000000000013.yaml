@@ -1,0 +1,38 @@
+schema: rp/node-revision/v1
+id: hyp_01J00000000000000000000013
+logical_id: hypothesis-drift
+kind: Hypothesis
+record_state: frozen
+title: Decomposed criteria drift hypothesis
+statement: Procedure C satisfies each median, tail, and comparison criterion independently.
+scope:
+  statement: Declared criteria evaluated independently before any combined conclusion.
+hypothesis:
+  falsification_criteria:
+  - Any individual declared criterion is not satisfied by procedure C.
+  revision_criteria:
+  - A criterion is shown to be non-independent or incorrectly calibrated.
+assumptions:
+- Each criterion is evaluated with the same versioned protocol.
+limitations:
+- Criterion independence does not establish stress-envelope generality.
+revision:
+  parents:
+  - id: hyp_01J00000000000000000000011
+    change_type: clarification
+  summary: Clarifies the broad claim by decomposing its acceptance criteria.
+created_at: '2026-02-02T09:05:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - hyp_01J00000000000000000000011
+  - meas_01J00000000000000000000025
+access:
+  level: internal
+  compartments: []
+tags:
+- overview-v1
+- synthetic
+- criteria-branch

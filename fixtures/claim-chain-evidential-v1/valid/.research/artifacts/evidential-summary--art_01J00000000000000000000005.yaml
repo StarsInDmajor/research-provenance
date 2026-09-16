@@ -1,0 +1,11 @@
+schema: rp/artifact-manifest/v1
+id: art_01J00000000000000000000005
+title: Synthetic evidential summary table
+uri: file:data/evidential-summary.csv
+media_type: text/csv
+size_bytes: 118
+sha256: sha256:0cd803350b2cf64577d2092c9763a5dace516624e539d7cdcfaa47577bd0c99f
+created_at: '2026-01-01T08:06:00Z'
+access:
+  level: internal
+  compartments: []

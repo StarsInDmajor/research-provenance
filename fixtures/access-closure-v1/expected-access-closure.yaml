@@ -1,0 +1,1366 @@
+# Noncanonical test oracle; not a research fact source.
+schema: rp/access-closure-expectations/v1
+fixture: access-closure-v1
+status: g7-approved-phase0-baseline
+algorithm: rp/access-closure/v1
+entries:
+- id: art_01J00000000000000000000005
+  object_type: rp/artifact-manifest/v1
+  required_floor:
+    level: public
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 0
+- id: art_01J00000000000000000000006
+  object_type: rp/artifact-manifest/v1
+  required_floor:
+    level: public
+    compartments: []
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 0
+- id: art_01J00000000000000000000007
+  object_type: rp/artifact-manifest/v1
+  required_floor:
+    level: public
+    compartments: []
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+  valid: true
+  dependency_count: 0
+- id: asm_01J00000000000000000000070
+  object_type: rp/assessment/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 4
+- id: asm_01J00000000000000000000071
+  object_type: rp/assessment/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 3
+- id: asm_01J00000000000000000000072
+  object_type: rp/assessment/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: asm_01J00000000000000000000073
+  object_type: rp/assessment/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 2
+- id: cch_01J00000000000000000000080
+  object_type: rp/claim-chain-snapshot/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 14
+- id: cch_01J00000000000000000000081
+  object_type: rp/claim-chain-snapshot/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 17
+- id: con_01J00000000000000000000029
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: con_01J00000000000000000000031
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: dset_01J00000000000000000000008
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 2
+- id: dset_01J00000000000000000000009
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 2
+- id: dset_01J0000000000000000000000A
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - control-room
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+  valid: true
+  dependency_count: 2
+- id: hyp_01J00000000000000000000011
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 3
+- id: hyp_01J00000000000000000000012
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 6
+- id: hyp_01J00000000000000000000016
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: public
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 1
+- id: hyp_01J00000000000000000000017
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 4
+- id: mth_01J00000000000000000000021
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: public
+    compartments: []
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+  valid: true
+  dependency_count: 1
+- id: qst_01J00000000000000000000010
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: public
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 1
+- id: qst_01J00000000000000000000013
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 3
+- id: qst_01J00000000000000000000014
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - control-room
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+  valid: true
+  dependency_count: 3
+- id: qst_01J00000000000000000000015
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: public
+    compartments: []
+  declared:
+    level: public
+    compartments: []
+  effective:
+    level: public
+    compartments: []
+  valid: true
+  dependency_count: 1
+- id: ref_01J00000000000000000000003
+  object_type: rp/external-reference/v1
+  required_floor:
+    level: public
+    compartments: []
+  declared:
+    level: public
+    compartments: []
+  effective:
+    level: public
+    compartments: []
+  valid: true
+  dependency_count: 0
+- id: rel_01J00000000000000000000041
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: rel_01J00000000000000000000042
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: rel_01J00000000000000000000043
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: rel_01J00000000000000000000044
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 8
+- id: rel_01J00000000000000000000045
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: rel_01J00000000000000000000046
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: rel_01J00000000000000000000047
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 8
+- id: rel_01J00000000000000000000048
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: rel_01J00000000000000000000050
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 5
+- id: rel_01J00000000000000000000051
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 8
+- id: rel_01J00000000000000000000052
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 8
+- id: rel_01J00000000000000000000053
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 9
+- id: rel_01J00000000000000000000060
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 4
+- id: rel_01J00000000000000000000061
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 5
+- id: rel_01J00000000000000000000070
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 3
+- id: rel_01J00000000000000000000071
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: restricted
+    compartments:
+    - lineage-alpha
+  effective:
+    level: restricted
+    compartments:
+    - lineage-alpha
+  valid: true
+  dependency_count: 3
+- id: rel_01J00000000000000000000072
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - lineage-alpha
+  declared:
+    level: restricted
+    compartments:
+    - lineage-alpha
+  effective:
+    level: restricted
+    compartments:
+    - lineage-alpha
+  valid: true
+  dependency_count: 4
+- id: syn_01J00000000000000000000028
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 6
+- id: syn_01J00000000000000000000030
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 6
+- id: tbd_01J00000000000000000000090
+  object_type: rp/thread-binding/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 8
+- id: tbd_01J00000000000000000000091
+  object_type: rp/thread-binding/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 11
+- id: tbd_01J00000000000000000000092
+  object_type: rp/thread-binding/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 10
+- id: thd_01J00000000000000000000080
+  object_type: rp/research-thread/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 2
+- id: thd_01J00000000000000000000081
+  object_type: rp/research-thread/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 4
+- id: thd_01J00000000000000000000082
+  object_type: rp/research-thread/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 4
+- id: thd_01J00000000000000000000083
+  object_type: rp/research-thread/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 8
+key_assertions:
+- id: ref_01J00000000000000000000003
+  object_type: rp/external-reference/v1
+  required_floor:
+    level: public
+    compartments: []
+  declared:
+    level: public
+    compartments: []
+  effective:
+    level: public
+    compartments: []
+  valid: true
+  dependency_count: 0
+- id: dset_01J00000000000000000000008
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 2
+- id: dset_01J00000000000000000000009
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 2
+- id: dset_01J0000000000000000000000A
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - control-room
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+  valid: true
+  dependency_count: 2
+- id: syn_01J00000000000000000000028
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 6
+- id: con_01J00000000000000000000029
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: syn_01J00000000000000000000030
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 6
+- id: con_01J00000000000000000000031
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 7
+- id: hyp_01J00000000000000000000017
+  object_type: rp/node-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 4
+- id: rel_01J00000000000000000000070
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 3
+- id: rel_01J00000000000000000000072
+  object_type: rp/scientific-relation-revision/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - lineage-alpha
+  declared:
+    level: restricted
+    compartments:
+    - lineage-alpha
+  effective:
+    level: restricted
+    compartments:
+    - lineage-alpha
+  valid: true
+  dependency_count: 4
+- id: asm_01J00000000000000000000070
+  object_type: rp/assessment/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 4
+- id: asm_01J00000000000000000000071
+  object_type: rp/assessment/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 3
+- id: asm_01J00000000000000000000073
+  object_type: rp/assessment/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 2
+- id: thd_01J00000000000000000000081
+  object_type: rp/research-thread/v1
+  required_floor:
+    level: internal
+    compartments: []
+  declared:
+    level: internal
+    compartments: []
+  effective:
+    level: internal
+    compartments: []
+  valid: true
+  dependency_count: 4
+- id: thd_01J00000000000000000000082
+  object_type: rp/research-thread/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 4
+- id: thd_01J00000000000000000000083
+  object_type: rp/research-thread/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 8
+- id: tbd_01J00000000000000000000090
+  object_type: rp/thread-binding/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - partner-beta
+  valid: true
+  dependency_count: 8
+- id: tbd_01J00000000000000000000092
+  object_type: rp/thread-binding/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 10
+- id: cch_01J00000000000000000000080
+  object_type: rp/claim-chain-snapshot/v1
+  required_floor:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  declared:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  effective:
+    level: restricted
+    compartments:
+    - analysis-alpha
+    - partner-beta
+  valid: true
+  dependency_count: 14
+- id: cch_01J00000000000000000000081
+  object_type: rp/claim-chain-snapshot/v1
+  required_floor:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  declared:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  effective:
+    level: exclusive
+    compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  valid: true
+  dependency_count: 17
+claim_chain_source_closures:
+- id: cch_01J00000000000000000000080
+  entries:
+  - object_type: rp/artifact-manifest/v1
+    id: art_01J00000000000000000000005
+    canonical_digest: sha256:1535bf511f776066a17b67b283d3ce42dc0bc591f7716716a4e06e24deeced3c
+  - object_type: rp/artifact-manifest/v1
+    id: art_01J00000000000000000000006
+    canonical_digest: sha256:2b02cfa1adb4827f2f7c1f12680b59b3c4af61c22a8f8ee9dc0d593f7315bd67
+  - object_type: rp/external-reference/v1
+    id: ref_01J00000000000000000000003
+    canonical_digest: sha256:7b6ec98b31af01cd2ac49a8da8c7be039cddf8e50ed430049ccd8bb2eb747548
+  - object_type: rp/node-revision/v1
+    id: con_01J00000000000000000000029
+    canonical_digest: sha256:1c79469ab72268568d9546650f590f343d4c361cba078ad5b5dbf39db2102adc
+  - object_type: rp/node-revision/v1
+    id: dset_01J00000000000000000000008
+    canonical_digest: sha256:4f3e691e005cb9f86b98d0e73e174065193a3b13eca136303b4da8c3f6576a27
+  - object_type: rp/node-revision/v1
+    id: dset_01J00000000000000000000009
+    canonical_digest: sha256:ba33478e0abe1dd24568b6123147c698d15835bc9bb0ef7b0f5352042e62f3cb
+  - object_type: rp/node-revision/v1
+    id: hyp_01J00000000000000000000011
+    canonical_digest: sha256:1f812cdeb7eb35650a4f50a4f88b3d66dadf20905da0c2babbff4d550b421909
+  - object_type: rp/node-revision/v1
+    id: mth_01J00000000000000000000021
+    canonical_digest: sha256:803a21ad112cdbaca2e47cf9030e4fa9031d29dd357a058765be294727373041
+  - object_type: rp/node-revision/v1
+    id: qst_01J00000000000000000000013
+    canonical_digest: sha256:c730f605bc02254b26a66180369c9b67a89d9aa36be0a3bae22e73c25c219a6b
+  - object_type: rp/node-revision/v1
+    id: syn_01J00000000000000000000028
+    canonical_digest: sha256:e406ed041f6f2ed41e75fa1d2d5d7b11d560b4b629838572580a71b8adcbac8d
+  - object_type: rp/scientific-relation-revision/v1
+    id: rel_01J00000000000000000000044
+    canonical_digest: sha256:01eef6ebaabb8ac7aded136c71f849680a2364464ff7b7bb57c8709afc0d2c93
+  - object_type: rp/scientific-relation-revision/v1
+    id: rel_01J00000000000000000000050
+    canonical_digest: sha256:566dd2bb093ff1842815760508c69d289675b33c90e451df7508df07a815af62
+  - object_type: rp/scientific-relation-revision/v1
+    id: rel_01J00000000000000000000051
+    canonical_digest: sha256:3c096facd031cde0a0932853276ed00de503565f15cb090e974d9b84d06d05b7
+  sha256: sha256:2adca4be1773f43b3c7a0e32cdfebdf1e86fe262e217d3c8e976a7031cef624f
+- id: cch_01J00000000000000000000081
+  entries:
+  - object_type: rp/artifact-manifest/v1
+    id: art_01J00000000000000000000006
+    canonical_digest: sha256:2b02cfa1adb4827f2f7c1f12680b59b3c4af61c22a8f8ee9dc0d593f7315bd67
+  - object_type: rp/artifact-manifest/v1
+    id: art_01J00000000000000000000007
+    canonical_digest: sha256:0a13ad0fdc8207a9e8b8115febcdf52866401d82e1341957591ac91d7cb254f7
+  - object_type: rp/external-reference/v1
+    id: ref_01J00000000000000000000003
+    canonical_digest: sha256:7b6ec98b31af01cd2ac49a8da8c7be039cddf8e50ed430049ccd8bb2eb747548
+  - object_type: rp/node-revision/v1
+    id: con_01J00000000000000000000031
+    canonical_digest: sha256:5977e2ed34a349d89fb0b01f8caac14e12bcec46f6363b4b685e0d35539e6c50
+  - object_type: rp/node-revision/v1
+    id: dset_01J00000000000000000000009
+    canonical_digest: sha256:ba33478e0abe1dd24568b6123147c698d15835bc9bb0ef7b0f5352042e62f3cb
+  - object_type: rp/node-revision/v1
+    id: dset_01J0000000000000000000000A
+    canonical_digest: sha256:773ddb25b52606ce646e0de6d45d58b574359d69ff4cc3fb3c180e6c49633833
+  - object_type: rp/node-revision/v1
+    id: hyp_01J00000000000000000000012
+    canonical_digest: sha256:b1f95321ce32bd39bc4f9c1c37e5c11065c5a0bc5d023e5fb50092f1d02f8a74
+  - object_type: rp/node-revision/v1
+    id: mth_01J00000000000000000000021
+    canonical_digest: sha256:803a21ad112cdbaca2e47cf9030e4fa9031d29dd357a058765be294727373041
+  - object_type: rp/node-revision/v1
+    id: qst_01J00000000000000000000014
+    canonical_digest: sha256:7bdc513181c9316187b74d574b7baf079b700c3129692f73794a82a7a7f30c81
+  - object_type: rp/node-revision/v1
+    id: syn_01J00000000000000000000030
+    canonical_digest: sha256:4223e37a1d435f31e6991041d3a165d9e40088db29c57444988611a98461a931
+  - object_type: rp/scientific-relation-revision/v1
+    id: rel_01J00000000000000000000047
+    canonical_digest: sha256:5e012c4f7a83302a33675b0c77a3adb0735173e5600a54c2b03ed48f448df95d
+  - object_type: rp/scientific-relation-revision/v1
+    id: rel_01J00000000000000000000052
+    canonical_digest: sha256:78f9f74211cb3114c8056fc7d48025c09a4cc7757919cfded96daeba75865984
+  - object_type: rp/scientific-relation-revision/v1
+    id: rel_01J00000000000000000000053
+    canonical_digest: sha256:eb2f5a39facd2eadd975f6ee5ed09ab3f194628091d83a87047054feed9e75c8
+  sha256: sha256:c860fc5352c7e15faf06fb8241c0fe3e93e8682c5cf5e9b38a8a9ab495780f4c
+export_queries:
+- name: public-reference
+  target_id: ref_01J00000000000000000000003
+  request:
+    level_ceiling: public
+    allowed_compartments: []
+  eligible: true
+- name: internal-dataset-public-denied
+  target_id: dset_01J00000000000000000000008
+  request:
+    level_ceiling: public
+    allowed_compartments: []
+  eligible: false
+- name: internal-dataset-internal-allowed
+  target_id: dset_01J00000000000000000000008
+  request:
+    level_ceiling: internal
+    allowed_compartments: []
+  eligible: true
+- name: restricted-conclusion-missing-analysis
+  target_id: con_01J00000000000000000000029
+  request:
+    level_ceiling: restricted
+    allowed_compartments:
+    - partner-beta
+  eligible: false
+- name: restricted-conclusion-authorized
+  target_id: con_01J00000000000000000000029
+  request:
+    level_ceiling: restricted
+    allowed_compartments:
+    - analysis-alpha
+    - partner-beta
+  eligible: true
+- name: exclusive-conclusion-level-denied
+  target_id: con_01J00000000000000000000031
+  request:
+    level_ceiling: restricted
+    allowed_compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  eligible: false
+- name: exclusive-conclusion-missing-compartment
+  target_id: con_01J00000000000000000000031
+  request:
+    level_ceiling: exclusive
+    allowed_compartments:
+    - control-room
+    - partner-beta
+  eligible: false
+- name: exclusive-conclusion-authorized
+  target_id: con_01J00000000000000000000031
+  request:
+    level_ceiling: exclusive
+    allowed_compartments:
+    - analysis-alpha
+    - control-room
+    - partner-beta
+  eligible: true

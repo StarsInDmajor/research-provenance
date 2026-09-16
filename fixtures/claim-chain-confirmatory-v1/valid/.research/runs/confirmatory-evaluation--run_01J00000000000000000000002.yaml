@@ -1,0 +1,28 @@
+schema: rp/research-run/v1
+id: run_01J00000000000000000000002
+project_id: proj_01J00000000000000000000001
+title: Synthetic confirmatory evaluation
+objective: Evaluate predeclared criteria across standard, stress, and retrospective synthetic evidence
+  without treating profile validity as scientific confirmation.
+created_at: '2026-01-01T08:30:00Z'
+created_by:
+  type: software
+  id: fixture-builder
+parent_run_id: null
+planned_inputs:
+  revisions: []
+  artifacts: []
+planned_outputs:
+- Dataset
+- Measurement
+- Synthesis
+- Conclusion
+limitations:
+- All values and actors are synthetic fixture data.
+- Layer A Events and Segments are deferred to the execution-provenance slice.
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-confirmatory-v1
+- synthetic

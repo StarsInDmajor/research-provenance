@@ -1,0 +1,209 @@
+# Noncanonical test oracle; not a research fact source.
+schema: rp/fixture-expectations/v1
+fixture: claim-chain-confirmatory-v1
+status: g7-approved-phase0-baseline
+profile: confirmatory-v1
+snapshot:
+  id: cch_01J00000000000000000000053
+  validation:
+    outcome: passed
+    root_kind: Question
+    target_kind: Conclusion
+    selected_result_count: 4
+    artifact_backed_result_count: 4
+    explicit_synthesis: syn_01J00000000000000000000028
+    positive_outcome_relations:
+    - rel_01J00000000000000000000061
+    - rel_01J00000000000000000000063
+    contradictory_outcome_relations:
+    - rel_01J00000000000000000000062
+    temporal_checks:
+    - result_revision: meas_01J00000000000000000000024
+      test_revision: tst_01J00000000000000000000022
+      prediction_revision: pred_01J00000000000000000000020
+      resolved_result_time_source: node_revision.created_at
+      resolved_result_time: '2026-01-10T12:00:00Z'
+      observed_before_predeclaration: false
+      outcome: passed
+    - result_revision: meas_01J00000000000000000000025
+      test_revision: tst_01J00000000000000000000022
+      prediction_revision: pred_01J00000000000000000000020
+      resolved_result_time_source: temporal.recorded_at
+      resolved_result_time: '2026-01-10T12:05:00Z'
+      observed_before_predeclaration: false
+      outcome: passed
+    - result_revision: meas_01J00000000000000000000026
+      test_revision: tst_01J00000000000000000000023
+      prediction_revision: pred_01J00000000000000000000020
+      resolved_result_time_source: temporal.recorded_at
+      resolved_result_time: '2026-02-01T12:05:00Z'
+      observed_before_predeclaration: false
+      outcome: passed
+    - result_revision: meas_01J00000000000000000000027
+      test_revision: tst_01J00000000000000000000022
+      prediction_revision: pred_01J00000000000000000000020
+      resolved_result_time_source: temporal.recorded_at
+      resolved_result_time: '2026-01-10T12:10:00Z'
+      observed_before_predeclaration: true
+      outcome: passed
+  selection:
+    root_node_revisions:
+    - qst_01J00000000000000000000010
+    target_node_revision: con_01J00000000000000000000029
+    node_revisions:
+    - qst_01J00000000000000000000010
+    - hyp_01J00000000000000000000011
+    - pred_01J00000000000000000000020
+    - mth_01J00000000000000000000021
+    - tst_01J00000000000000000000022
+    - tst_01J00000000000000000000023
+    - meas_01J00000000000000000000024
+    - meas_01J00000000000000000000025
+    - meas_01J00000000000000000000026
+    - meas_01J00000000000000000000027
+    - syn_01J00000000000000000000028
+    - con_01J00000000000000000000029
+    relation_revisions:
+    - rel_01J00000000000000000000041
+    - rel_01J00000000000000000000047
+    - rel_01J00000000000000000000048
+    - rel_01J00000000000000000000064
+    - rel_01J00000000000000000000058
+    - rel_01J00000000000000000000059
+    - rel_01J00000000000000000000049
+    - rel_01J00000000000000000000050
+    - rel_01J00000000000000000000051
+    - rel_01J00000000000000000000056
+    - rel_01J00000000000000000000060
+    - rel_01J00000000000000000000052
+    - rel_01J00000000000000000000053
+    - rel_01J00000000000000000000057
+    - rel_01J00000000000000000000061
+    - rel_01J00000000000000000000062
+    - rel_01J00000000000000000000063
+    - rel_01J00000000000000000000054
+    - rel_01J00000000000000000000055
+  source_closure:
+    algorithm: rp/source-closure/v1
+    entries:
+    - object_type: rp/artifact-manifest/v1
+      id: art_01J00000000000000000000005
+      canonical_digest: sha256:3cf2b482cc66975969395ff6ca74cfb89ac9a137e45317f356e2336679ef3d8e
+    - object_type: rp/artifact-manifest/v1
+      id: art_01J00000000000000000000006
+      canonical_digest: sha256:c0768735514d34c503168a360b3a04040fca8ad5e72017538d1638d44c940c05
+    - object_type: rp/artifact-manifest/v1
+      id: art_01J00000000000000000000007
+      canonical_digest: sha256:630acb31e930d075acd4b0e02f581da0838051a0ee6311042e59e464c9f08283
+    - object_type: rp/external-reference/v1
+      id: ref_01J00000000000000000000003
+      canonical_digest: sha256:a0ef5690a9b7face5f8a66be753d217c61e5b3607c40fd78e7313d39e44a4318
+    - object_type: rp/external-reference/v1
+      id: ref_01J00000000000000000000004
+      canonical_digest: sha256:a4b8077f2dae298bd1f3ea37d0c4f7958a3ee178483e308c5a740a2ae4506c7e
+    - object_type: rp/node-revision/v1
+      id: con_01J00000000000000000000029
+      canonical_digest: sha256:9c79f9c221fa261089f754cd5a995ebdebb811197e52638841cf61fecd5711fb
+    - object_type: rp/node-revision/v1
+      id: dset_01J00000000000000000000008
+      canonical_digest: sha256:c82e456e74e4ad929ae2e7dea008a18c97ad7bb3cf3f9797b5eb1eac30310724
+    - object_type: rp/node-revision/v1
+      id: dset_01J00000000000000000000009
+      canonical_digest: sha256:3d4890bde5856ba6389a303a0fb2189e3bf89955f8d8b362d4f3b5018e4c30f0
+    - object_type: rp/node-revision/v1
+      id: dset_01J0000000000000000000000A
+      canonical_digest: sha256:1544a12e37d37b3c87012cf54f2517d2c73614208f867611a7ee475ce7d63992
+    - object_type: rp/node-revision/v1
+      id: hyp_01J00000000000000000000011
+      canonical_digest: sha256:4c06b8075016807e54fbc259de9f402a9e0aeea0c303fd19fdaa368b6a8931d5
+    - object_type: rp/node-revision/v1
+      id: meas_01J00000000000000000000024
+      canonical_digest: sha256:a15a8084316ebff2c92e74c9d586d3212fb361c16d009240976d67594af4f4ae
+    - object_type: rp/node-revision/v1
+      id: meas_01J00000000000000000000025
+      canonical_digest: sha256:81f3d4374c0ad656dedf2a09893a1f6f5fcac7845c9a472c892c6952879a45a6
+    - object_type: rp/node-revision/v1
+      id: meas_01J00000000000000000000026
+      canonical_digest: sha256:405b7d30d7b49ada750c54df2babd6c8039735e7278838f9016fc14c8fe9b176
+    - object_type: rp/node-revision/v1
+      id: meas_01J00000000000000000000027
+      canonical_digest: sha256:089ec223454d6feaef99266699d81b0d8ad300232f8bbee2ee411bb2e95d996b
+    - object_type: rp/node-revision/v1
+      id: mth_01J00000000000000000000021
+      canonical_digest: sha256:4f8eb6cfebe74190ea81881eba35a918181276ca670726ca5a5aa4dca346eb9e
+    - object_type: rp/node-revision/v1
+      id: pred_01J00000000000000000000020
+      canonical_digest: sha256:93924f8ecd36acec990eebf8f432a5795143fce27f46b7cafba90289e93d7a19
+    - object_type: rp/node-revision/v1
+      id: qst_01J00000000000000000000010
+      canonical_digest: sha256:812e9521e669aa6d8e418594e9b02a728a5f78a15febc5d75263eceef2bd4824
+    - object_type: rp/node-revision/v1
+      id: syn_01J00000000000000000000028
+      canonical_digest: sha256:6a99cc1e0a11c25e63520884ee92f65b620e614fa2c691eb7360df791b68556f
+    - object_type: rp/node-revision/v1
+      id: tst_01J00000000000000000000022
+      canonical_digest: sha256:e1f497c47409de0e1f3afda2182e1b900b6a30c81610e1a7c818dfd43c748b21
+    - object_type: rp/node-revision/v1
+      id: tst_01J00000000000000000000023
+      canonical_digest: sha256:3d8b76d282df01c6082e665969b05d70b0391a9d04cbcff1359cb2fde7222bbf
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000041
+      canonical_digest: sha256:dcc78e685b1e3aa14394390b2e63ca6506fb2bf919c8946a8675b108f0c91214
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000047
+      canonical_digest: sha256:d329a4c756f112dda18c64f85cb03f2d795537aee43fa598ea92901549ee7929
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000048
+      canonical_digest: sha256:2c795c9f6a0d26d4f1fab5e242c74de4051722b4c1739095ab9fcab21b7ef4e7
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000049
+      canonical_digest: sha256:251c6410da66574a38c89d16f06a4b0bd7b1b7f87a7edcf5db1f2c8ac6b70859
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000050
+      canonical_digest: sha256:5c7d4fb19db298a3f62a68a538c39a8ebb97fa553170935ebfa1bebaee2ac164
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000051
+      canonical_digest: sha256:9b448b587522e0109ceaa93ac6187677cbb3bb6a2e917b0653daea1dfd8ce58e
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000052
+      canonical_digest: sha256:5e572157ee0d351a26ff177c96a0f3c94228afc6cefb1c2e93b25611ae62908e
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000053
+      canonical_digest: sha256:504c5946bbf5fd34767d089a3a29648d3644f52e249ebdb6e2a6e83958b613b0
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000054
+      canonical_digest: sha256:711e22bcb9d5d5fb8f9a6ae4f9a084cabb1072b0ddd27b1b2b58a59cf7f426de
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000055
+      canonical_digest: sha256:987c7530f20383912bc2fc91b663cbb15cab44572f0fc8e9a0b0a95bb5844c24
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000056
+      canonical_digest: sha256:4d2c58c913a5bbe3e3321969f61588a75e889061342bcd0249adb2457a1fc484
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000057
+      canonical_digest: sha256:2d183bd0924f2923c058be455d2be8b675d3f7bb273aa9b4e6b75ba25d0b4f0d
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000058
+      canonical_digest: sha256:0e82de69cb415952640b6aff114140692ad7135c70ad52e17da08f7a91fcc6ee
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000059
+      canonical_digest: sha256:14d13ca4cd35a0aaa61655a17cd0add03ad30254c1e899a1714249ff9359eb74
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000060
+      canonical_digest: sha256:93923e95e3645696450bedb112b3165f889c03af4bb691965b335bce031eafad
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000061
+      canonical_digest: sha256:bc4f8c06842f9451b9673c5783ddfdbfa8e359788e7a06c29cbc76d190133c4e
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000062
+      canonical_digest: sha256:8223599ba136cf44985e50808e80d52027e9562ed799d6fc71e3090a685043ec
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000063
+      canonical_digest: sha256:d65f8eabb99c1c7ca416717e58fcec1f21a5e4ffb26c8491e5a7cf453508fb52
+    - object_type: rp/scientific-relation-revision/v1
+      id: rel_01J00000000000000000000064
+      canonical_digest: sha256:92c1ba2dc874075aaae7d2e401195c922fba08cf2b94ed1c2ec1062a39bb80fe
+    sha256: sha256:a379670b1c9d3134b58a8f1a19984eb694f9e92d16d945526ca923b21f29ab3d
+access:
+  level: internal
+  compartments: []

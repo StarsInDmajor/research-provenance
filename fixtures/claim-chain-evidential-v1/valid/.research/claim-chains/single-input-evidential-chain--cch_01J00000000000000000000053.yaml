@@ -1,0 +1,28 @@
+schema: rp/claim-chain-snapshot/v1
+id: cch_01J00000000000000000000053
+thread_id: null
+title: Single-input evidential ClaimChain snapshot
+root_node_revisions:
+- qst_01J00000000000000000000010
+target_node_revision: con_01J00000000000000000000030
+validation_policy:
+  profile: evidential-v1
+  version: 1
+node_revisions:
+- qst_01J00000000000000000000010
+- hyp_01J00000000000000000000014
+- meas_01J00000000000000000000025
+- con_01J00000000000000000000030
+relation_revisions:
+- rel_01J00000000000000000000041
+- rel_01J00000000000000000000047
+- rel_01J00000000000000000000048
+source_closure_sha256: sha256:1808d73b6c608a261ff86d4a256d1c5de85cde3fea9959d60dc9db0a33d24538
+validation_report: null
+created_at: '2026-01-01T09:00:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: internal
+  compartments: []

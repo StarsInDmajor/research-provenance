@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-claim-selection-leak
+fixture: access-closure-v1
+title: ClaimChain drops selected dependency level
+description: Lower a ClaimChain below its restricted selected nodes and relations.
+expected_failure:
+  exit_code: 1
+  finding_family: access_claim_chain_selection
+  error_code: RP_E_ACCESS_CLAIM_SELECTION
+  target_file: .research/claim-chains/restricted-structural-access-chain--cch_01J00000000000000000000080.yaml
+  target_field: access.level
+mutation:
+  mode: structured_ast
+  target_file: .research/claim-chains/restricted-structural-access-chain--cch_01J00000000000000000000080.yaml
+  operation: set_value
+  path: /access/level
+  value: internal

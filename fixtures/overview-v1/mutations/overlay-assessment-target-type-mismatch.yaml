@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-assessment-target-type-mismatch
+fixture: overview-v1
+title: Relation Assessment carries a node ID
+description: Keep relation_revision target type but replace the target with a Hypothesis ID.
+expected_failure:
+  exit_code: 1
+  finding_family: schema_target_id_type
+  error_code: RP_E_SCHEMA_TARGET_ID_TYPE
+  target_file: .research/assessments/candidate-support-relation-assessment--asm_01J00000000000000000000024.yaml
+  target_field: target.id
+mutation:
+  mode: structured_ast
+  target_file: .research/assessments/candidate-support-relation-assessment--asm_01J00000000000000000000024.yaml
+  operation: set_value
+  path: /target/id
+  value: hyp_01J00000000000000000000011

@@ -1,0 +1,43 @@
+schema: rp/assessment/v1
+
+id: asm_01J00000000000000000000024
+target:
+  type: relation_revision
+  id: rel_01J00000000000000000000043
+
+assessment_scope: relation-assertion
+
+epistemic_status: supported
+
+evidence_evaluation:
+  evidence_quality: medium
+  agreement: consistent
+  independence: shared_data
+  directness: direct
+  decision_confidence: medium
+  rationale: >-
+    The selected relation is structurally supported by the synthetic standard
+    measurement but is not independently replicated.
+  limitations:
+    - The assessment exists to cover relation-target typing in the schema.
+
+quantitative_assessment: null
+
+assessed_at: "2026-01-10T12:30:00Z"
+assessed_by:
+  type: human
+  id: researcher
+
+source:
+  revisions:
+    - meas_01J00000000000000000000025
+  relations:
+    - rel_01J00000000000000000000043
+
+supersedes_assessments: []
+
+review_assurance: human-reviewed
+
+access:
+  level: internal
+  compartments: []

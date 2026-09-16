@@ -1,0 +1,45 @@
+# Registry frozen with the G7-approved Phase 0 baseline.
+schema: rp/fixture-id-registry/v1
+fixture: claim-chain-minimum-v1
+status: g7-approved-phase0-baseline
+id_policy:
+  format: typed-prefix-plus-ulid
+  allocation: deterministic-fixture-order
+  mutable_aliases: false
+objects:
+  minimum-structural-chain:
+    id: cch_01J00000000000000000000051
+    path: valid/.research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml
+  project-minimum:
+    id: proj_01J00000000000000000000001
+    path: valid/.research/project.yaml
+  minimum-profile-conclusion:
+    id: con_01J00000000000000000000019
+    path: valid/.research/records/conclusions/minimum-profile-conclusion--con_01J00000000000000000000019.yaml
+  exact-structure-hypothesis:
+    id: hyp_01J00000000000000000000011
+    path: valid/.research/records/hypotheses/exact-structure-hypothesis--hyp_01J00000000000000000000011.yaml
+  core-structural-question:
+    id: qst_01J00000000000000000000010
+    path: valid/.research/records/questions/core-structural-question--qst_01J00000000000000000000010.yaml
+  unselected-context-question:
+    id: qst_01J00000000000000000000020
+    path: valid/.research/records/questions/unselected-context-question--qst_01J00000000000000000000020.yaml
+  structural-protocol-v1:
+    id: ref_01J00000000000000000000003
+    path: valid/.research/references/structural-protocol-v1--ref_01J00000000000000000000003.yaml
+  conclusion-depends-on-question:
+    id: rel_01J00000000000000000000044
+    path: valid/.research/relations/conclusion-depends-on-question--rel_01J00000000000000000000044.yaml
+  hypothesis-derived-conclusion:
+    id: rel_01J00000000000000000000042
+    path: valid/.research/relations/hypothesis-derived-conclusion--rel_01J00000000000000000000042.yaml
+  question-derived-conclusion:
+    id: rel_01J00000000000000000000043
+    path: valid/.research/relations/question-derived-conclusion--rel_01J00000000000000000000043.yaml
+  question-derived-conclusion-invalidated:
+    id: rel_01J00000000000000000000045
+    path: valid/.research/relations/question-derived-conclusion-invalidated--rel_01J00000000000000000000045.yaml
+  question-motivates-hypothesis:
+    id: rel_01J00000000000000000000041
+    path: valid/.research/relations/question-motivates-hypothesis--rel_01J00000000000000000000041.yaml

@@ -1,0 +1,53 @@
+# Noncanonical test oracle; not a research fact source.
+schema: rp/fixture-expectations/v1
+fixture: claim-chain-minimum-v1
+status: g7-approved-phase0-baseline
+snapshot_id: cch_01J00000000000000000000051
+profile: minimum-v1
+validation:
+  outcome: passed
+  weak_component_count: 1
+  directed_cycle_count: 0
+  all_selected_relations_active: true
+  all_relation_endpoints_selected: true
+  exact_frozen_revision_ids_only: true
+selection:
+  root_node_revisions:
+  - qst_01J00000000000000000000010
+  target_node_revision: con_01J00000000000000000000019
+  node_revisions:
+  - qst_01J00000000000000000000010
+  - hyp_01J00000000000000000000011
+  - con_01J00000000000000000000019
+  relation_revisions:
+  - rel_01J00000000000000000000041
+  - rel_01J00000000000000000000042
+  - rel_01J00000000000000000000043
+source_closure:
+  algorithm: rp/source-closure/v1
+  entries:
+  - object_type: rp/external-reference/v1
+    id: ref_01J00000000000000000000003
+    canonical_digest: sha256:624469e307bd2f3f390d5fba61ee0875a41756bd4335d228d7377d0eefb2e221
+  - object_type: rp/node-revision/v1
+    id: con_01J00000000000000000000019
+    canonical_digest: sha256:066508271c5da09689a3727179403c0e257462d685ce3c41e5b32d53604f6228
+  - object_type: rp/node-revision/v1
+    id: hyp_01J00000000000000000000011
+    canonical_digest: sha256:9f9ae4a1eb697efcef25be84cbce3db918e3f49406a75c8da2a22e64dfd25e92
+  - object_type: rp/node-revision/v1
+    id: qst_01J00000000000000000000010
+    canonical_digest: sha256:d11fbeac47b58bb54bf85cf0d199e764b7af6f305867a6ac2d2ad97bcbfeb4be
+  - object_type: rp/scientific-relation-revision/v1
+    id: rel_01J00000000000000000000041
+    canonical_digest: sha256:487305c5bdd8b78f0dee40f84778e54e7484a0e5c5b2fef2651153abfed0345f
+  - object_type: rp/scientific-relation-revision/v1
+    id: rel_01J00000000000000000000042
+    canonical_digest: sha256:934f9b1c035518a72cdfc44786a591a5bc5eafdbd7640b0fda1837d8cba259c8
+  - object_type: rp/scientific-relation-revision/v1
+    id: rel_01J00000000000000000000043
+    canonical_digest: sha256:6cf98e533840d6d185034fa5b4c57b97098dbca3d2305908e42cd771c70cce6e
+  sha256: sha256:dc702957f3f4f5bd6bb2057a79bf77a77c4a9b1beaf62dd80cd646c0fab45cd9
+access:
+  level: internal
+  compartments: []

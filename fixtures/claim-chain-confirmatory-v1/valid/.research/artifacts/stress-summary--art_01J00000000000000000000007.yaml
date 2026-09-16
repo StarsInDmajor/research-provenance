@@ -1,0 +1,11 @@
+schema: rp/artifact-manifest/v1
+id: art_01J00000000000000000000007
+title: Synthetic stress-envelope summary table
+uri: file:data/stress-summary.csv
+media_type: text/csv
+size_bytes: 182
+sha256: sha256:d64e34094447a253147d912d731b8491ce94f9872e61389660c8a2d858163110
+created_at: '2026-02-01T12:00:00Z'
+access:
+  level: internal
+  compartments: []

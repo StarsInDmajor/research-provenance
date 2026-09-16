@@ -1,0 +1,24 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-missing-endpoint
+fixture: claim-chain-minimum-v1
+title: Selected relation endpoint omitted
+description: Remove the intermediate Hypothesis from the selected node set while retaining
+  relations that use it; root and target remain selected.
+expected_failure:
+  exit_code: 1
+  finding_family: endpoint_containment
+  error_code: RP_E_CLAIM_CHAIN_ENDPOINT_NOT_SELECTED
+  target_file: .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml
+  target_field: node_revisions
+mutation:
+  mode: structured_ast
+  target_file: .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml
+  operation: set_value
+  path: /node_revisions
+  value:
+  - qst_01J00000000000000000000010
+  - con_01J00000000000000000000019
+maintenance:
+  recompute_source_closure_sha256:
+  - .research/claim-chains/minimum-structural-chain--cch_01J00000000000000000000051.yaml

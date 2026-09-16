@@ -1,0 +1,22 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-compartment-drop
+fixture: access-closure-v1
+title: Restricted Synthesis drops analysis compartment
+description: Keep restricted level but remove analysis-alpha required by the Method dependency.
+expected_failure:
+  exit_code: 1
+  finding_family: access_compartment_drop
+  error_code: RP_E_ACCESS_COMPARTMENT_MISSING
+  target_file: .research/records/syntheses/synthesis-restricted-combined--syn_01J00000000000000000000028.yaml
+  target_field: access.compartments
+mutation:
+  mode: structured_ast
+  target_file: .research/records/syntheses/synthesis-restricted-combined--syn_01J00000000000000000000028.yaml
+  operation: set_value
+  path: /access/compartments
+  value:
+  - partner-beta
+maintenance:
+  recompute_source_closure_sha256:
+  - .research/claim-chains/restricted-structural-access-chain--cch_01J00000000000000000000080.yaml

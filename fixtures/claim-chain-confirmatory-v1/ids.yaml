@@ -1,0 +1,135 @@
+# Registry frozen with the G7-approved Phase 0 baseline.
+schema: rp/fixture-id-registry/v1
+fixture: claim-chain-confirmatory-v1
+status: g7-approved-phase0-baseline
+id_policy:
+  format: typed-prefix-plus-ulid
+  allocation: deterministic-fixture-order
+  mutable_aliases: false
+objects:
+  archival-summary:
+    id: art_01J00000000000000000000006
+    path: valid/.research/artifacts/archival-summary--art_01J00000000000000000000006.yaml
+  standard-summary:
+    id: art_01J00000000000000000000005
+    path: valid/.research/artifacts/standard-summary--art_01J00000000000000000000005.yaml
+  stress-summary:
+    id: art_01J00000000000000000000007
+    path: valid/.research/artifacts/stress-summary--art_01J00000000000000000000007.yaml
+  confirmatory-mixed-outcome-chain:
+    id: cch_01J00000000000000000000053
+    path: valid/.research/claim-chains/confirmatory-mixed-outcome-chain--cch_01J00000000000000000000053.yaml
+  project-confirmatory:
+    id: proj_01J00000000000000000000001
+    path: valid/.research/project.yaml
+  conclusion-confirmatory-scope:
+    id: con_01J00000000000000000000029
+    path: valid/.research/records/conclusions/conclusion-confirmatory-scope--con_01J00000000000000000000029.yaml
+  dataset-archival-envelope:
+    id: dset_01J00000000000000000000009
+    path: valid/.research/records/datasets/dataset-archival-envelope--dset_01J00000000000000000000009.yaml
+  dataset-standard-envelope:
+    id: dset_01J00000000000000000000008
+    path: valid/.research/records/datasets/dataset-standard-envelope--dset_01J00000000000000000000008.yaml
+  dataset-stress-envelope:
+    id: dset_01J0000000000000000000000A
+    path: valid/.research/records/datasets/dataset-stress-envelope--dset_01J0000000000000000000000A.yaml
+  hypothesis-confirmatory-scope:
+    id: hyp_01J00000000000000000000011
+    path: valid/.research/records/hypotheses/hypothesis-confirmatory-scope--hyp_01J00000000000000000000011.yaml
+  measurement-archival-retrospective:
+    id: meas_01J00000000000000000000027
+    path: valid/.research/records/measurements/measurement-archival-retrospective--meas_01J00000000000000000000027.yaml
+  measurement-standard-baseline:
+    id: meas_01J00000000000000000000024
+    path: valid/.research/records/measurements/measurement-standard-baseline--meas_01J00000000000000000000024.yaml
+  measurement-standard-candidate:
+    id: meas_01J00000000000000000000025
+    path: valid/.research/records/measurements/measurement-standard-candidate--meas_01J00000000000000000000025.yaml
+  measurement-stress-candidate:
+    id: meas_01J00000000000000000000026
+    path: valid/.research/records/measurements/measurement-stress-candidate--meas_01J00000000000000000000026.yaml
+  method-confirmatory-analysis:
+    id: mth_01J00000000000000000000021
+    path: valid/.research/records/methods/method-confirmatory-analysis--mth_01J00000000000000000000021.yaml
+  prediction-confirmatory-thresholds:
+    id: pred_01J00000000000000000000020
+    path: valid/.research/records/predictions/prediction-confirmatory-thresholds--pred_01J00000000000000000000020.yaml
+  question-confirmatory-scope:
+    id: qst_01J00000000000000000000010
+    path: valid/.research/records/questions/question-confirmatory-scope--qst_01J00000000000000000000010.yaml
+  synthesis-confirmatory-scope:
+    id: syn_01J00000000000000000000028
+    path: valid/.research/records/syntheses/synthesis-confirmatory-scope--syn_01J00000000000000000000028.yaml
+  test-standard-confirmatory:
+    id: tst_01J00000000000000000000022
+    path: valid/.research/records/tests/test-standard-confirmatory--tst_01J00000000000000000000022.yaml
+  test-stress-confirmatory:
+    id: tst_01J00000000000000000000023
+    path: valid/.research/records/tests/test-stress-confirmatory--tst_01J00000000000000000000023.yaml
+  legacy-summary:
+    id: ref_01J00000000000000000000004
+    path: valid/.research/references/legacy-summary--ref_01J00000000000000000000004.yaml
+  measurement-protocol-v3:
+    id: ref_01J00000000000000000000003
+    path: valid/.research/references/measurement-protocol-v3--ref_01J00000000000000000000003.yaml
+  archival-consistent-with-prediction:
+    id: rel_01J00000000000000000000063
+    path: valid/.research/relations/archival-consistent-with-prediction--rel_01J00000000000000000000063.yaml
+  archival-input-to-synthesis:
+    id: rel_01J00000000000000000000057
+    path: valid/.research/relations/archival-input-to-synthesis--rel_01J00000000000000000000057.yaml
+  archival-result-of-standard:
+    id: rel_01J00000000000000000000056
+    path: valid/.research/relations/archival-result-of-standard--rel_01J00000000000000000000056.yaml
+  baseline-input-to-synthesis:
+    id: rel_01J00000000000000000000060
+    path: valid/.research/relations/baseline-input-to-synthesis--rel_01J00000000000000000000060.yaml
+  baseline-result-of-standard:
+    id: rel_01J00000000000000000000049
+    path: valid/.research/relations/baseline-result-of-standard--rel_01J00000000000000000000049.yaml
+  candidate-consistent-with-prediction:
+    id: rel_01J00000000000000000000061
+    path: valid/.research/relations/candidate-consistent-with-prediction--rel_01J00000000000000000000061.yaml
+  candidate-input-to-synthesis:
+    id: rel_01J00000000000000000000052
+    path: valid/.research/relations/candidate-input-to-synthesis--rel_01J00000000000000000000052.yaml
+  candidate-result-of-standard:
+    id: rel_01J00000000000000000000050
+    path: valid/.research/relations/candidate-result-of-standard--rel_01J00000000000000000000050.yaml
+  hypothesis-predicts-thresholds:
+    id: rel_01J00000000000000000000047
+    path: valid/.research/relations/hypothesis-predicts-thresholds--rel_01J00000000000000000000047.yaml
+  method-implements-standard-test:
+    id: rel_01J00000000000000000000058
+    path: valid/.research/relations/method-implements-standard-test--rel_01J00000000000000000000058.yaml
+  method-implements-stress-test:
+    id: rel_01J00000000000000000000059
+    path: valid/.research/relations/method-implements-stress-test--rel_01J00000000000000000000059.yaml
+  prediction-tested-by-standard:
+    id: rel_01J00000000000000000000048
+    path: valid/.research/relations/prediction-tested-by-standard--rel_01J00000000000000000000048.yaml
+  prediction-tested-by-stress:
+    id: rel_01J00000000000000000000064
+    path: valid/.research/relations/prediction-tested-by-stress--rel_01J00000000000000000000064.yaml
+  question-motivates-hypothesis:
+    id: rel_01J00000000000000000000041
+    path: valid/.research/relations/question-motivates-hypothesis--rel_01J00000000000000000000041.yaml
+  stress-contradicts-prediction:
+    id: rel_01J00000000000000000000062
+    path: valid/.research/relations/stress-contradicts-prediction--rel_01J00000000000000000000062.yaml
+  stress-input-to-synthesis:
+    id: rel_01J00000000000000000000053
+    path: valid/.research/relations/stress-input-to-synthesis--rel_01J00000000000000000000053.yaml
+  stress-result-of-test:
+    id: rel_01J00000000000000000000051
+    path: valid/.research/relations/stress-result-of-test--rel_01J00000000000000000000051.yaml
+  synthesis-generates-conclusion:
+    id: rel_01J00000000000000000000055
+    path: valid/.research/relations/synthesis-generates-conclusion--rel_01J00000000000000000000055.yaml
+  synthesis-supports-hypothesis:
+    id: rel_01J00000000000000000000054
+    path: valid/.research/relations/synthesis-supports-hypothesis--rel_01J00000000000000000000054.yaml
+  confirmatory-evaluation:
+    id: run_01J00000000000000000000002
+    path: valid/.research/runs/confirmatory-evaluation--run_01J00000000000000000000002.yaml

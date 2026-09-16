@@ -1,0 +1,29 @@
+schema: rp/scientific-relation-revision/v1
+id: rel_01J00000000000000000000043
+logical_id: relation-candidate-support
+record_state: frozen
+type: supports
+from_revision: meas_01J00000000000000000000025
+to_revision: hyp_01J00000000000000000000011
+scope:
+  statement: Synthetic overview relation scoped to this fixture.
+  conditions:
+  - Use only exact frozen revision endpoints.
+  exclusions:
+  - Does not represent a real scientific claim.
+assertion_mode: asserted
+relation_state: active
+rationale: The standard-envelope measurement supports the broad statement within that envelope.
+revision:
+  parents: []
+  summary: Initial support assertion.
+created_at: '2026-01-10T12:30:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - meas_01J00000000000000000000025
+access:
+  level: internal
+  compartments: []

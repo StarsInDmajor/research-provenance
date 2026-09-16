@@ -1,0 +1,39 @@
+schema: rp/node-revision/v1
+id: qst_01J00000000000000000000013
+logical_id: question-restricted-branch
+kind: Question
+record_state: frozen
+title: Restricted branch question
+statement: What follows from the partner-restricted branch?
+scope:
+  statement: Synthetic access-closure fixture only.
+question:
+  resolution_criteria:
+  - Resolve the partner-restricted branch.
+  evidence_requirements:
+  - Use only the synthetic access branch declared by the node.
+assumptions:
+- Partner provenance controls access.
+limitations:
+- No real partner information is included.
+revision:
+  parents: []
+  summary: Initial restricted question.
+created_at: '2026-01-20T13:00:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - dset_01J00000000000000000000009
+  relations: []
+  artifacts: []
+  external_references: []
+  events: []
+access:
+  level: restricted
+  compartments:
+  - partner-beta
+tags:
+- access-closure-v1
+- synthetic

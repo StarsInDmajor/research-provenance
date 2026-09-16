@@ -1,0 +1,15 @@
+schema: rp/research-thread/v1
+id: thd_01J00000000000000000000080
+title: Internal base thread
+objective: Exercise structural access closure for synthetic thread metadata.
+root_question_revision: qst_01J00000000000000000000010
+parent_thread_id: null
+forked_from_thread_id: null
+fork_reason: null
+created_at: '2026-01-28T10:00:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: internal
+  compartments: []

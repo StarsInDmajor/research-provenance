@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "external-reference.schema.json",
+  "title": "rp/external-reference/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "type",
+    "canonical_uri",
+    "foreign_key",
+    "display_label",
+    "retrieved_at",
+    "source_version",
+    "trust_tags",
+    "access"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/external-reference/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/reference"
+    },
+    "type": {
+      "enum": [
+        "doi",
+        "arxiv",
+        "zotero",
+        "viking",
+        "https",
+        "file"
+      ]
+    },
+    "canonical_uri": {
+      "type": "string",
+      "format": "uri",
+      "minLength": 1
+    },
+    "foreign_key": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "display_label": {
+      "type": "string",
+      "minLength": 1
+    },
+    "retrieved_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "source_version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "identifier"
+      ],
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "released_at": {
+          "oneOf": [
+            {
+              "$ref": "common.schema.json#/$defs/timestamp"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "digest": {
+          "oneOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "trust_tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "access": {
+      "$ref": "common.schema.json#/$defs/access"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  }
+}

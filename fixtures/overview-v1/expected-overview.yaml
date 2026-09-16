@@ -1,0 +1,87 @@
+# Noncanonical test oracle frozen with the G7-approved Phase 0 baseline.
+# It describes derived query results; it is not a research record or fact source.
+schema: rp/fixture-expectations/v1
+fixture: overview-v1
+status: g7-approved-phase0-baseline
+
+object_counts:
+  project: 1
+  research_run: 1
+  external_reference: 2
+  node_revision: 14
+  assessment: 4
+  scientific_relation_revision: 9
+  research_thread: 3
+  thread_binding: 14
+
+revision_heads:
+  hypothesis-drift:
+    resolved: true
+    heads:
+      - hyp_01J00000000000000000000014
+    merged_from:
+      - hyp_01J00000000000000000000012
+      - hyp_01J00000000000000000000013
+  interpretation-stress-cause:
+    resolved: false
+    heads:
+      - int_01J00000000000000000000015
+      - int_01J00000000000000000000016
+
+assessment_history:
+  target_revision: hyp_01J00000000000000000000011
+  independent_assessments:
+    - id: asm_01J00000000000000000000021
+      epistemic_status: proposed
+    - id: asm_01J00000000000000000000022
+      epistemic_status: supported
+    - id: asm_01J00000000000000000000023
+      epistemic_status: challenged
+  aggregation: none
+
+relation_history:
+  relation-candidate-support:
+    revisions:
+      - id: rel_01J00000000000000000000043
+        relation_state: active
+      - id: rel_01J00000000000000000000044
+        relation_state: invalidated
+    heads:
+      - rel_01J00000000000000000000044
+    active_heads: []
+
+thread_overview:
+  roots:
+    - thd_01J00000000000000000000031
+  branches:
+    - id: thd_01J00000000000000000000032
+      parent_thread_id: thd_01J00000000000000000000031
+      forked_from_thread_id: thd_01J00000000000000000000031
+    - id: thd_01J00000000000000000000033
+      parent_thread_id: thd_01J00000000000000000000031
+      forked_from_thread_id: thd_01J00000000000000000000032
+  contextual_role_check:
+    target_revision: meas_01J00000000000000000000026
+    roles:
+      - thread_id: thd_01J00000000000000000000031
+        role: sensitivity
+      - thread_id: thd_01J00000000000000000000032
+        role: primary
+
+current_work:
+  unresolved_forks:
+    - interpretation-stress-cause
+  blockers:
+    - blk_01J00000000000000000000017
+  next_actions:
+    - nxt_01J00000000000000000000018
+
+freshness:
+  contract: rp/freshness/v1
+  as_of: "2026-09-01T00:00:00Z"
+  evaluated: true
+  default_status: unknown
+  reason: >-
+    The freshness contract is approved, but this fixture declares no applicable
+    project freshness policy or review deadline. Deterministic evaluation at the
+    stated as_of therefore yields unknown without changing revision-head state.

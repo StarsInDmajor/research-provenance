@@ -1,0 +1,22 @@
+schema: rp/thread-binding/v1
+id: tbd_01J00000000000000000000092
+logical_id: binding-restricted-thread-analysis-target
+record_state: frozen
+thread_id: thd_01J00000000000000000000082
+target:
+  type: node_revision
+  id: con_01J00000000000000000000029
+role: follow-up
+rationale: Synthetic binding used only to test structural access closure.
+revision:
+  parents: []
+  summary: Initial access fixture binding.
+created_at: '2026-01-28T11:00:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: restricted
+  compartments:
+  - analysis-alpha
+  - partner-beta

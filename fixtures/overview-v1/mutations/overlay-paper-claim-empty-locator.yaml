@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-paper-claim-empty-locator
+fixture: overview-v1
+title: PaperClaim has no source locator
+description: Replace the required non-empty publication locator with an empty mapping.
+expected_failure:
+  exit_code: 1
+  finding_family: schema_min_properties
+  error_code: RP_E_SCHEMA_MIN_PROPERTIES
+  target_file: .research/records/paper-claims/legacy-summary-claim--clm_01J00000000000000000000024.yaml
+  target_field: paper_claim.locator
+mutation:
+  mode: structured_ast
+  target_file: .research/records/paper-claims/legacy-summary-claim--clm_01J00000000000000000000024.yaml
+  operation: set_value
+  path: /paper_claim/locator
+  value: {}

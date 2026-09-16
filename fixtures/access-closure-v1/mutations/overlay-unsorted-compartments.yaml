@@ -1,0 +1,20 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-unsorted-compartments
+fixture: access-closure-v1
+title: Unsorted compartment list
+description: Reverse a valid two-compartment exclusive Assessment list.
+expected_failure:
+  exit_code: 1
+  finding_family: access_compartment_normalization
+  error_code: RP_E_ACCESS_COMPARTMENTS_UNSORTED
+  target_file: .research/assessments/target-exclusive-control--asm_01J00000000000000000000072.yaml
+  target_field: access.compartments
+mutation:
+  mode: structured_ast
+  target_file: .research/assessments/target-exclusive-control--asm_01J00000000000000000000072.yaml
+  operation: set_value
+  path: /access/compartments
+  value:
+  - partner-beta
+  - control-room

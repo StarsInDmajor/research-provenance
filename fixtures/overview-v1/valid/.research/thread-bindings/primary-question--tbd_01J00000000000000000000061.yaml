@@ -1,0 +1,20 @@
+schema: rp/thread-binding/v1
+id: tbd_01J00000000000000000000061
+logical_id: binding-primary-question
+record_state: frozen
+thread_id: thd_01J00000000000000000000031
+target:
+  type: node_revision
+  id: qst_01J00000000000000000000010
+role: primary
+rationale: The root question defines the primary efficacy objective.
+revision:
+  parents: []
+  summary: Initial thread-role binding.
+created_at: '2026-02-03T10:30:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: internal
+  compartments: []

@@ -1,0 +1,27 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-multi-input-missing-synthesis
+fixture: claim-chain-evidential-v1
+title: Multi-input inference bypasses Synthesis
+description: Replace both input-to edges with direct evidence-to-target edges while leaving the
+  selected Synthesis disconnected from its inputs.
+expected_failure:
+  exit_code: 1
+  finding_family: evidential_synthesis_requirement
+  error_code: RP_E_EVIDENTIAL_SYNTHESIS_REQUIRED
+  target_file: .research/claim-chains/multi-input-evidential-chain--cch_01J00000000000000000000052.yaml
+  target_field: relation_revisions
+mutation:
+  mode: structured_ast
+  target_file: .research/claim-chains/multi-input-evidential-chain--cch_01J00000000000000000000052.yaml
+  operation: set_value
+  path: /relation_revisions
+  value:
+  - rel_01J00000000000000000000041
+  - rel_01J00000000000000000000045
+  - rel_01J00000000000000000000046
+  - rel_01J00000000000000000000049
+  - rel_01J00000000000000000000050
+maintenance:
+  recompute_source_closure_sha256:
+    - .research/claim-chains/multi-input-evidential-chain--cch_01J00000000000000000000052.yaml

@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "artifact-manifest.schema.json",
+  "title": "rp/artifact-manifest/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "title",
+    "uri",
+    "media_type",
+    "size_bytes",
+    "sha256",
+    "created_at",
+    "access"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/artifact-manifest/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/artifact"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uri": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^file:[^/\\s][^\\s]*$"
+        },
+        {
+          "type": "string",
+          "pattern": "^https://[^\\s]+$"
+        }
+      ]
+    },
+    "media_type": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9!#$&^_.+-]+/[A-Za-z0-9!#$&^_.+-]+$"
+    },
+    "size_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "access": {
+      "$ref": "common.schema.json#/$defs/access"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  },
+  "$comment": "Project containment and URI allowlisting are semantic Core checks in addition to this syntactic file/https restriction."
+}

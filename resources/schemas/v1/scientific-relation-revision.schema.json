@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "scientific-relation-revision.schema.json",
+  "title": "rp/scientific-relation-revision/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "logical_id",
+    "record_state",
+    "type",
+    "from_revision",
+    "to_revision",
+    "scope",
+    "assertion_mode",
+    "relation_state",
+    "rationale",
+    "revision",
+    "created_at",
+    "created_by",
+    "source",
+    "access"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/scientific-relation-revision/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/relation"
+    },
+    "logical_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "record_state": {
+      "enum": [
+        "draft",
+        "frozen"
+      ]
+    },
+    "type": {
+      "enum": [
+        "derived-from",
+        "has-part",
+        "input-to",
+        "generated",
+        "cites",
+        "implements",
+        "supports",
+        "weakens",
+        "contradicts",
+        "consistent-with",
+        "provides-prior",
+        "motivates",
+        "predicts",
+        "tested-by",
+        "result-of",
+        "observed-in",
+        "reproduces",
+        "fails-to-reproduce",
+        "validated-by",
+        "requires",
+        "blocked-by",
+        "enables",
+        "next-step",
+        "depends-on"
+      ]
+    },
+    "from_revision": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/node"
+    },
+    "to_revision": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/node"
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conditions",
+        "exclusions"
+      ],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aspect": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "statement"
+          ]
+        },
+        {
+          "required": [
+            "aspect"
+          ]
+        }
+      ]
+    },
+    "assertion_mode": {
+      "enum": [
+        "asserted",
+        "inferred",
+        "imported"
+      ]
+    },
+    "relation_state": {
+      "enum": [
+        "active",
+        "invalidated"
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "$ref": "common.schema.json#/$defs/relation_revision"
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "created_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "source": {
+      "$ref": "common.schema.json#/$defs/source"
+    },
+    "access": {
+      "$ref": "common.schema.json#/$defs/access"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  },
+  "$comment": "Relation endpoint compatibility and canonical frozen-only storage are semantic project checks."
+}

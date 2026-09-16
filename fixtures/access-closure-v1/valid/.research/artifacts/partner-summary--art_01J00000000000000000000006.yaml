@@ -1,0 +1,12 @@
+schema: rp/artifact-manifest/v1
+id: art_01J00000000000000000000006
+title: Synthetic restricted partner summary
+uri: file:data/partner-summary.csv
+media_type: text/csv
+size_bytes: 183
+sha256: sha256:54826794331eb2bffa42f21508b6eef589334ca029fad9242b69bd5d2fcc086c
+created_at: '2026-01-20T12:00:00Z'
+access:
+  level: restricted
+  compartments:
+  - partner-beta

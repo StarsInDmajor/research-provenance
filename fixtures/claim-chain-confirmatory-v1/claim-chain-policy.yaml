@@ -1,0 +1,170 @@
+# Phase 0 design data. This is not yet an installed Core schema.
+schema: rp/claim-chain-policy/v1
+
+profile: confirmatory-v1
+version: 1
+extends: evidential-v1
+
+minimum_v1:
+  identity:
+    references: exact-frozen-revision-ids
+    allow_logical_ids: false
+    follow_future_heads: false
+    duplicate_ids: reject
+  roots:
+    minimum_count: 1
+    kinds: any-node-revision
+    must_be_selected: true
+  target:
+    count: 1
+    kinds: any-node-revision
+    must_be_selected: true
+  relations:
+    require_active: true
+    allow_invalidated_as_formal_support: false
+    endpoints_must_be_selected: true
+    compatibility_policy_required: true
+  shape:
+    connectivity: weak
+    require_single_component: true
+    allow_orphan_selected_nodes: false
+    directed_cycles: reject
+  access:
+    expected_label: join-of-dependency-closure
+    downgrade: reject-unconditionally
+  validation_report:
+    required: false
+
+evidential_v1:
+  require_target_evaluation_path: true
+  evidence_bearing_kinds:
+    - Dataset
+    - Observation
+    - Measurement
+    - PaperClaim
+  allowed_evaluative_or_derivational_relations:
+    - supports
+    - weakens
+    - contradicts
+    - consistent-with
+    - derived-from
+    - generated
+  multi_input_inference:
+    grouping: shared-inference-target
+    minimum_inputs_requiring_synthesis: 2
+    synthesis_kind: Synthesis
+    input_relation: input-to
+    output_relation: generated
+    require_every_group_input: true
+  single_input_inference:
+    allow_direct_scoped_relation: true
+  temporal_predeclaration_required: false
+
+confirmatory_v1:
+  roots:
+    exact_count: 1
+    kind: Question
+  target:
+    kind: Conclusion
+  minimum_selected_kinds:
+    Hypothesis: 1
+    Prediction: 1
+    Test: 1
+    result:
+      kinds:
+        - Observation
+        - Measurement
+      minimum_total: 1
+  required_confirmatory_backbone:
+    coverage: every-selected-confirmatory-result
+    result_to_test_relation: result-of
+    test_to_prediction_relation: tested-by
+    paths:
+      - relation: motivates
+        from: Question
+        to: Hypothesis
+      - relation: predicts
+        from: Hypothesis
+        to: Prediction
+      - relation: tested-by
+        from: Prediction
+        to: Test
+      - relation: result-of
+        from:
+          - Observation
+          - Measurement
+        to: Test
+  result_mapping:
+    every_selected_result_requires_selected_test: true
+    every_selected_result_test_requires_selected_prediction: true
+  scientific_outcome:
+    minimum_relations: 1
+    relations:
+      - supports
+      - consistent-with
+      - weakens
+      - contradicts
+    from:
+      - Observation
+      - Measurement
+      - Synthesis
+    to:
+      - Hypothesis
+      - Prediction
+      - Conclusion
+  target_inference:
+    if_evidence_input_count_at_least: 2
+    require:
+      synthesis: true
+      input_to_relations: true
+      generated_to_target_min_count: 1
+    otherwise:
+      allow_direct_evaluation_to_target: true
+  temporal_predeclaration:
+    required: true
+    evaluation_scope: every-result-and-applicable-backbone
+    prediction_field: created_at
+    test_field: created_at
+    result_field: temporal.recorded_at
+    fallback_event_field: unsupported-in-phase1a
+    final_fallback_field: created_at
+    relation: strictly-earlier
+    missing_field: reject
+  provenance:
+    mode: artifact-backed
+    result_node_kinds:
+      - Observation
+      - Measurement
+    selected_result_nodes_require_artifact: true
+    artifact_reference_must_be_direct: true
+    artifact_uri_scheme: file
+    artifact_local_bytes_size_and_digest_verified: true
+    https_artifact_identifier_only: true
+    event_links_required: false
+    event_backed_modes_supported: false
+
+source_closure:
+  algorithm: rp/source-closure/v1
+  roots:
+    - selected_node_revisions
+    - selected_relation_revisions
+  recursive_fields:
+    - source.revisions
+    - source.relations
+    - source.artifacts
+    - source.external_references
+    - source.events
+  entry_tuple:
+    - object_type
+    - id
+    - canonical_digest
+  ordering:
+    - object_type
+    - id
+  serialization: RFC-8785
+  digest: sha256
+
+fixture_expected:
+  access:
+    level: internal
+    compartments: []

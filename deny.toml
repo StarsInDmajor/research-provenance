@@ -1,0 +1,80 @@
+# Production dependency policy for the rp-cli -> rp-core graph.
+# Checks must invoke cargo-deny with crates/rp-cli/Cargo.toml and --exclude-dev
+# so test-only workspace tools do not redefine the production boundary.
+
+[graph]
+all-features = false
+no-default-features = false
+
+[bans]
+multiple-versions = "allow"
+# Cargo models versionless workspace path dependencies as wildcards. External
+# dependencies remain versioned in Cargo.toml and checksum-pinned in Cargo.lock.
+wildcards = "allow"
+highlight = "simplest-path"
+deny = [
+  # Network clients and transports.
+  { crate = "attohttpc", reason = "rp is offline-only" },
+  { crate = "awc", reason = "rp is offline-only" },
+  { crate = "curl", reason = "rp is offline-only" },
+  { crate = "curl-sys", reason = "rp is offline-only" },
+  { crate = "h2", reason = "rp is offline-only" },
+  { crate = "hyper", reason = "rp is offline-only" },
+  { crate = "hyper-util", reason = "rp is offline-only" },
+  { crate = "isahc", reason = "rp is offline-only" },
+  { crate = "quinn", reason = "rp is offline-only" },
+  { crate = "reqwest", reason = "rp is offline-only" },
+  { crate = "surf", reason = "rp is offline-only" },
+  { crate = "tonic", reason = "rp is offline-only" },
+  { crate = "tower-http", reason = "rp is offline-only" },
+  { crate = "tungstenite", reason = "rp is offline-only" },
+  { crate = "ureq", reason = "rp is offline-only" },
+
+  # TLS implementations and platform TLS adapters.
+  { crate = "hyper-rustls", reason = "rp has no TLS or network stack" },
+  { crate = "native-tls", reason = "rp has no TLS or network stack" },
+  { crate = "openssl", reason = "rp has no TLS or network stack" },
+  { crate = "openssl-sys", reason = "rp has no TLS or network stack" },
+  { crate = "rustls", reason = "rp has no TLS or network stack" },
+  { crate = "rustls-pki-types", reason = "rp has no TLS or network stack" },
+  { crate = "rustls-webpki", reason = "rp has no TLS or network stack" },
+  { crate = "schannel", reason = "rp has no TLS or network stack" },
+  { crate = "security-framework", reason = "rp has no TLS or network stack" },
+  { crate = "tokio-rustls", reason = "rp has no TLS or network stack" },
+  { crate = "webpki-roots", reason = "rp has no TLS or network stack" },
+
+  # SQLite and database projections are outside Phase 1A.
+  { crate = "diesel", reason = "Phase 1A uses the in-memory index only" },
+  { crate = "libsqlite3-sys", reason = "Phase 1A uses the in-memory index only" },
+  { crate = "rusqlite", reason = "Phase 1A uses the in-memory index only" },
+  { crate = "sqlite", reason = "Phase 1A uses the in-memory index only" },
+  { crate = "sqlx", reason = "Phase 1A uses the in-memory index only" },
+  { crate = "sqlx-core", reason = "Phase 1A uses the in-memory index only" },
+
+  # Async executors/runtimes are intentionally absent from production.
+  { crate = "async-executor", reason = "rp uses bounded synchronous execution" },
+  { crate = "async-global-executor", reason = "rp uses bounded synchronous execution" },
+  { crate = "async-io", reason = "rp uses bounded synchronous execution" },
+  { crate = "async-net", reason = "rp uses bounded synchronous execution" },
+  { crate = "async-process", reason = "rp uses bounded synchronous execution" },
+  { crate = "async-std", reason = "rp uses bounded synchronous execution" },
+  { crate = "glommio", reason = "rp uses bounded synchronous execution" },
+  { crate = "smol", reason = "rp uses bounded synchronous execution" },
+  { crate = "tokio", reason = "rp uses bounded synchronous execution" },
+]
+
+[[bans.features]]
+crate = "jsonschema"
+deny = [
+  "default",
+  "resolve-async",
+  "resolve-http",
+  "tls-aws-lc-rs",
+  "tls-ring",
+]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = []

@@ -1,0 +1,81 @@
+# Registry frozen with the G7-approved Phase 0 baseline.
+schema: rp/fixture-id-registry/v1
+fixture: claim-chain-evidential-v1
+status: g7-approved-phase0-baseline
+id_policy:
+  format: typed-prefix-plus-ulid
+  allocation: deterministic-fixture-order
+  mutable_aliases: false
+objects:
+  evidential-summary:
+    id: art_01J00000000000000000000005
+    path: valid/.research/artifacts/evidential-summary--art_01J00000000000000000000005.yaml
+  multi-input-evidential-chain:
+    id: cch_01J00000000000000000000052
+    path: valid/.research/claim-chains/multi-input-evidential-chain--cch_01J00000000000000000000052.yaml
+  single-input-evidential-chain:
+    id: cch_01J00000000000000000000053
+    path: valid/.research/claim-chains/single-input-evidential-chain--cch_01J00000000000000000000053.yaml
+  project-evidential:
+    id: proj_01J00000000000000000000001
+    path: valid/.research/project.yaml
+  multi-input-evidential-conclusion:
+    id: con_01J00000000000000000000029
+    path: valid/.research/records/conclusions/multi-input-evidential-conclusion--con_01J00000000000000000000029.yaml
+  single-input-evidential-conclusion:
+    id: con_01J00000000000000000000030
+    path: valid/.research/records/conclusions/single-input-evidential-conclusion--con_01J00000000000000000000030.yaml
+  standard-envelope-improvement:
+    id: hyp_01J00000000000000000000014
+    path: valid/.research/records/hypotheses/standard-envelope-improvement--hyp_01J00000000000000000000014.yaml
+  baseline-drift:
+    id: meas_01J00000000000000000000024
+    path: valid/.research/records/measurements/baseline-drift--meas_01J00000000000000000000024.yaml
+  candidate-drift:
+    id: meas_01J00000000000000000000025
+    path: valid/.research/records/measurements/candidate-drift--meas_01J00000000000000000000025.yaml
+  comparative-evidence-question:
+    id: qst_01J00000000000000000000010
+    path: valid/.research/records/questions/comparative-evidence-question--qst_01J00000000000000000000010.yaml
+  standard-envelope-comparison:
+    id: syn_01J00000000000000000000028
+    path: valid/.research/records/syntheses/standard-envelope-comparison--syn_01J00000000000000000000028.yaml
+  measurement-protocol-v1:
+    id: ref_01J00000000000000000000003
+    path: valid/.research/references/measurement-protocol-v1--ref_01J00000000000000000000003.yaml
+  baseline-input-to-synthesis:
+    id: rel_01J00000000000000000000044
+    path: valid/.research/relations/baseline-input-to-synthesis--rel_01J00000000000000000000044.yaml
+  baseline-supports-multi-conclusion:
+    id: rel_01J00000000000000000000049
+    path: valid/.research/relations/baseline-supports-multi-conclusion--rel_01J00000000000000000000049.yaml
+  candidate-depends-on-single-conclusion:
+    id: rel_01J00000000000000000000053
+    path: valid/.research/relations/candidate-depends-on-single-conclusion--rel_01J00000000000000000000053.yaml
+  candidate-input-overlay-control:
+    id: rel_01J00000000000000000000052
+    path: valid/.research/relations/candidate-input-overlay-control--rel_01J00000000000000000000052.yaml
+  candidate-input-to-synthesis:
+    id: rel_01J00000000000000000000043
+    path: valid/.research/relations/candidate-input-to-synthesis--rel_01J00000000000000000000043.yaml
+  candidate-supports-hypothesis:
+    id: rel_01J00000000000000000000047
+    path: valid/.research/relations/candidate-supports-hypothesis--rel_01J00000000000000000000047.yaml
+  candidate-supports-multi-conclusion:
+    id: rel_01J00000000000000000000050
+    path: valid/.research/relations/candidate-supports-multi-conclusion--rel_01J00000000000000000000050.yaml
+  candidate-supports-single-conclusion:
+    id: rel_01J00000000000000000000048
+    path: valid/.research/relations/candidate-supports-single-conclusion--rel_01J00000000000000000000048.yaml
+  question-motivates-hypothesis:
+    id: rel_01J00000000000000000000041
+    path: valid/.research/relations/question-motivates-hypothesis--rel_01J00000000000000000000041.yaml
+  synthesis-depends-on-conclusion:
+    id: rel_01J00000000000000000000051
+    path: valid/.research/relations/synthesis-depends-on-conclusion--rel_01J00000000000000000000051.yaml
+  synthesis-generates-conclusion:
+    id: rel_01J00000000000000000000046
+    path: valid/.research/relations/synthesis-generates-conclusion--rel_01J00000000000000000000046.yaml
+  synthesis-supports-hypothesis:
+    id: rel_01J00000000000000000000045
+    path: valid/.research/relations/synthesis-supports-hypothesis--rel_01J00000000000000000000045.yaml

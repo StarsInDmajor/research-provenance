@@ -1,0 +1,20 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-relation-parent-leak
+fixture: access-closure-v1
+title: Child relation drops restricted parent label
+description: Lower a relation revision with internal endpoints but a restricted relation parent.
+expected_failure:
+  exit_code: 1
+  finding_family: access_relation_parent
+  error_code: RP_E_ACCESS_RELATION_PARENT
+  target_file: .research/relations/restricted-relation-lineage-control--rel_01J00000000000000000000072.yaml
+  target_field: access
+mutation:
+  mode: structured_ast
+  target_file: .research/relations/restricted-relation-lineage-control--rel_01J00000000000000000000072.yaml
+  operation: set_value
+  path: /access
+  value:
+    level: internal
+    compartments: []

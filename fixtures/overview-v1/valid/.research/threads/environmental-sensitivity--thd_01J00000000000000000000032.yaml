@@ -1,0 +1,15 @@
+schema: rp/research-thread/v1
+id: thd_01J00000000000000000000032
+title: Environmental sensitivity thread
+objective: Track stress-envelope evidence and unresolved causal interpretations.
+root_question_revision: qst_01J00000000000000000000010
+parent_thread_id: thd_01J00000000000000000000031
+forked_from_thread_id: thd_01J00000000000000000000031
+fork_reason: Stress-envelope evidence conflicts with the original broad scope.
+created_at: '2026-02-01T13:00:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: internal
+  compartments: []

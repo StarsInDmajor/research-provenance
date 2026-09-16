@@ -1,0 +1,20 @@
+schema: rp/thread-binding/v1
+id: tbd_01J00000000000000000000062
+logical_id: binding-primary-hypothesis-v1
+record_state: frozen
+thread_id: thd_01J00000000000000000000031
+target:
+  type: node_revision
+  id: hyp_01J00000000000000000000011
+role: historical
+rationale: The broad initial hypothesis remains visible as historical context.
+revision:
+  parents: []
+  summary: Initial thread-role binding.
+created_at: '2026-02-03T10:30:00Z'
+created_by:
+  type: human
+  id: researcher
+access:
+  level: internal
+  compartments: []

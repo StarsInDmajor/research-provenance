@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-binding-target-leak
+fixture: access-closure-v1
+title: Binding drops restricted target label
+description: Lower a Binding whose Thread is internal but target is restricted.
+expected_failure:
+  exit_code: 1
+  finding_family: access_binding_target
+  error_code: RP_E_ACCESS_BINDING_TARGET
+  target_file: .research/thread-bindings/binding-internal-thread-restricted-target--tbd_01J00000000000000000000090.yaml
+  target_field: access.level
+mutation:
+  mode: structured_ast
+  target_file: .research/thread-bindings/binding-internal-thread-restricted-target--tbd_01J00000000000000000000090.yaml
+  operation: set_value
+  path: /access/level
+  value: internal

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "finding.schema.json",
+  "title": "rp/finding/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "error_code",
+    "finding_family",
+    "severity",
+    "message",
+    "source_file",
+    "json_pointer"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/finding/v1"
+    },
+    "error_code": {
+      "type": "string",
+      "pattern": "^RP_[EWI]_[A-Z0-9_]+$"
+    },
+    "finding_family": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$"
+    },
+    "severity": {
+      "enum": [
+        "error",
+        "warning",
+        "info"
+      ]
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_file": {
+      "oneOf": [
+        {
+          "type": "string",
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "json_pointer": {
+      "type": "string",
+      "pattern": "^(?:/(?:[^~/]|~[01])*)*$"
+    },
+    "details": {
+      "type": "object"
+    }
+  },
+  "$comment": "error_code membership and its normative stage/family/severity mapping are defined by finding-registry.yaml. source_file is null only for command-global findings that have no project file."
+}

@@ -1,0 +1,34 @@
+schema: rp/node-revision/v1
+id: hyp_01J00000000000000000000011
+logical_id: hypothesis-minimum-structure
+kind: Hypothesis
+record_state: frozen
+title: Exact structural snapshot hypothesis
+statement: The selected immutable revisions can form one valid minimum-profile chain.
+scope:
+  statement: Synthetic minimum-profile structural validation only.
+hypothesis:
+  falsification_criteria:
+  - Any selected ID is mutable, missing, disconnected, cyclic, or invalidated.
+  revision_criteria:
+  - A stricter profile introduces evidential or confirmatory requirements.
+assumptions:
+- Exact frozen revision identity is available.
+limitations:
+- This statement addresses structure only.
+revision:
+  parents: []
+  summary: Initial synthetic structural hypothesis.
+created_at: '2026-01-01T08:20:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - qst_01J00000000000000000000010
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-minimum-v1
+- synthetic

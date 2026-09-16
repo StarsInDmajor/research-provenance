@@ -1,0 +1,2199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "node-revision.schema.json",
+  "title": "rp/node-revision/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "logical_id",
+    "kind",
+    "record_state",
+    "title",
+    "statement",
+    "scope",
+    "assumptions",
+    "limitations",
+    "revision",
+    "created_at",
+    "created_by",
+    "source",
+    "access"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/node-revision/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/node"
+    },
+    "logical_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "kind": {
+      "oneOf": [
+        {
+          "enum": [
+            "Dataset",
+            "Question",
+            "Hypothesis",
+            "Observation",
+            "Measurement",
+            "Method",
+            "Test",
+            "Prediction",
+            "Synthesis",
+            "Interpretation",
+            "Decision",
+            "Conclusion",
+            "Blocker",
+            "NextAction",
+            "PaperClaim"
+          ]
+        },
+        {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]*/v[1-9][0-9]*:[A-Z][A-Za-z0-9]*$"
+        }
+      ]
+    },
+    "record_state": {
+      "enum": [
+        "draft",
+        "frozen"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "research_run_id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/run"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dataset_revisions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/ids/$defs/dataset"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "statement"
+          ]
+        },
+        {
+          "required": [
+            "target"
+          ]
+        },
+        {
+          "required": [
+            "conditions"
+          ]
+        }
+      ]
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "revision": {
+      "$ref": "common.schema.json#/$defs/node_revision"
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "created_by": {
+      "$ref": "common.schema.json#/$defs/actor"
+    },
+    "source": {
+      "$ref": "common.schema.json#/$defs/source"
+    },
+    "access": {
+      "$ref": "common.schema.json#/$defs/access"
+    },
+    "tags": {
+      "$ref": "common.schema.json#/$defs/tags"
+    },
+    "temporal": {
+      "$ref": "common.schema.json#/$defs/temporal"
+    },
+    "narrative": {
+      "$ref": "common.schema.json#/$defs/narrative"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    },
+    "dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "selection",
+        "variables"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selection": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "description",
+            "criteria"
+          ],
+          "properties": {
+            "description": {
+              "type": "string",
+              "minLength": 1
+            },
+            "criteria": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "field",
+                  "operator",
+                  "values"
+                ],
+                "properties": {
+                  "field": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "operator": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "values": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "integer"
+                        },
+                        {
+                          "type": "boolean"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    }
+                  },
+                  "unit": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "variables": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "role",
+              "unit"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "role": {
+                "enum": [
+                  "measure",
+                  "metadata",
+                  "dimension",
+                  "identifier",
+                  "attribute",
+                  "feature",
+                  "target"
+                ]
+              },
+              "unit": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resolution_criteria",
+        "evidence_requirements"
+      ],
+      "properties": {
+        "resolution_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "evidence_requirements": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "hypothesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "falsification_criteria",
+        "revision_criteria"
+      ],
+      "properties": {
+        "falsification_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "revision_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context",
+        "method",
+        "reproducibility_criteria"
+      ],
+      "properties": {
+        "context": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "description"
+          ],
+          "properties": {
+            "description": {
+              "type": "string",
+              "minLength": 1
+            },
+            "protocol_reference": {
+              "type": "string",
+              "pattern": "^(?:ref|mth)_[0-9A-HJKMNP-TV-Z]{26}$"
+            }
+          }
+        },
+        "reproducibility_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quantity",
+        "value",
+        "unit",
+        "uncertainty",
+        "method"
+      ],
+      "properties": {
+        "quantity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[+-]?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uncertainty": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "standard-deviation",
+                "standard-error",
+                "confidence-interval",
+                "credible-interval",
+                "not-reported"
+              ]
+            },
+            "value": {
+              "type": "string",
+              "pattern": "^[+-]?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+            },
+            "confidence_level": {
+              "type": "string",
+              "pattern": "^[+-]?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+            },
+            "lower": {
+              "type": "string",
+              "pattern": "^[+-]?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+            },
+            "upper": {
+              "type": "string",
+              "pattern": "^[+-]?(?:0|[1-9][0-9]*)(?:\\.[0-9]+)?(?:[eE][+-]?[0-9]+)?$"
+            }
+          }
+        },
+        "method": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "description",
+            "protocol_reference"
+          ],
+          "properties": {
+            "description": {
+              "type": "string",
+              "minLength": 1
+            },
+            "protocol_reference": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/reference"
+            }
+          }
+        }
+      }
+    },
+    "method": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "procedure",
+        "applicable_inputs",
+        "protocol_references"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "procedure": {
+          "type": "string",
+          "minLength": 1
+        },
+        "applicable_inputs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "protocol_references": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/ids/$defs/reference"
+          }
+        }
+      }
+    },
+    "test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "target_revision_ids",
+        "method_revision",
+        "evaluation_criteria"
+      ],
+      "properties": {
+        "target_revision_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^(?:hyp|pred)_[0-9A-HJKMNP-TV-Z]{26}$"
+          }
+        },
+        "method_revision": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/method"
+        },
+        "evaluation_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "prediction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "expected_outcome",
+        "test_conditions",
+        "acceptance_criteria"
+      ],
+      "properties": {
+        "expected_outcome": {
+          "type": "string",
+          "minLength": 1
+        },
+        "test_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "acceptance_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "synthesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "combination_method",
+        "rationale"
+      ],
+      "properties": {
+        "combination_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "alternatives_considered",
+        "unresolved_alternatives"
+      ],
+      "properties": {
+        "alternatives_considered": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        },
+        "unresolved_alternatives": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0
+        }
+      }
+    },
+    "decision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selected_option",
+        "considered_alternatives",
+        "rationale",
+        "reversibility",
+        "revisit_triggers"
+      ],
+      "properties": {
+        "selected_option": {
+          "type": "string",
+          "minLength": 1
+        },
+        "considered_alternatives": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reversibility": {
+          "enum": [
+            "reversible",
+            "partially-reversible",
+            "irreversible"
+          ]
+        },
+        "revisit_triggers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "conclusion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "residual_uncertainty",
+        "use_limitations"
+      ],
+      "properties": {
+        "residual_uncertainty": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "use_limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "blocked_target",
+        "blocking_condition",
+        "evidence_summary",
+        "unblock_criteria"
+      ],
+      "properties": {
+        "blocked_target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "blocking_condition": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unblock_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "next_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intended_outcome",
+        "dependencies",
+        "owner",
+        "completion_criteria"
+      ],
+      "properties": {
+        "intended_outcome": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dependencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/ids/$defs/node"
+          }
+        },
+        "owner": {
+          "oneOf": [
+            {
+              "$ref": "common.schema.json#/$defs/actor"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "completion_criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      }
+    },
+    "paper_claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "publication_reference",
+        "locator"
+      ],
+      "properties": {
+        "publication_reference": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/reference"
+        },
+        "locator": {
+          "type": "object",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "properties": {
+            "section": {
+              "type": "string",
+              "minLength": 1
+            },
+            "page": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "minLength": 1
+                },
+                {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              ]
+            },
+            "figure": {
+              "type": "string",
+              "minLength": 1
+            },
+            "table": {
+              "type": "string",
+              "minLength": 1
+            },
+            "equation": {
+              "type": "string",
+              "minLength": 1
+            },
+            "quote_digest": {
+              "$ref": "common.schema.json#/$defs/sha256"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$comment": "The portable object schema permits draft and frozen records; canonical .research project validation permits frozen only.",
+  "oneOf": [
+    {
+      "properties": {
+        "kind": {
+          "const": "Dataset"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/dataset"
+        }
+      },
+      "required": [
+        "dataset"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Question"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/question"
+        }
+      },
+      "required": [
+        "question"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Hypothesis"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/hypothesis"
+        }
+      },
+      "required": [
+        "hypothesis"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Observation"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/observation"
+        }
+      },
+      "required": [
+        "observation"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Measurement"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/measurement"
+        }
+      },
+      "required": [
+        "measurement"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Method"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/method"
+        }
+      },
+      "required": [
+        "method"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Test"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/test"
+        }
+      },
+      "required": [
+        "test"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Prediction"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/prediction"
+        }
+      },
+      "required": [
+        "prediction"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Synthesis"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/synthesis"
+        }
+      },
+      "required": [
+        "synthesis"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Interpretation"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/interpretation"
+        }
+      },
+      "required": [
+        "interpretation"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Decision"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/decision"
+        }
+      },
+      "required": [
+        "decision"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Conclusion"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/conclusion"
+        }
+      },
+      "required": [
+        "conclusion"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "Blocker"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/blocker"
+        }
+      },
+      "required": [
+        "blocker"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "NextAction"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/next_action"
+        }
+      },
+      "required": [
+        "next_action"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "PaperClaim"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/paper_claim"
+        }
+      },
+      "required": [
+        "paper_claim"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "properties": {
+        "kind": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]*/v[1-9][0-9]*:[A-Z][A-Za-z0-9]*$"
+        },
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/extension_node"
+        }
+      },
+      "required": [
+        "extensions"
+      ],
+      "not": {
+        "anyOf": [
+          {
+            "required": [
+              "dataset"
+            ]
+          },
+          {
+            "required": [
+              "question"
+            ]
+          },
+          {
+            "required": [
+              "hypothesis"
+            ]
+          },
+          {
+            "required": [
+              "observation"
+            ]
+          },
+          {
+            "required": [
+              "measurement"
+            ]
+          },
+          {
+            "required": [
+              "method"
+            ]
+          },
+          {
+            "required": [
+              "test"
+            ]
+          },
+          {
+            "required": [
+              "prediction"
+            ]
+          },
+          {
+            "required": [
+              "synthesis"
+            ]
+          },
+          {
+            "required": [
+              "interpretation"
+            ]
+          },
+          {
+            "required": [
+              "decision"
+            ]
+          },
+          {
+            "required": [
+              "conclusion"
+            ]
+          },
+          {
+            "required": [
+              "blocker"
+            ]
+          },
+          {
+            "required": [
+              "next_action"
+            ]
+          },
+          {
+            "required": [
+              "paper_claim"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

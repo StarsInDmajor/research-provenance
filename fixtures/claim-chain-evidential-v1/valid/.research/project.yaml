@@ -1,0 +1,27 @@
+schema: rp/project/v1
+
+id: proj_01J00000000000000000000001
+slug: claim-chain-evidential-v1
+title: Evidential claim-chain conformance fixture
+
+created_at: "2026-01-01T08:00:00Z"
+
+schema_policy:
+  core_version: v1
+  kind_registry: rp/kinds/v1
+  allowed_extensions:
+    - fixture.synthetic/v1
+
+repository_policy:
+  visibility: private
+  allowed_remotes: []
+
+access_defaults:
+  level: internal
+  compartments: []
+
+extensions:
+  fixture.synthetic/v1:
+    domain_neutral: true
+    scientific_claim: false
+    network_resolution_required: false

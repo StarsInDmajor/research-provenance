@@ -1,0 +1,49 @@
+schema: rp/node-revision/v1
+
+id: clm_01J00000000000000000000024
+logical_id: paper-claim-legacy-summary
+kind: PaperClaim
+record_state: frozen
+
+title: Synthetic legacy summary claim
+statement: >-
+  The synthetic legacy summary reports a lower standard-envelope drift for the
+  candidate procedure than for the baseline procedure.
+
+scope:
+  statement: Literature-style source-location coverage using a synthetic reference.
+
+paper_claim:
+  publication_reference: ref_01J00000000000000000000004
+  locator:
+    section: Synthetic summary results
+    table: Table 1
+    quote_digest: "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+
+assumptions:
+  - The source locator identifies only synthetic fixture content.
+
+limitations:
+  - The digest is a deterministic placeholder for schema and locator coverage.
+
+revision:
+  parents: []
+  summary: Initial domain-neutral PaperClaim example.
+
+created_at: "2026-01-10T12:25:00Z"
+created_by:
+  type: human
+  id: researcher
+
+source:
+  external_references:
+    - ref_01J00000000000000000000004
+
+access:
+  level: internal
+  compartments: []
+
+tags:
+  - overview-v1
+  - schema-coverage
+  - synthetic

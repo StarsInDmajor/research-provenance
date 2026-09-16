@@ -1,0 +1,19 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-missing-evaluative-path
+fixture: claim-chain-evidential-v1
+title: Target lacks an evaluative path
+description: In the single-input snapshot, select the root Question as target; the graph remains
+  valid but no allowed evidence path reaches it.
+expected_failure:
+  exit_code: 1
+  finding_family: evidential_target_path
+  error_code: RP_E_EVIDENTIAL_TARGET_PATH_MISSING
+  target_file: .research/claim-chains/single-input-evidential-chain--cch_01J00000000000000000000053.yaml
+  target_field: target_node_revision
+mutation:
+  mode: structured_ast
+  target_file: .research/claim-chains/single-input-evidential-chain--cch_01J00000000000000000000053.yaml
+  operation: set_value
+  path: /target_node_revision
+  value: qst_01J00000000000000000000010

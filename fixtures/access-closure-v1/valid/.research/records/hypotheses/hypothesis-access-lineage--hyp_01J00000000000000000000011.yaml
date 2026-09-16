@@ -1,0 +1,39 @@
+schema: rp/node-revision/v1
+id: hyp_01J00000000000000000000011
+logical_id: hypothesis-access-lineage
+kind: Hypothesis
+record_state: frozen
+title: Partner-restricted hypothesis
+statement: The partner branch requires restricted handling.
+scope:
+  statement: Synthetic access-closure fixture only.
+hypothesis:
+  falsification_criteria:
+  - A dependency closure exceeds the declared access label.
+  revision_criteria:
+  - A new dependency compartment requires a new revision.
+assumptions:
+- Partner access applies transitively.
+limitations:
+- Synthetic only.
+revision:
+  parents: []
+  summary: Initial restricted hypothesis.
+created_at: '2026-01-20T13:10:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - dset_01J00000000000000000000009
+  relations: []
+  artifacts: []
+  external_references: []
+  events: []
+access:
+  level: restricted
+  compartments:
+  - partner-beta
+tags:
+- access-closure-v1
+- synthetic

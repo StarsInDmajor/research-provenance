@@ -1,0 +1,30 @@
+schema: rp/scientific-relation-revision/v1
+id: rel_01J00000000000000000000049
+logical_id: relation-environment-interpretation-next-step
+record_state: frozen
+type: next-step
+from_revision: int_01J00000000000000000000015
+to_revision: nxt_01J00000000000000000000018
+scope:
+  statement: Synthetic overview relation scoped to this fixture.
+  conditions:
+  - Use only exact frozen revision endpoints.
+  exclusions:
+  - Does not represent a real scientific claim.
+assertion_mode: asserted
+relation_state: active
+rationale: An independent stress test is the next step for adjudicating the environmental interpretation.
+revision:
+  parents: []
+  summary: Initial follow-up relation.
+created_at: '2026-02-02T12:10:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - int_01J00000000000000000000015
+  - nxt_01J00000000000000000000018
+access:
+  level: internal
+  compartments: []

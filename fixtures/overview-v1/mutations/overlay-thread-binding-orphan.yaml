@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-thread-binding-orphan
+fixture: overview-v1
+title: Orphan thread binding
+description: Replace one ThreadBinding thread_id with a type-correct ID absent from the project.
+expected_failure:
+  exit_code: 1
+  finding_family: thread_binding_integrity
+  error_code: RP_E_ORPHAN_THREAD_BINDING
+  target_file: .research/thread-bindings/primary-hypothesis-v3--tbd_01J00000000000000000000063.yaml
+  target_field: thread_id
+mutation:
+  mode: structured_ast
+  target_file: .research/thread-bindings/primary-hypothesis-v3--tbd_01J00000000000000000000063.yaml
+  operation: set_value
+  path: /thread_id
+  value: thd_01J00000000000000000000099

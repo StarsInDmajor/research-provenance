@@ -1,0 +1,34 @@
+schema: rp/node-revision/v1
+id: con_01J00000000000000000000029
+logical_id: conclusion-multi-input-improvement
+kind: Conclusion
+record_state: frozen
+title: Multi-input evidential conclusion
+statement: The candidate summary is lower than the baseline summary by 0.41 normalized units.
+scope:
+  statement: Synthetic standard-envelope evidence evaluation only.
+conclusion:
+  residual_uncertainty:
+  - The synthetic summaries contain no uncertainty estimate.
+  use_limitations:
+  - This is an evidential-structure fixture, not a confirmatory or scientific result.
+assumptions:
+- The explicit Synthesis represents the two-input comparison.
+limitations:
+- No confirmatory predeclaration requirement is asserted.
+revision:
+  parents: []
+  summary: Initial synthesis-generated conclusion.
+created_at: '2026-01-01T08:50:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - syn_01J00000000000000000000028
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-evidential-v1
+- synthetic

@@ -1,0 +1,214 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "test-overlay.schema.json",
+  "title": "rp/test-overlay/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "fixture",
+    "title",
+    "description",
+    "expected_failure",
+    "mutation"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/test-overlay/v1"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^overlay-[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "fixture": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*-v[1-9][0-9]*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_failure": {
+      "$ref": "#/$defs/expectedFinding"
+    },
+    "mutation": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/structuredMutation"
+        },
+        {
+          "$ref": "#/$defs/rawTextMutation"
+        }
+      ]
+    },
+    "maintenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recompute_source_closure_sha256"
+      ],
+      "properties": {
+        "recompute_source_closure_sha256": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/projectRelativeFile"
+          }
+        }
+      }
+    },
+    "allowed_secondary_findings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "finding_family",
+          "error_code",
+          "rationale"
+        ],
+        "properties": {
+          "finding_family": {
+            "$ref": "#/$defs/findingFamily"
+          },
+          "error_code": {
+            "$ref": "#/$defs/errorCode"
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "errorCode": {
+      "type": "string",
+      "pattern": "^RP_E_[A-Z0-9_]+$"
+    },
+    "findingFamily": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$"
+    },
+    "projectRelativeFile": {
+      "type": "string",
+      "pattern": "^\\.research/(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+"
+    },
+    "expectedFinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "exit_code",
+        "finding_family",
+        "error_code",
+        "target_file",
+        "target_field"
+      ],
+      "properties": {
+        "exit_code": {
+          "const": 1
+        },
+        "finding_family": {
+          "$ref": "#/$defs/findingFamily"
+        },
+        "error_code": {
+          "$ref": "#/$defs/errorCode"
+        },
+        "target_file": {
+          "$ref": "#/$defs/projectRelativeFile"
+        },
+        "target_field": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "structuredMutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "target_file",
+        "operation",
+        "path"
+      ],
+      "properties": {
+        "mode": {
+          "const": "structured_ast"
+        },
+        "target_file": {
+          "$ref": "#/$defs/projectRelativeFile"
+        },
+        "operation": {
+          "enum": [
+            "set_value",
+            "add_field",
+            "delete_field"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^(?:/(?:[^~/]|~[01])*)+$"
+        },
+        "value": {}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "operation": {
+                "enum": [
+                  "set_value",
+                  "add_field"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "value"
+            ]
+          }
+        }
+      ]
+    },
+    "rawTextMutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "target_file",
+        "operation",
+        "search",
+        "replace"
+      ],
+      "properties": {
+        "mode": {
+          "const": "raw_text"
+        },
+        "target_file": {
+          "$ref": "#/$defs/projectRelativeFile"
+        },
+        "operation": {
+          "const": "text_replace"
+        },
+        "search": {
+          "type": "string",
+          "minLength": 1
+        },
+        "replace": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

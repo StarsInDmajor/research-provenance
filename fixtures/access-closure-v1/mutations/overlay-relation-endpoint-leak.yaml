@@ -1,0 +1,18 @@
+# Test-only single-mutation overlay; not a canonical research record.
+schema: rp/test-overlay/v1
+id: overlay-relation-endpoint-leak
+fixture: access-closure-v1
+title: Public Relation exposes internal endpoint
+description: Lower a Relation whose source is public but whose structural target is internal.
+expected_failure:
+  exit_code: 1
+  finding_family: access_structural_endpoint
+  error_code: RP_E_ACCESS_STRUCTURAL_ENDPOINT
+  target_file: .research/relations/public-to-internal-endpoint-control--rel_01J00000000000000000000070.yaml
+  target_field: access.level
+mutation:
+  mode: structured_ast
+  target_file: .research/relations/public-to-internal-endpoint-control--rel_01J00000000000000000000070.yaml
+  operation: set_value
+  path: /access/level
+  value: public

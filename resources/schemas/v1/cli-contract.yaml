@@ -1,0 +1,290 @@
+# Standalone Phase 1A command, stream, result, and exit-code contract.
+schema: rp/cli-contract/v1
+
+execution_budget:
+  default_seconds: 60
+  scope: one-monotonic-command-state-from-dispatch-through-rendering; no-helper-reset
+  enforcement: cooperative-only; no-hard-wall-deadline-or-signal-guarantee
+  cli_override: none
+  caller_token: Arc-AtomicBool; no-OS-signal-handler-installed
+  deadline: {code: RP_E_RESOURCE_DEADLINE_EXCEEDED, status: invalid, exit_code: 1, data: null}
+  cancellation: {code: RP_E_INTERRUPTED, status: interrupted, exit_code: 130, data: null}
+  output: one-checking-byte-capped-buffer-including-newline-before-stdout; stop-selects-small-terminal-envelope
+  terminal: no-refund-of-findings-or-output-cap; finish-selected-envelope-without-midwrite-cancellation
+  human_output: bounded-buffer-and-checkpoints-before-emission
+  limitations: in-flight-schema-eager-error-Vec-regex-allocations-and-blocking-syscalls-not-interruptible
+  init_stop: before-publication-owned-staging-cleanup; after-publication-tree-remains-even-if-report-stops
+status: phase1-task0-frozen
+version: 1
+
+independence:
+  harness_required: false
+  layer_a_required: false
+  adapter_required: false
+  network_required: false
+
+common_options:
+  project:
+    flag: --project
+    value: project-root-path
+    required_for: all-rp-commands
+    init_semantics: path-to-create-or-initialize
+    existing_project_semantics: root-containing-exactly-one-.research/project.yaml
+  output:
+    human: default
+    json_flag: --json
+  deterministic_time:
+    flag: --as-of
+    format: rfc3339
+    required_for:
+      - deterministic freshness tests
+      - deterministic time-sensitive exports
+    interactive_default:
+      source: current-clock
+      echo_resolved_value: true
+
+streams:
+  human_mode:
+    stdout: requested result or concise success summary
+    stderr: diagnostics, warnings, and fatal errors
+  json_mode:
+    stdout: exactly one rp/cli-result/v1 JSON object followed by newline
+    stderr: fatal launcher diagnostics only; no duplicate structured Findings
+  canonical_data_mutation: false
+
+result_envelope:
+  schema: rp/cli-result/v1
+  required:
+    - schema
+    - command
+    - status
+    - exit_code
+    - as_of
+    - findings
+    - data
+  fields:
+    schema:
+      const: rp/cli-result/v1
+    command:
+      type: string
+    status:
+      enum:
+        - ok
+        - invalid
+        - denied
+        - not-found
+        - conflict
+        - usage-error
+        - io-error
+        - internal-error
+        - interrupted
+    exit_code:
+      type: integer
+    as_of:
+      type: rfc3339-or-null
+    findings:
+      type: array-of-rp-finding-v1
+    data:
+      type: command-specific-object-or-null
+  json_schema: cli-result.schema.json
+  command_data_schema: cli-data.schema.json
+  schemas_are_canonical_layer_b_objects: false
+
+exit_codes:
+  0:
+    name: success
+    meaning: Command completed and the requested conformance or eligibility condition holds.
+  1:
+    name: negative-result
+    meaning: >-
+      Parsed input was processed, but validation failed, export was denied,
+      a requested object was not found, or a state conflict prevented the
+      requested non-destructive operation.
+    statuses:
+      - invalid
+      - denied
+      - not-found
+      - conflict
+  2:
+    name: usage-error
+    meaning: Invalid command syntax, missing option, incompatible options, or invalid option value.
+  3:
+    name: io-error
+    meaning: Project root, file, directory, permissions, or bounded-read operation failed.
+  4:
+    name: internal-error
+    meaning: Unexpected invariant violation or implementation failure; never used for invalid research data.
+  130:
+    name: interrupted
+    meaning: Cooperative interruption requested by explicit caller token; OS signal handling is deferred in this slice.
+
+finding_contract:
+  schema: rp/finding/v1
+  ordering:
+    - "severity ascending by fixed order: error, warning, info"
+    - source_file lexicographic
+    - json_pointer lexicographic
+    - error_code lexicographic
+  required_fields:
+    - error_code
+    - finding_family
+    - severity
+    - message
+    - source_file
+    - json_pointer
+  source_file:
+    representation: normalized project-relative path or null for command-global Findings
+    absolute_host_paths_forbidden: true
+    path_separator: /
+  message_stability: non-normative
+  error_code_stability: normative-within-v1
+  registry: finding-registry.yaml
+  json_schema: finding.schema.json
+  bounded_collection:
+    defaults_from: resource-limits.yaml
+    truncation_finding: RP_W_FINDINGS_TRUNCATED
+
+commands:
+  rp init:
+    synopsis: rp init --project <path>
+    writes:
+      - .research/project.yaml skeleton
+      - empty canonical directory tree
+    forbidden:
+      - generic object mutation
+      - Layer A initialization
+      - adapter installation
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp validate:
+    synopsis: rp validate --project <path> [--json]
+    stages_from: validation-stages.yaml
+    success_condition: all parsed canonical objects and whole-project invariants are valid
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp overview:
+    synopsis: rp overview --project <path> [--as-of <rfc3339>] [--json]
+    success_condition: bounded deterministic overview produced
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp show:
+    synopsis: rp show --project <path> <id> [--as-of <rfc3339>] [--json]
+    success_condition: exact object and derived context found
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp history:
+    synopsis: rp history --project <path> <logical-id> [--json]
+    success_condition: immutable revision DAG returned without implicit head selection
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp diff:
+    synopsis: rp diff --project <path> <revision-id-a> <revision-id-b> [--json]
+    success_condition: deterministic semantic diff produced
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp query:
+    synopsis: >-
+      rp query --project <path> [--kind <kind>] [--thread <thread-id>]
+      [--freshness <unknown|fresh|review-due|stale>] [--as-of <rfc3339>]
+      [--limit <rows>] [--json]
+    filters:
+      optional: true
+      conjunctive_when_multiple: true
+      kind_values: built-in-or-declared-extension-kind
+      thread_value: exact-thread-id
+      freshness_values: [unknown, fresh, review-due, stale]
+    bounds:
+      default_and_maximum_from: resource-limits.yaml#limits.query_rows
+      limit_must_be_positive: true
+      exceeding_maximum_is_usage_error: true
+      no_unbounded_mode: true
+    success_condition: bounded result set produced; an empty result is successful
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp thread list:
+    synopsis: rp thread list --project <path> [--json]
+    success_condition: bounded thread list produced; an empty list is successful
+    exits: [0, 2, 3, 4, 130]
+
+  rp thread show:
+    synopsis: rp thread show --project <path> <thread-id> [--as-of <rfc3339>] [--json]
+    success_condition: exact Thread and contextual bindings found
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp chain validate:
+    synopsis: rp chain validate --project <path> <chain-id> --profile <profile> [--json]
+    success_condition: snapshot validates against the requested matching profile
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp access explain:
+    synopsis: rp access explain --project <path> <id> [--json]
+    data_fields:
+      - declared_access
+      - required_dependency_floor
+      - effective_access
+      - dependency_count
+      - ordered_dependency_explanation
+    dependency_count: unique transitive semantic dependencies excluding target
+    explanation_order:
+      - shortest-path-length
+      - policy-edge-order
+      - dependency-id
+    invalid_object_findings: >-
+      Emit exactly one primary access Finding for the invalid object using the
+      canonical shortest witness. The message may summarize every missing level
+      and compartment requirement.
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp export check:
+    synopsis: >-
+      rp export check --project <path> <id> --level-ceiling <level>
+      [--compartment <slug>]... [--as-of <rfc3339>] [--json]
+    success_condition: target effective access is eligible under both level and compartment request
+    denied_status: denied
+    denied_exit_code: 1
+    performs_export: false
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp snapshot:
+    synopsis: rp snapshot --project <path> [--as-of <rfc3339>] [--json]
+    success_condition: validated project index exported with all-canonical records and graph metadata
+    data_fields:
+      - schema
+      - project
+      - threads
+      - objects
+      - heads
+      - relation_heads
+      - assessments
+      - thread_bindings
+      - freshness
+      - canonical_count
+    bounds:
+      canonical_records: 512
+      canonical_bytes: 2000000
+      semantic_nodes: 100
+      scientific_relations: 300
+    exits: [0, 1, 2, 3, 4, 130]
+
+  rp-fixture-test:
+    synopsis: rp-fixture-test --baseline <valid-root> --overlay <descriptor> [--json]
+    test_only: true
+    behavior: >-
+      Materialize a temporary project, apply exactly one descriptor mutation,
+      perform only declared integrity maintenance, invoke validation, and report
+      whether observed Findings match the descriptor.
+    exit_behavior: >-
+      Preserve the observed validator result for acceptance scripts: valid
+      baseline is 0 and a correctly rejected negative overlay is 1. The JSON
+      result must additionally set data.expectation_matched=true; mismatched
+      expectation is internal-error exit 4.
+    exits: [0, 1, 2, 3, 4, 130]
+
+resource_bounds:
+  required: true
+  values_from: resource-limits.yaml
+  acceptance_from: benchmark-budget.yaml
+  overrides:
+    explicit: true
+    bounded_by_machine_readable_maxima: true
+    no_unbounded_mode: true

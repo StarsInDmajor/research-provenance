@@ -1,0 +1,26 @@
+schema: rp/freshness-policy/v1
+version: 1
+default_status: unknown
+rules:
+  - id: review-window
+    selector:
+      tags_any:
+        - freshness-review-window
+    required_checks:
+      - review-deadline
+    invalidates_on_change: false
+  - id: version-watch
+    selector:
+      tags_any:
+        - freshness-version-watch
+    required_checks:
+      - review-deadline
+      - external-source-version
+    invalidates_on_change: true
+  - id: artifact-watch
+    selector:
+      tags_any:
+        - freshness-artifact-watch
+    required_checks:
+      - artifact-digest
+    invalidates_on_change: true

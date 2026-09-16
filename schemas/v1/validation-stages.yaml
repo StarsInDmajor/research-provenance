@@ -1,0 +1,480 @@
+# Phase 1 validation-order and Finding-classification contract.
+schema: rp/validation-stages/v1
+status: phase1-task0-frozen
+version: 1
+finding_registry: finding-registry.yaml
+resource_limits: resource-limits.yaml
+
+stages:
+  - id: restricted-yaml-parser
+    order: 1
+    input: exact-file-bytes
+    responsibilities:
+      - strict UTF-8 input with optional UTF-8 BOM only
+      - exactly one YAML document per file
+      - one non-null top-level mapping per document
+      - YAML 1.2 Core scalar handling
+      - reject duplicate keys
+      - reject anchors, aliases, merge keys, complex keys, and custom tags
+    on_failure: stop-file
+
+  - id: draft-2020-12
+    order: 2
+    input: parsed-object
+    schema_catalog: schema-catalog.json
+    format_assertion_required: true
+    responsibilities:
+      - schema dispatch
+      - closed object fields
+      - required properties
+      - scalar and collection types
+      - enums and const values
+      - typed ID patterns
+      - kind/payload discrimination
+      - nullable fields
+      - non-empty payload constraints
+      - unique arrays
+    on_failure: stop-file-before-project-semantics
+
+  - id: project-semantics
+    order: 3
+    input: schema-valid-project-object-set
+    gate:
+      run_only_if_every_canonical_file_passed_stages: [1, 2]
+      any_stage_1_or_2_failure_skips_stage_3_for_entire_project: true
+      collect_independent_file_local_stage_1_and_2_failures: true
+      collection_bound: resource-limits.yaml#limits.findings
+      no_stage_3_secondary_findings_when_skipped: true
+    responsibilities:
+      - duplicate object IDs and filename-to-ID consistency
+      - frozen-only canonical records
+      - reference and target resolution
+      - extension namespace policy and use-triggered local schema validation
+      - Node, Relation, and ThreadBinding same-lineage parent integrity
+      - relation endpoint kind compatibility
+      - Assessment supersession lane integrity
+      - full semantic access dependency closure, witness, count, and compartment ordering
+      - thread and binding integrity
+      - ClaimChain graph and profile validation
+      - chronology and Phase 1A provenance-mode requirements
+      - Artifact containment, byte size, and digest
+      - C2 bounded same-read derived report acquisition as explicitly unbound candidates
+      - C3 bounded independent expected subject comparison and equal-label disclosure gate per snapshot-artifact pair
+      - policy file containment and existence
+      - narrative note containment, existence, and digest
+      - extension namespace-to-kind matching and used local schema resolution
+      - extension schema compile and remote-or-escaping ref rejection
+      - local file Artifact byte verification for artifact-backed results
+      - event-backed execution provenance rejection until Layer A exists
+      - full-field JCS source-closure digest
+      - effective-access export guard
+    on_failure: project-invalid
+
+findings_collection:
+  allowance: resource-limits.yaml#limits.findings
+  deterministic_admission: >-
+    Scan directories breadth-first with byte-sorted entry names, then canonical
+    files in project-relative path order. Directory inventory is separately capped
+    before copying names; overflow discards the unsorted prefix and aborts the scan
+    with an unattributed directory-entry resource error, never processes a partial
+    directory or counts its remaining entries. Semantic index passes use sorted IDs,
+    fixed phase order and canonical array order. Select retained diagnostics at
+    insertion in that order; presentation sorting alone is not admission policy.
+  exact_boundary: no-marker-unless-an-additional-diagnostic-is-observed
+  admission_identity: >-
+    Keep original admission sequence and consumed allowance across isolated scopes,
+    deduplication, display sorting and CLI continuation. Dedup retains the first
+    admitted copy without refund. A full output evicts the last admitted retained
+    diagnostic, not the presentation-order tail; a shorter output appends the
+    marker without evicting another finding. Discarded helper diagnostics still
+    consume allowance.
+  overflow: >-
+    Stop at bounded producer cancellation points; retain the deterministic prefix
+    with one final-slot warning marker inside the cap. Keep sticky error and
+    incompleteness independently of displayed diagnostics. Do not publish a usable
+    validation index or successful CLI validity from a truncated run.
+  schema_conversion: >-
+    Convert only admitted schema errors; probe at most one excess error before
+    cancellation. Contextual overrides precede their suppressed generic errors.
+    JSON Schema internal branch evaluation, output-byte and deadline budgets are
+    separate resource contracts, not claims made by the Findings retention cap.
+  subject_reports: >-
+    Isolated C3 prerequisite/profile transcripts debit the enclosing validation
+    allowance without importing outer report findings. Truncated helper findings
+    or incomplete source observation coverage make the expected body unavailable,
+    never a fabricated passed/failed body or matched success. Source observations
+    remain captured by producing owner before presentation retention/finalization.
+
+finding_mapping:
+  report_binding_C3:
+    complete_body_inequality: RP_E_CLAIM_CHAIN_VALIDATION_REPORT_MISMATCH
+    own_report_via_any_non_role_path_including_unresolved: RP_E_REPORT_SOURCE_SEPARATION
+    unequal_or_insufficient_declared_labels: RP_E_REPORT_LABEL_REJECTED
+    incomplete_or_ambiguous_index: RP_E_REPORT_SUBJECT_INDEX_INCOMPLETE
+    unread_unstable_ambiguous_or_incomplete_subject_content: RP_E_REPORT_SUBJECT_CONTENT_INCOMPLETE
+    ambiguous_helper_finding_owner: RP_E_REPORT_SUBJECT_ATTRIBUTION
+    expected_wire_contract_unrepresentable: RP_E_REPORT_SUBJECT_WIRE_CONTRACT
+    subject_work_bytes_or_observation_retention_exhausted: RP_E_RESOURCE_REPORT_SUBJECT_EXCEEDED
+    snapshot_artifact_pair_overflow: RP_E_RESOURCE_REPORT_PAIRS_EXCEEDED
+    acquisition_failure: retain-C2-or-reference-error-not-body-mismatch
+
+  report_acquisition_C2:
+    invalid_json_bom_utf8_root_or_duplicate_key: RP_E_REPORT_JSON_INVALID
+    derived_report_schema_failure_including_wrong_dispatch: RP_E_REPORT_SCHEMA_INVALID
+    https_identifier_only_body_unavailable: RP_E_REPORT_BODY_UNAVAILABLE
+    document_bytes: RP_E_RESOURCE_REPORT_SIZE_EXCEEDED
+    aggregate_actual_captured_bytes: RP_E_RESOURCE_REPORT_CAPTURE_EXCEEDED
+    document_or_aggregate_attempted_value_nodes: RP_E_RESOURCE_REPORT_NODES_EXCEEDED
+    distinct_artifact_references: RP_E_RESOURCE_REPORT_COUNT_EXCEEDED
+    container_depth: RP_E_RESOURCE_NESTING_DEPTH_EXCEEDED
+    decoded_scalar_or_key_bytes: RP_E_RESOURCE_SCALAR_LENGTH_EXCEEDED
+    mapping_keys: RP_E_RESOURCE_MAPPING_KEYS_EXCEEDED
+    sequence_items: RP_E_RESOURCE_SEQUENCE_ITEMS_EXCEEDED
+    missing_or_unreadable_file: RP_E_ARTIFACT_NOT_FOUND
+    missing_manifest_reference: RP_E_REFERENCE_NOT_FOUND
+    manifest_size_mismatch: RP_E_ARTIFACT_SIZE_MISMATCH
+    manifest_sha256_mismatch: RP_E_ARTIFACT_DIGEST_MISMATCH
+    descriptor_changed: RP_E_ARTIFACT_CHANGED_DURING_VERIFICATION
+    unsafe_path: RP_E_PATH_PROJECT_ESCAPE
+    symlink: RP_E_PATH_SYMLINK_FORBIDDEN
+    non_regular: RP_E_PATH_NON_REGULAR_FILE
+    artifact_item_bytes: RP_E_RESOURCE_ARTIFACT_SIZE_EXCEEDED
+    shared_actual_artifact_bytes: RP_E_RESOURCE_ARTIFACT_AGGREGATE_EXCEEDED
+
+  parser:
+    duplicate_key: RP_E_YAML_DUPLICATE_KEY
+    alias_or_anchor: RP_E_YAML_ALIAS_FORBIDDEN
+    merge_key: RP_E_YAML_MERGE_KEY_FORBIDDEN
+    custom_tag: RP_E_YAML_CUSTOM_TAG_FORBIDDEN
+    complex_key: RP_E_YAML_COMPLEX_KEY_FORBIDDEN
+    invalid_utf8: RP_E_YAML_INVALID_UTF8
+    multiple_documents: RP_E_YAML_MULTIPLE_DOCUMENTS
+    root_not_mapping: RP_E_YAML_ROOT_NOT_MAPPING
+
+  resource_limits:
+    directory_entries: RP_E_RESOURCE_DIRECTORY_ENTRIES_EXCEEDED
+    scanned_files: RP_E_RESOURCE_SCANNED_FILES_EXCEEDED
+    scanned_directories: RP_E_RESOURCE_SCANNED_DIRECTORIES_EXCEEDED
+    file_bytes: RP_E_RESOURCE_FILE_SIZE_EXCEEDED
+    total_bytes: RP_E_RESOURCE_TOTAL_BYTES_EXCEEDED
+    nesting_depth: RP_E_RESOURCE_NESTING_DEPTH_EXCEEDED
+    scalar_length: RP_E_RESOURCE_SCALAR_LENGTH_EXCEEDED
+    collection_size: RP_E_RESOURCE_COLLECTION_SIZE_EXCEEDED
+    mapping_keys: RP_E_RESOURCE_MAPPING_KEYS_EXCEEDED
+    sequence_items: RP_E_RESOURCE_SEQUENCE_ITEMS_EXCEEDED
+    artifact_bytes: RP_E_RESOURCE_ARTIFACT_SIZE_EXCEEDED
+    artifact_aggregate_bytes: RP_E_RESOURCE_ARTIFACT_AGGREGATE_EXCEEDED
+    graph_nodes: RP_E_RESOURCE_GRAPH_NODES_EXCEEDED
+    graph_edges: RP_E_RESOURCE_GRAPH_EDGES_EXCEEDED
+    traversal_depth: RP_E_RESOURCE_TRAVERSAL_DEPTH_EXCEEDED
+    result_rows: RP_E_RESOURCE_RESULT_ROWS_EXCEEDED
+    rendered_output: RP_E_RESOURCE_OUTPUT_SIZE_EXCEEDED
+    extension_schemas: RP_E_RESOURCE_EXTENSION_SCHEMAS_EXCEEDED
+    extension_schema_bytes: RP_E_RESOURCE_EXTENSION_SCHEMA_BYTES_EXCEEDED
+    schema_ref_depth: RP_E_RESOURCE_SCHEMA_REF_DEPTH_EXCEEDED
+    schema_evaluation: RP_E_RESOURCE_SCHEMA_EVALUATION_EXCEEDED
+    regex_input: RP_E_RESOURCE_REGEX_INPUT_EXCEEDED
+    deadline: RP_E_RESOURCE_DEADLINE_EXCEEDED
+
+  path_and_content:
+    project_path_escape: RP_E_PATH_PROJECT_ESCAPE
+    symlink_forbidden: RP_E_PATH_SYMLINK_FORBIDDEN
+    policy_not_found: RP_E_POLICY_NOT_FOUND
+    narrative_not_found: RP_E_NARRATIVE_NOT_FOUND
+    narrative_digest_mismatch: RP_E_NARRATIVE_DIGEST_MISMATCH
+    artifact_digest_mismatch: RP_E_ARTIFACT_DIGEST_MISMATCH
+
+  extensions:
+    namespace_not_allowed: RP_E_EXTENSION_NAMESPACE_NOT_ALLOWED
+    kind_namespace_mismatch: RP_E_EXTENSION_KIND_NAMESPACE_MISMATCH
+    schema_not_found: RP_E_EXTENSION_SCHEMA_NOT_FOUND
+    schema_invalid: RP_E_EXTENSION_SCHEMA_INVALID
+    payload_mismatch: RP_E_EXTENSION_PAYLOAD_SCHEMA_MISMATCH
+    ref_forbidden: RP_E_EXTENSION_REF_FORBIDDEN
+    semantic_reference_declaration_invalid: RP_E_EXTENSION_REFERENCE_DECLARATION_INVALID
+
+  json_schema_defaults:
+    additionalProperties: RP_E_CLOSED_SCHEMA_UNKNOWN_PROPERTY
+    required: RP_E_SCHEMA_REQUIRED_PROPERTY
+    enum: RP_E_SCHEMA_ENUM
+    const: RP_E_SCHEMA_CONST
+    pattern: RP_E_SCHEMA_PATTERN
+    format: RP_E_SCHEMA_FORMAT
+    type: RP_E_SCHEMA_TYPE
+    minItems: RP_E_SCHEMA_MIN_ITEMS
+    minProperties: RP_E_SCHEMA_MIN_PROPERTIES
+    uniqueItems: RP_E_SCHEMA_UNIQUE_ITEMS
+    oneOf: RP_E_SCHEMA_DISCRIMINATOR
+
+  semantic_defaults:
+    unresolved_reference: RP_E_REFERENCE_NOT_FOUND
+    wrong_reference_type: RP_E_REFERENCE_TYPE_MISMATCH
+    duplicate_object_id: RP_E_OBJECT_DUPLICATE_ID
+    filename_id_mismatch: RP_E_OBJECT_FILENAME_ID_MISMATCH
+    canonical_draft: RP_E_CANONICAL_DRAFT_FORBIDDEN
+    node_parent_logical_id_mismatch: RP_E_NODE_LINEAGE_LOGICAL_ID_MISMATCH
+    node_parent_kind_mismatch: RP_E_NODE_LINEAGE_KIND_MISMATCH
+    relation_parent_logical_id_mismatch: RP_E_RELATION_LINEAGE_LOGICAL_ID_MISMATCH
+    relation_parent_type_mismatch: RP_E_RELATION_LINEAGE_TYPE_MISMATCH
+    binding_parent_logical_id_mismatch: RP_E_BINDING_LINEAGE_LOGICAL_ID_MISMATCH
+    binding_parent_context_mismatch: RP_E_BINDING_LINEAGE_CONTEXT_MISMATCH
+    assessment_supersession_lane_mismatch: RP_E_ASSESSMENT_SUPERSESSION_LANE_MISMATCH
+    event_provenance_unsupported: RP_E_EVENT_PROVENANCE_UNSUPPORTED
+    source_closure_digest_mismatch: RP_E_SOURCE_CLOSURE_DIGEST_MISMATCH
+
+  contextual_overrides:
+    - field: ClaimChainSnapshot.node_revisions[]|relation_revisions[]
+      condition: mutable-logical-id-instead-of-typed-revision-id
+      error_code: RP_E_CLAIM_CHAIN_REQUIRES_EXACT_REVISION
+    - field: Assessment.target
+      condition: target-type-and-id-prefix-disagree
+      error_code: RP_E_SCHEMA_TARGET_ID_TYPE
+    - field: access.level
+      condition: unknown-level
+      error_code: RP_E_ACCESS_LEVEL_UNKNOWN
+    - field: declassification_attestation
+      condition: field-present-in-mvp
+      error_code: RP_E_DECLASSIFICATION_UNSUPPORTED
+
+semantic_contracts:
+  report_acquisition_C2:
+    prerequisite: schema-valid-snapshots-and-artifact-manifests
+    acquisition_cache_key: artifact-id
+    candidate_type: UnboundReportCandidate
+    outer_findings_owner: artifact-manifest-source-file-at-/uri
+    reference_count_overflow_owner: first-overflowing-snapshot-at-/validation_report
+    reference_count_overflow: abort-entire-artifact-phase-before-scientific-or-report-reads
+    reference_count_overflow_result: error-no-artifact-byte-verification-no-report-candidates
+    reference_count_overflow_rationale: bound-work-without-unbounded-id-set-or-per-artifact-index-scans
+    reference_count_overflow_independent_non_artifact_diagnostics: continue
+    artifact_verified_means: local-stable-bytes-match-manifest-only
+    syntax_or_schema_failure_may_still_have_verified_bytes: true
+    binding_verified: only-by-separate-C3-pair-comparison-and-label-gate
+    candidate_alone_does_not_prove_report_binding: true
+    binding_cache: none
+    binding_comparison_key: snapshot-id-and-artifact-id
+    missing_manifest: retain-existing-reference-diagnostic-no-candidate
+    report_read_failure: no-candidate-no-byte-verification-success
+    resource_failure: no-candidate-for-failed-acquisition-no-work-refund
+    mismatch_code_reserved: C3-complete-body-inequality-not-C2-technical-failures
+  report_binding_C3:
+    prerequisites: graph-ready-and-same-read-content-observations-ready
+    budget: one-SubjectBudget-per-project-validation
+    absent_report: unchanged-existing-validity-and-output-no-subject-store-or-binding-work
+    outer_finding_owner: snapshot-source-file-at-/validation_report
+    subject_scope: V-plus-Project-cut-all-ClaimChain-validation_report-role-edges
+    self_source: reject-before-candidate-comparison-including-missing-own-report-when-traversal-proves-it
+    label_equality: exact-declared-snapshot-and-manifest-access-including-sorted-compartments
+    disclosure_floor: join-computed-role-cut-effective-labels-for-every-object-in-V-including-Project
+    context_access_policy: Project-and-consuming-objects-in-V-govern-consumed-policy-and-schema-context
+    context_and_finding_owners: covered-by-the-same-all-V-effective-floor
+    invalid_dependency_access: retain-original-subject-errors-and-reject-label-gate-if-floor-not-covered
+    body_comparison: full-parsed-Value-equality-with-independent-complete-expected-body
+    public_observation: ProjectIndex.report_binding(snapshot-id,artifact-id)
+    comparison_states: [MatchedSubjectPassed, MatchedSubjectFailed, Mismatch, CandidateUnavailable, SourceSeparation, SubjectUnavailable]
+    label_states: [NotEvaluated, Accepted, Rejected]
+    overall_chain_success: existing-claim-valid-and-MatchedSubjectPassed-and-Accepted
+    honest_failed_binding: MatchedSubjectFailed-may-have-Accepted-labels-but-chain-project-remain-invalid
+    missing_pair_observation: not-evaluated-never-success
+    unrelated_project_errors: remain-outer-and-CLI-invalid-without-contaminating-complete-subject-body
+    science_truth_or_export_permission: not-claimed
+  claim_chain_endpoint_membership:
+    profiles: [minimum-v1, evidential-v1, confirmatory-v1]
+    prerequisite: every root and target resolves to a NodeRevision selected in node_revisions
+    resolved_unselected_endpoint:
+      error_code: RP_E_CLAIM_CHAIN_ENDPOINT_NOT_SELECTED
+      finding_family: endpoint_containment
+      source_file: snapshot-source-path
+      root_json_pointer: /root_node_revisions/<index>
+      target_json_pointer: /target_node_revision
+      emit_for_each_offending_field: true
+      finding_order: existing-finding-sort-order
+    unresolved_or_wrong_type_endpoint:
+      retain_reference_diagnostics: true
+      emit_membership_finding: false
+      prerequisite_satisfied: false
+    when_prerequisite_unsatisfied:
+      skip: [evidential-profile-inference, confirmatory-profile-inference]
+      retain:
+        - independent minimum relation-state and relation-endpoint checks
+        - independent minimum connectivity and cycle checks
+        - source-closure resolution and digest checks
+        - access dependency closure and content integrity checks
+    selected_relation_endpoint_rule:
+      unchanged: true
+      json_pointer: /node_revisions
+  claim_chain_v1_conformance:
+    basis: approved-clarification-section-3-and-schema-v1-section-6.3
+    flat_synthesis_bypass:
+      code: RP_E_EVIDENTIAL_SYNTHESIS_REQUIRED
+      family: evidential_synthesis_requirement
+      json_pointer: /relation_revisions
+      scope: partial-v1-coverage-not-new-policy-or-global-grouping
+      shape: one-selected-active-final-Synthesis-with-at-least-two-distinct-evidence-inputs
+      reject: direct-selected-active-evidence-evaluation-to-same-target-without-input-to-that-Synthesis
+      guards:
+        - all selected edges active with selected endpoints
+        - no selected generated Observation or Measurement intermediate
+        - final Synthesis has no separate generated target or shared evidence input
+        - bypass candidate has no other input-to or separate evaluation context
+      unchanged: existing-at-least-two-input-predicate-and-all-other-shapes
+    confirmatory_required_kinds:
+      result: selected-Observation-or-Measurement-minimum-one
+      result_absence_code: RP_E_CONFIRMATORY_RESULT_REQUIRED
+      result_absence_family: confirmatory_required_result
+      result_absence_pointer: /node_revisions
+      other_kinds: selected-Hypothesis-Prediction-Test-with-kind-compatible-backbone
+      other_kinds_code: RP_E_CONFIRMATORY_BACKBONE_MISSING
+      missing_edge_membership: retain-primary-endpoint-finding-without-backbone-absence-cascade
+    confirmatory_scientific_evaluation:
+      code: RP_E_CONFIRMATORY_EVALUATION_REQUIRED
+      family: confirmatory_scientific_evaluation
+      json_pointer: /relation_revisions
+      minimum: one-selected-active-relation-with-both-endpoints-selected
+      types: [supports, weakens, contradicts, consistent-with]
+      from: [Observation, Measurement, Synthesis]
+      to: [Hypothesis, Prediction, target-Conclusion]
+      not_sufficient: [generated, derived-from, unselected-relation, PaperClaim-source]
+      suppress_absence_when:
+        - no selected result; required-result is primary
+        - selected otherwise qualifying evaluation is inactive or has unselected endpoint; minimum is primary
+      retain: independent-mapping-predeclaration-provenance-source-access-and-content-errors
+      rationale: distinct-required-result-and-scientific-outcome-predicates-not-existing-result-mapping-or-evidential-whitelist
+  extension_schema_triggering:
+    allowlist_metadata_alone_requires_schema_file: false
+    schema_required_when:
+      - any object has extensions[namespace]
+      - any NodeRevision kind uses namespace/version:KindName
+    extension_kind_requires_payload_namespace: exact-match
+    path_mapping: .research/schemas/<namespace-dots-as-path>/vN.schema.json
+    semantic_reference_declarations:
+      keyword: x-rp-semantic-references
+      entry_fields: [pointer_template, target_schema]
+      pointer_template: RFC-6901 JSON Pointer relative to extension payload; `*` is allowed only as a complete array-item segment
+      target_schema: exact rp/<object>/v1 schema identifier
+      required_for: every extension payload scalar matching a canonical exact-ID pattern
+      missing_or_invalid_declaration_finding: RP_E_EXTENSION_REFERENCE_DECLARATION_INVALID
+  parent_lineage:
+    NodeRevision:
+      same_logical_id: true
+      compatible_kind: exact-built-in-kind-or-same-extension-kind
+    ScientificRelationRevision:
+      same_logical_id: true
+      compatible_type: exact-relation-type
+    ThreadBinding:
+      same_logical_id: true
+      compatible_context:
+        - same thread_id
+        - same target.type
+        - same target.id
+  assessment_supersession:
+    lane_key:
+      - target.type
+      - target.id
+      - assessment_scope
+      - assessed_by.type
+      - assessed_by.id
+      - review_assurance
+    cross_lane_supersession: reject
+    timestamp_selects_winner: false
+    cycles: reject
+  access_dependency_closure:
+    include_every_exact_semantic_reference_that_can_reveal_another_object: true
+    built_in_edge_order:
+      - source.revisions
+      - source.relations
+      - source.external_references
+      - source.artifacts
+      - source.events
+      - revision.parents
+      - relation.from_revision
+      - relation.to_revision
+      - assessment.target
+      - assessment.supersedes_assessments
+      - assessment.quantitative_assessment.source_measurements
+      - thread.root_question_revision
+      - thread.parent_thread_id
+      - thread.forked_from_thread_id
+      - binding.thread_id
+      - binding.target
+      - claim_chain.thread_id
+      - claim_chain.root_node_revisions
+      - claim_chain.target_node_revision
+      - claim_chain.node_revisions
+      - claim_chain.relation_revisions
+      - claim_chain.validation_report
+      - node.scope.research_run_id
+      - node.scope.dataset_revisions
+      - node.observation.method.protocol_reference
+      - node.measurement.method.protocol_reference
+      - node.method.protocol_references
+      - node.test.target_revision_ids
+      - node.test.method_revision
+      - node.next_action.dependencies
+      - node.paper_claim.publication_reference
+      - research_run.project_id
+      - research_run.parent_run_id
+      - research_run.planned_inputs.revisions
+      - research_run.planned_inputs.artifacts
+      - extension_schema_declared_semantic_references
+    dependency_count: unique-transitive-count-excluding-target
+    project_dependency_access_label: Project.access_defaults
+    witness_order: [shortest-path, policy-edge-order, id]
+    primary_findings_per_invalid_object: 1
+  execution_provenance:
+    supported_phase1a: [none, artifact-backed]
+    unsupported_phase1a: [event-backed, artifact-and-event]
+    unsupported_finding: RP_E_EVENT_PROVENANCE_UNSUPPORTED
+    artifact_backed:
+      selected_result_kinds: [Observation, Measurement]
+      direct_source_artifact_required: true
+      artifact_uri_scheme: file
+      local_bytes_must_be_verified: true
+      https_identifier_only: true
+  freshness:
+    contract: rp/freshness/v1
+    status_precedence: [stale, review-due, fresh, unknown]
+    policy_path: Project.validation_policy
+    policy_schema: freshness-policy.schema.json
+    source_version_matching:
+      same_reference_type: true
+      same_canonical_uri: true
+      candidate_released_at_must_be_lte_as_of: true
+      newer_than_pinned_requires_later_released_at: true
+      identifier_must_differ: true
+    unavailable_required_check: unknown-unless-a-stale-condition-already-exists
+    revision_head_currentness_independent: true
+  canonical_digest:
+    algorithm: RFC-8785-JCS-plus-SHA-256
+    input: every parsed field
+    presentation_field_exclusions: []
+
+fixture_stage_expectations:
+  parser_invalid:
+    - overview-v1/overlay-duplicate-yaml-key
+
+  schema_invalid:
+    - overview-v1/overlay-closed-schema-violation
+    - overview-v1/overlay-observation-payload-missing
+    - overview-v1/overlay-decision-reversibility-enum
+    - overview-v1/overlay-paper-claim-empty-locator
+    - overview-v1/overlay-assessment-target-type-mismatch
+    - claim-chain-minimum-v1/overlay-claim-chain-logical-id
+    - access-closure-v1/overlay-unknown-access-level
+    - access-closure-v1/overlay-declassification-in-mvp
+
+  semantic_examples_that_must_pass_json_schema:
+    - overview-v1/overlay-dangling-reference
+    - overview-v1/overlay-revision-cycle
+    - overview-v1/overlay-thread-binding-orphan
+    - claim-chain-minimum-v1/overlay-claim-chain-cycle
+    - claim-chain-minimum-v1/overlay-disconnected-node
+    - claim-chain-minimum-v1/overlay-invalidated-relation
+    - claim-chain-minimum-v1/overlay-missing-endpoint
+    - claim-chain-evidential-v1/overlay-invalid-input-to-endpoint
+    - claim-chain-evidential-v1/overlay-unsupported-evaluative-relation
+    - claim-chain-confirmatory-v1/overlay-temporal-predeclaration-inverted
+    - claim-chain-confirmatory-v1/overlay-provenance-gap
+    - access-closure-v1/overlay-unsorted-compartments
+    - access-closure-v1/overlay-invalid-access-downgrade
+    - access-closure-v1/overlay-relation-endpoint-leak

@@ -1,0 +1,521 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "claim-chain-validation-report.schema.json",
+  "title": "rp/claim-chain-validation-report/v1",
+  "$comment": "Derived contract only, never canonical Layer B. Local shape is not binding verification: a structurally valid forged digest or passed outcome can validate. Sorting, keyed uniqueness, completeness, recomputed JCS digests, same-read bytes, containment on disk, labels and ruleset identity are later Core obligations. Array maxima match the strict report parser per-array ceiling; aggregate byte/node/depth budgets remain parser obligations.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "scope",
+    "subject",
+    "selected_nodes",
+    "selected_relations",
+    "source_closure",
+    "validation_dependencies",
+    "validation_context",
+    "validator",
+    "outcome"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/claim-chain-validation-report/v1"
+    },
+    "scope": {
+      "const": "claim-chain-subject-pre-binding/v1"
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "canonical_digest",
+        "validation_policy"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "common.schema.json#/$defs/ids/$defs/claim_chain"
+        },
+        "canonical_digest": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "validation_policy": {
+          "$ref": "claim-chain-snapshot.schema.json#/properties/validation_policy"
+        }
+      }
+    },
+    "selected_nodes": {
+      "type": "array",
+      "maxItems": 65536,
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/requested_entry"
+          },
+          {
+            "properties": {
+              "object_type": {
+                "const": "rp/node-revision/v1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "selected_relations": {
+      "type": "array",
+      "maxItems": 65536,
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/$defs/requested_entry"
+          },
+          {
+            "properties": {
+              "object_type": {
+                "const": "rp/scientific-relation-revision/v1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "source_closure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "entries",
+        "sha256",
+        "unresolved_ids"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "rp/source-closure/v1"
+        },
+        "entries": {
+          "type": "array",
+          "maxItems": 65536,
+          "items": {
+            "$ref": "#/$defs/resolved_entry"
+          }
+        },
+        "sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "unresolved_ids": {
+          "type": "array",
+          "maxItems": 65536,
+          "items": {
+            "$ref": "#/$defs/canonical_id"
+          }
+        }
+      }
+    },
+    "validation_dependencies": {
+      "type": "array",
+      "maxItems": 65536,
+      "items": {
+        "$ref": "#/$defs/requested_entry"
+      }
+    },
+    "validation_context": {
+      "type": "array",
+      "maxItems": 65536,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "raw_sha256"
+        ],
+        "properties": {
+          "path": {
+            "$ref": "#/$defs/context_path"
+          },
+          "raw_sha256": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          }
+        }
+      }
+    },
+    "validator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "ruleset",
+        "fingerprint"
+      ],
+      "properties": {
+        "id": {
+          "const": "rp-core"
+        },
+        "ruleset": {
+          "const": "claim-chain-subject-pre-binding/v1"
+        },
+        "fingerprint": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "passed",
+        "findings"
+      ],
+      "properties": {
+        "passed": {
+          "type": "boolean"
+        },
+        "findings": {
+          "type": "array",
+          "maxItems": 65536,
+          "items": {
+            "$ref": "#/$defs/compact_finding"
+          }
+        }
+      },
+      "if": {
+        "properties": {
+          "passed": {
+            "const": true
+          }
+        },
+        "required": [
+          "passed"
+        ]
+      },
+      "then": {
+        "properties": {
+          "findings": {
+            "not": {
+              "contains": {
+                "$ref": "#/$defs/error_finding"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "findings": {
+            "contains": {
+              "$ref": "#/$defs/error_finding"
+            },
+            "minContains": 1
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "canonical_id": {
+      "oneOf": [
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/project"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/node"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/relation"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/assessment"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/thread"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/binding"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/claim_chain"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/reference"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/artifact"
+        },
+        {
+          "$ref": "common.schema.json#/$defs/ids/$defs/run"
+        }
+      ]
+    },
+    "canonical_identity": {
+      "oneOf": [
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/project/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/project"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        },
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/node-revision/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/node"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        },
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/scientific-relation-revision/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/relation"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        },
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/assessment/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/assessment"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        },
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/research-thread/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/thread"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        },
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/thread-binding/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/binding"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        },
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/claim-chain-snapshot/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/claim_chain"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        },
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/external-reference/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/reference"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        },
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/artifact-manifest/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/artifact"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        },
+        {
+          "properties": {
+            "object_type": {
+              "const": "rp/research-run/v1"
+            },
+            "id": {
+              "$ref": "common.schema.json#/$defs/ids/$defs/run"
+            }
+          },
+          "required": [
+            "object_type",
+            "id"
+          ]
+        }
+      ]
+    },
+    "requested_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "object_type",
+        "id",
+        "canonical_digest"
+      ],
+      "properties": {
+        "object_type": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "canonical_digest": {
+          "oneOf": [
+            {
+              "$ref": "common.schema.json#/$defs/sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/$defs/canonical_identity"
+        }
+      ]
+    },
+    "resolved_entry": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/requested_entry"
+        },
+        {
+          "properties": {
+            "canonical_digest": {
+              "$ref": "common.schema.json#/$defs/sha256"
+            }
+          }
+        }
+      ]
+    },
+    "context_path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![A-Za-z][A-Za-z0-9+.-]*:)(?!.*(?:^|/)(?:\\.|%2[eE]){1,2}(?:/|$))(?!.*%(?:2[fF]|5[cC]|[01][0-9A-Fa-f]|7[fF]|[89][0-9A-Fa-f]))(?!.*(?:%25(?:[0-9A-Fa-f]|%3[0-9]|%[46][1-6]){2}|%%(?:3[0-9]|[46][1-6])(?:[0-9A-Fa-f]|%3[0-9]|%[46][1-6])|%[0-9A-Fa-f]%(?:3[0-9]|[46][1-6])))[^/\\\\\\x00-\\x1F\\x7F-\\x9F]+(?:/[^/\\\\\\x00-\\x1F\\x7F-\\x9F]+)*$",
+      "$comment": "Normalized project-relative auxiliary path, not a URI: no empty/dot/parent components, backslash, drive prefix, controls, unsafe percent decoding or latent second decoding. Benign percent text and ordinary POSIX names are not Windows reserved names. Actual descriptor containment and policy/schema role resolution are Core obligations."
+    },
+    "owner": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "id"
+          ],
+          "properties": {
+            "kind": {
+              "const": "object"
+            },
+            "id": {
+              "$ref": "#/$defs/canonical_id"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "path"
+          ],
+          "properties": {
+            "kind": {
+              "const": "context"
+            },
+            "path": {
+              "$ref": "#/$defs/context_path"
+            }
+          }
+        }
+      ]
+    },
+    "compact_finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "error_code",
+        "finding_family",
+        "severity",
+        "json_pointer"
+      ],
+      "properties": {
+        "owner": {
+          "$ref": "#/$defs/owner"
+        },
+        "error_code": {
+          "$ref": "finding.schema.json#/properties/error_code"
+        },
+        "finding_family": {
+          "$ref": "finding.schema.json#/properties/finding_family"
+        },
+        "severity": {
+          "$ref": "finding.schema.json#/properties/severity"
+        },
+        "json_pointer": {
+          "$ref": "finding.schema.json#/properties/json_pointer"
+        }
+      }
+    },
+    "error_finding": {
+      "type": "object",
+      "properties": {
+        "severity": {
+          "const": "error"
+        }
+      },
+      "required": [
+        "severity"
+      ]
+    }
+  }
+}

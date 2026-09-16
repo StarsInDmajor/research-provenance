@@ -1,0 +1,35 @@
+schema: rp/node-revision/v1
+id: qst_01J00000000000000000000010
+logical_id: question-comparative-evidence
+kind: Question
+record_state: frozen
+title: Comparative evidence question
+statement: Does candidate procedure C reduce normalized drift relative to baseline B in the standard
+  envelope?
+scope:
+  statement: Synthetic standard-envelope evidence evaluation only.
+question:
+  resolution_criteria:
+  - Compare versioned baseline and candidate measurements through an explicit synthesis.
+  evidence_requirements:
+  - Baseline and candidate measurements use the same synthetic protocol.
+assumptions:
+- The normalized summaries are comparable.
+limitations:
+- No real experimental inference is represented.
+revision:
+  parents: []
+  summary: Initial evidential question.
+created_at: '2026-01-01T08:10:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  external_references:
+  - ref_01J00000000000000000000003
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-evidential-v1
+- synthetic

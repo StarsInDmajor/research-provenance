@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project.schema.json",
+  "title": "rp/project/v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "id",
+    "slug",
+    "title",
+    "created_at",
+    "schema_policy",
+    "repository_policy",
+    "access_defaults"
+  ],
+  "properties": {
+    "schema": {
+      "const": "rp/project/v1"
+    },
+    "id": {
+      "$ref": "common.schema.json#/$defs/ids/$defs/project"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "schema_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "core_version",
+        "kind_registry",
+        "allowed_extensions"
+      ],
+      "properties": {
+        "core_version": {
+          "const": "v1"
+        },
+        "kind_registry": {
+          "const": "rp/kinds/v1"
+        },
+        "allowed_extensions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9.-]*/v[1-9][0-9]*$"
+          }
+        }
+      }
+    },
+    "repository_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "visibility",
+        "allowed_remotes"
+      ],
+      "properties": {
+        "visibility": {
+          "enum": [
+            "public",
+            "internal",
+            "private"
+          ]
+        },
+        "allowed_remotes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "access_defaults": {
+      "$ref": "common.schema.json#/$defs/access"
+    },
+    "redaction_policy": {
+      "type": "string",
+      "pattern": "^\\.research/policies/(?!.*\\.\\.)[^/\\s]+\\.ya?ml$"
+    },
+    "validation_policy": {
+      "type": "string",
+      "pattern": "^\\.research/policies/(?!.*\\.\\.)[^/\\s]+\\.ya?ml$"
+    },
+    "extensions": {
+      "$ref": "common.schema.json#/$defs/extensions"
+    }
+  }
+}

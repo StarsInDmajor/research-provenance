@@ -1,0 +1,34 @@
+schema: rp/node-revision/v1
+id: con_01J00000000000000000000019
+logical_id: conclusion-minimum-structure
+kind: Conclusion
+record_state: frozen
+title: Minimum-profile structural conclusion
+statement: This exact selection satisfies the minimum structural ClaimChain contract.
+scope:
+  statement: Synthetic minimum-profile structural validation only.
+conclusion:
+  residual_uncertainty:
+  - No evidential quality or confirmatory timing claim is made.
+  use_limitations:
+  - Use only as a synthetic minimum-profile conformance result.
+assumptions:
+- The profile policy is applied exactly as versioned.
+limitations:
+- Scientific correctness is outside this fixture.
+revision:
+  parents: []
+  summary: Initial synthetic structural conclusion.
+created_at: '2026-01-01T08:30:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - hyp_01J00000000000000000000011
+access:
+  level: internal
+  compartments: []
+tags:
+- claim-chain-minimum-v1
+- synthetic

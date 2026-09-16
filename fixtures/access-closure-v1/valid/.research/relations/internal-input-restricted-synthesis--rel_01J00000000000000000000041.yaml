@@ -1,0 +1,36 @@
+schema: rp/scientific-relation-revision/v1
+id: rel_01J00000000000000000000041
+logical_id: internal-input-restricted-synthesis
+record_state: frozen
+type: input-to
+from_revision: dset_01J00000000000000000000008
+to_revision: syn_01J00000000000000000000028
+scope:
+  statement: Synthetic access-closure relation.
+  conditions:
+  - Use exact frozen endpoints.
+  exclusions:
+  - No scientific authority is implied.
+assertion_mode: asserted
+relation_state: active
+rationale: Structural target raises the relation access.
+revision:
+  parents: []
+  summary: Synthetic access relation revision.
+created_at: '2026-01-26T10:00:00Z'
+created_by:
+  type: human
+  id: researcher
+source:
+  revisions:
+  - dset_01J00000000000000000000008
+  - syn_01J00000000000000000000028
+  relations: []
+  artifacts: []
+  external_references: []
+  events: []
+access:
+  level: restricted
+  compartments:
+  - analysis-alpha
+  - partner-beta

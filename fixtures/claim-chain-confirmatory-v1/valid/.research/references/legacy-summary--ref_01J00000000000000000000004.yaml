@@ -1,0 +1,16 @@
+schema: rp/external-reference/v1
+id: ref_01J00000000000000000000004
+type: https
+canonical_uri: https://example.invalid/confirmatory-v1/legacy-summary
+foreign_key: null
+display_label: Synthetic archival summary source
+retrieved_at: '2026-01-01T08:15:00Z'
+source_version:
+  identifier: fixture-legacy-v1
+  released_at: '2025-11-01T00:00:00Z'
+trust_tags:
+- legacy-unverified
+- synthetic-fixture
+access:
+  level: internal
+  compartments: []
