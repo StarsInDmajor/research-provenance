@@ -337,8 +337,10 @@ function boot(doc) {
             try {
               const msg = JSON.parse(ev.data);
               if(msg.generation && msg.generation !== generation) {
+                // Re-mount is unsupported by design (SVG shell and mount are
+                // single-boot); a full reload is the honest live update.
                 generation = msg.generation;
-                loadLive().then(o2=>buildGraph(o2.wireText, o2.recordsText)).catch(()=>{});
+                location.reload();
               }
             } catch(_) {}
           };

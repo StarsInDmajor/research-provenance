@@ -589,27 +589,36 @@ fn main() {
 }
 
 fn dir_mtime(root: &Path) -> Option<u128> {
-    let mut latest: Option<u128> = None;
-    let research = root.join(".research");
-    let sources = root.join("sources");
-    for base in [research, sources] {
-        if !base.exists() {
-            continue;
+    // Records nest (e.g. .research/records/questions/*.yaml), so a top-level
+    // scan misses the most common edit. Walk bounded depth; DirEntry::metadata
+    // is lstat, so symlinked entries never recurse.
+    fn walk(dir: &Path, depth: u8, latest: &mut Option<u128>) {
+        if depth > 6 {
+            return;
         }
-        let Ok(entries) = std::fs::read_dir(&base) else {
-            continue;
+        let Ok(entries) = std::fs::read_dir(dir) else {
+            return;
         };
         for entry in entries.flatten() {
-            let path = entry.path();
-            if let Ok(meta) = std::fs::metadata(&path) {
-                if let Ok(mtime) = meta.modified() {
-                    let ts = mtime
-                        .duration_since(std::time::UNIX_EPOCH)
-                        .map(|d| d.as_nanos())
-                        .unwrap_or(0);
-                    latest = Some(latest.map_or(ts, |l: u128| l.max(ts)));
-                }
+            let Ok(meta) = entry.metadata() else {
+                continue;
+            };
+            if meta.is_dir() {
+                walk(&entry.path(), depth + 1, latest);
             }
+            if let Ok(mtime) = meta.modified() {
+                let ts = mtime
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .map(|d| d.as_nanos())
+                    .unwrap_or(0);
+                *latest = Some(latest.map_or(ts, |l: u128| l.max(ts)));
+            }
+        }
+    }
+    let mut latest = None;
+    for base in [root.join(".research"), root.join("sources")] {
+        if base.exists() {
+            walk(&base, 0, &mut latest);
         }
     }
     latest
