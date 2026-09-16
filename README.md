@@ -1,11 +1,15 @@
 # Research Provenance Workbench (`rp`)
 
-`rp` is the standalone Phase 1A CLI for offline validation and deterministic
-navigation of Git-tracked `.research/` Layer B projects. It embeds the frozen v1
-schemas. The same package includes `rp-view` (private HTML generation) and
-`rp-lookup` (read-only title/ID lookup), without a service, database, automatic
-browser/server, Pi/DSH adapter, or Home Manager module. The canonical Rust CLI
-remains `rp`; these are separate thin generic reader launchers, not subcommands.
+`rp` is a standalone CLI for offline validation and deterministic navigation of
+Git-tracked `.research/` projects. It embeds the frozen v1 schemas. The package
+also ships `rp-view` (static HTML generation), `rp-lookup` (read-only
+title/ID lookup) and `rp-server` (a live graph server: `/api/wire`,
+`/api/records`, SSE hot-reload on project changes — start manually when
+needed). The canonical Rust CLI remains `rp`; the others are separate thin
+launchers, not subcommands.
+
+Migrated 2026-09-16 from nixos-config (`pkgs/misc/research-provenance`);
+full history up to the split lives there.
 
 ## Initialization
 
@@ -161,21 +165,21 @@ relocated and profile-symlink launchers, and failure/file-preservation checks.
 The standalone smoke harness needs only stdlib Python:
 
 ```bash
-python3 -I pkgs/misc/research-provenance/tools/pilot-reader/tests/installed_reader.py \
+python3 -I tools/pilot-reader/tests/installed_reader.py \
   --package "$(readlink -f result)" -v
 ```
 
 ## Development checks
 
 ```bash
-M=pkgs/misc/research-provenance/Cargo.toml
+M=Cargo.toml
 cargo fmt --manifest-path "$M" --all --check
 cargo clippy --manifest-path "$M" --workspace --all-targets -- -D warnings
 cargo test --manifest-path "$M" --workspace
 cargo deny \
-  --manifest-path pkgs/misc/research-provenance/crates/rp-cli/Cargo.toml \
+  --manifest-path crates/rp-cli/Cargo.toml \
   --exclude-dev --offline --locked \
-  check --config "$(pwd)/pkgs/misc/research-provenance/deny.toml" bans sources
+  check --config "$(pwd)/deny.toml" bans sources
 ```
 
 The frozen fixtures and source schema snapshots live under

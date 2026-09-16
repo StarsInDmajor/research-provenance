@@ -316,13 +316,17 @@ fn render_html(
 }
 
 fn extract_wire_and_records(html: &str) -> Option<(String, String)> {
-    // Extract the graph-data script content and canonical-records pre content
-    let gd_start = html.find(r#"<script id="graph-data" type="application/json">"#)?;
-    let gd_end = html[gd_start..].find("</script>")?;
-    let wire = html[gd_start + 48..gd_start + gd_end].to_string();
-    let fb_start = html.find(r#"<pre id="canonical-records">"#)?;
-    let fb_end = html[fb_start..].find("</pre>")?;
-    let records = html[fb_start + 28..fb_start + fb_end].to_string();
+    // Extract the graph-data script content and canonical-records pre content.
+    // Locate the closing delimiter of the opening tag itself so template tag
+    // changes cannot shift silent offsets.
+    let gd_open = html.find(r#"<script id="graph-data" type="application/json">"#)?;
+    let gd_body = gd_open + r#"<script id="graph-data" type="application/json">"#.len();
+    let gd_end = html[gd_body..].find("</script>")?;
+    let wire = html[gd_body..gd_body + gd_end].to_string();
+    let fb_open = html.find(r#"<pre id="canonical-records">"#)?;
+    let fb_body = fb_open + r#"<pre id="canonical-records">"#.len();
+    let fb_end = html[fb_body..].find("</pre>")?;
+    let records = html[fb_body..fb_body + fb_end].to_string();
     Some((wire, records))
 }
 
@@ -362,7 +366,14 @@ fn escape_pre(s: &str) -> String {
     s.replace('&', "&amp;").replace('<', "&lt;")
 }
 fn escape_script(s: &str) -> String {
-    s.replace("</script", "<\\/script")
+    // Match build.py script_json: escape &, <, > and U+2028/9 so embedded
+    // canonical text can never close the script tag or break JS string
+    // contexts, while remaining valid JSON (\uXXXX forms).
+    s.replace('&', "\\u0026")
+        .replace('<', "\\u003c")
+        .replace('>', "\\u003e")
+        .replace('\u{2028}', "\\u2028")
+        .replace('\u{2029}', "\\u2029")
 }
 fn escape_attr(s: &str) -> String {
     s.replace('&', "&amp;").replace('"', "&quot;")

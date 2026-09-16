@@ -227,9 +227,9 @@ the historical performance failure. Build current rp before Python integration t
 ### Generic build command
 
 ```sh
-python3 pkgs/misc/research-provenance/tools/pilot-reader/build.py \
+python3 tools/pilot-reader/build.py \
   --project /path/to/project \
-  --rp pkgs/misc/research-provenance/target/debug/rp \
+  --rp target/debug/rp \
   --output ~/rp-pilot/my-reader.html \
   [--thread <THREAD_ID>] [--as-of <RFC3339>] [--force] [--include-local-sources]
 ```
@@ -244,9 +244,9 @@ python3 pkgs/misc/research-provenance/tools/pilot-reader/build.py \
 ### Generic name and ID lookup
 
 ```sh
-python3 pkgs/misc/research-provenance/tools/pilot-reader/lookup.py \
+python3 tools/pilot-reader/lookup.py \
   --project /path/to/project \
-  --rp pkgs/misc/research-provenance/target/debug/rp \
+  --rp target/debug/rp \
   [--thread <THREAD_ID>] [--as-of <RFC3339>] \
   <EXACT_ID_OR_NAME>
 ```
@@ -302,7 +302,7 @@ text, zoom, controls, `说明` kinds guide, compact wire and routing algorithms.
   geometric crossing/shared-length/label tradeoffs are reported, not hidden by
   dropping nodes or reducing font size. Browser font/hit-testing remains unverified.
 
-Run `python3 -m unittest discover -s pkgs/misc/research-provenance/tools/pilot-reader/tests`
+Run `python3 -m unittest discover -s tools/pilot-reader/tests`
 and all `tests/*.test.js`. `test_horizontal_layout.py` is self-contained except
 one optional actual-corpus test using an explicitly copied private snapshot and
 pre-task HTML under `/tmp/rp-horizontal-layout-private/`. Final-HTML compact/SVG,
@@ -427,8 +427,8 @@ No Rust/Nix, dependencies, network, GUI/browser, commit or deploy.
 
 ```sh
 NODE=/nix/store/2bslrww4ch7my47xxwabj1qy4acq4720-nodejs-slim-24.14.1/bin/node
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/follow-relations.test.js
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/follow-relations.test.js \
+"$NODE" tools/pilot-reader/tests/follow-relations.test.js
+"$NODE" tools/pilot-reader/tests/follow-relations.test.js \
   ~/rp-pilot/csp-case-r2/csp-reader.html
 ```
 
@@ -603,12 +603,12 @@ metadata is shape/endpoint checked at bootstrap; producer tests check its semant
 New-template startup checks do not impose new required DOM on immutable old HTML.
 
 ```sh
-python3 -m unittest discover -s pkgs/misc/research-provenance/tools/pilot-reader/tests
+python3 -m unittest discover -s tools/pilot-reader/tests
 # Use the installed Node path documented below; no downloads.
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/clarity.test.js
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/clarity.test.js \
+"$NODE" tools/pilot-reader/tests/clarity.test.js
+"$NODE" tools/pilot-reader/tests/clarity.test.js \
   ~/rp-pilot/csp-case-r2/csp-reader.html
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/startup.test.js \
+"$NODE" tools/pilot-reader/tests/startup.test.js \
   ~/rp-pilot/csp-case-r2/csp-reader.html
 ```
 
@@ -630,7 +630,7 @@ New reader: `csp-case/csp-reader.html`; parent/data review and usefulness pendin
 One command an Agent can execute from this repository:
 
 ```sh
-python3 pkgs/misc/research-provenance/tools/pilot-reader/lookup.py \
+python3 tools/pilot-reader/lookup.py \
   --project ~/rp-pilot/csp-case/project \
   --case-manifest ~/rp-pilot/csp-case/case-manifest.json \
   --rp /nix/store/rrblc2vg0h7q915mprqq864zl7322hlj-research-provenance-0.1.0/bin/rp \
@@ -726,8 +726,8 @@ Final generation: `2026-09-10T03:16:14Z`, **210,918 bytes**, file 0600 / directo
 
 Additional current test commands (installed Node path is below; no new deps):
 ```sh
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/startup.test.js
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/startup.test.js \
+"$NODE" tools/pilot-reader/tests/startup.test.js
+"$NODE" tools/pilot-reader/tests/startup.test.js \
   ~/rp-pilot/reader-v5.html
 ```
 
@@ -780,7 +780,7 @@ Browser visual/hit-testing/mobile/print acceptance remains PENDING. No GUI used.
 
 Additional test command:
 ```sh
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/exploration.test.js
+"$NODE" tools/pilot-reader/tests/exploration.test.js
 ```
 
 The remainder records the v3 baseline; its strict role-filter behavior is superseded
@@ -846,7 +846,7 @@ are unchanged in details, even when Chinese short presentation labels differ.
 From nixos-config, with the existing installed binary:
 
 ```sh
-python3 pkgs/misc/research-provenance/tools/pilot-reader/build.py \
+python3 tools/pilot-reader/build.py \
   --project /tmp/rp-private-pilot-20260908-case/after \
   --before /tmp/rp-private-pilot-20260908-case/before \
   --rp /nix/store/rrblc2vg0h7q915mprqq864zl7322hlj-research-provenance-0.1.0/bin/rp \
@@ -934,10 +934,10 @@ Node was discovered installed, not obtained from a guessed environment variable:
 
 ```sh
 NODE=/nix/store/2bslrww4ch7my47xxwabj1qy4acq4720-nodejs-slim-24.14.1/bin/node
-python3 -m unittest discover -s pkgs/misc/research-provenance/tools/pilot-reader/tests
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/state.test.js
-"$NODE" pkgs/misc/research-provenance/tools/pilot-reader/tests/dom.test.js
-python3 pkgs/misc/research-provenance/tools/pilot-reader/tests/integration.py \
+python3 -m unittest discover -s tools/pilot-reader/tests
+"$NODE" tools/pilot-reader/tests/state.test.js
+"$NODE" tools/pilot-reader/tests/dom.test.js
+python3 tools/pilot-reader/tests/integration.py \
   --project /tmp/rp-private-pilot-20260908-case/after \
   --before /tmp/rp-private-pilot-20260908-case/before \
   --rp /nix/store/rrblc2vg0h7q915mprqq864zl7322hlj-research-provenance-0.1.0/bin/rp \
