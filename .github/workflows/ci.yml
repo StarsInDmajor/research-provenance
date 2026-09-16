@@ -25,13 +25,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Build rp (debug)
+        run: cargo build --workspace
       - name: Reader JS tests
+        working-directory: tools/pilot-reader
+        env:
+          RP_BIN: ${{ github.workspace }}/target/debug/rp
         run: |
-          cd tools/pilot-reader
           for t in tests/*.test.js; do
+            case "$t" in *review-stage*) continue;; esac  # private candidate fixtures
             node "$t"
           done
 

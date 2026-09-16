@@ -32,7 +32,7 @@ function failed(s) {
 test('actual final decode/hydrate shares the one full canonical map and runtime builds all SVG keys',()=>{
   const s=setup();assert.equal(s.get('graph').children.length,0);s.run();
   assert.equal(s.doc.body.getAttribute('data-app-state'),'ready');
-  const data=vm.runInContext('decodeWire(document)',s.ctx),g=data.graph;
+  const data=vm.runInContext('decodeWire(document).data',s.ctx),g=data.graph;
   for(const n of [...g.nodes,...g.edges])assert.equal(n.raw,data.records[n.id]);
   assert.deepEqual(JSON.parse(JSON.stringify(data.records)),s.records);
   const keys=s.get('graph').querySelectorAll('[data-key]');
@@ -83,7 +83,7 @@ test('hostile closing tags, Unicode, ampersands and template tokens roundtrip th
   for(const s of fixture.scripts)vm.runInContext(s,ctx);
   assert.equal(doc.body.getAttribute('data-app-state'),'ready');
   assert.equal(doc.querySelectorAll('script').length,3);assert.equal(doc.querySelectorAll('img').length,0);
-  assert.equal(vm.runInContext('decodeWire(document).graph.nodes[0].raw.statement',ctx),expected.a.statement);
+  assert.equal(vm.runInContext('decodeWire(document).data.graph.nodes[0].raw.statement',ctx),expected.a.statement);
   assert.ok(doc.getElementById('graph').querySelectorAll('[data-key]')[0].getAttribute('aria-label').includes(expected.a.title));
 });
 test('all supported non-graph canonical schemas survive boot without projection reduction',()=>{
@@ -100,11 +100,11 @@ test('runtime initial SVG equals historical static oracle for every attribute an
   // Run producer scripts but not bootstrap; compare pre-mount initial SVG.
   vm.runInContext(f.scripts[0],s.ctx);
   vm.runInContext(f.scripts[1].replace("if(typeof document!=='undefined')boot(document);",''),s.ctx);
-  const data=vm.runInContext('decodeWire(document)',s.ctx);
+  const data=vm.runInContext('decodeWire(document).data',s.ctx);
   const source=`import sys,json\nfrom pathlib import Path\nsys.path.insert(0,sys.argv[1]);sys.path.insert(0,sys.argv[1]+'/tests')\nimport build\nfrom entry_fixture import Tree\ng=json.load(sys.stdin);p=Tree();p.feed(build.render_svg(g));print(json.dumps(p.root))`;
   const tree=JSON.parse(execFileSync('python3',['-c',source,__dirname+'/..'],{input:JSON.stringify(data.graph),maxBuffer:8e6}));
   const oracle=fromTree(tree).getElementById('graph');
-  vm.runInContext('const initial=decodeWire(document);validateProjection(initial);buildSVG(document,initial.graph);validateDOM(document,[...initial.graph.nodes,...initial.graph.edges,...initial.graph.revisionEdges]);',s.ctx);
+  vm.runInContext('const initial=decodeWire(document).data;validateProjection(initial, initial.records);buildSVG(document,initial.graph);validateDOM(document,[...initial.graph.nodes,...initial.graph.edges,...initial.graph.revisionEdges]);',s.ctx);
   function normal(el){
     // HTML foreign-content parser restores mixed-case SVG attribute names.
     const names={refx:'refX',refy:'refY',markerwidth:'markerWidth',markerheight:'markerHeight',clippathunits:'clipPathUnits'};

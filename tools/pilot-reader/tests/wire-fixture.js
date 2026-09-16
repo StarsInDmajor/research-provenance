@@ -4,7 +4,10 @@
 const {decodeWire}=require('../bootstrap.js');
 function readData(doc) {
   const wire=JSON.parse(doc.getElementById('graph-data').textContent);
-  return wire.wireVersion===undefined?wire:decodeWire(doc);
+  if(wire.wireVersion===undefined)return wire;
+  const decoded=decodeWire(doc);
+  // Phase B decodeWire returns {data, records}; tests expect the data object.
+  return decoded.data!==undefined && decoded.records!==undefined ? decoded.data : decoded;
 }
 function writeData(doc,data) {
   if(data.wireVersion===undefined) {

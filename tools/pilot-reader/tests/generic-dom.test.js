@@ -10,15 +10,15 @@ const {readData,writeData}=require('./wire-fixture.js');
 const tmp = execFileSync('python3', ['-c', `
 import tempfile, sys, os
 from pathlib import Path
-sys.path.insert(0, 'pkgs/misc/research-provenance/tools/pilot-reader')
-sys.path.insert(0, 'pkgs/misc/research-provenance/tools/pilot-reader/tests')
+sys.path.insert(0, '.')
+sys.path.insert(0, './tests')
 import build, case_io, test_reusable_reader
 tmp = Path(tempfile.mkdtemp(prefix='rp-test-dom-'))
 p_alpha = tmp / 'alpha'
 p_alpha.mkdir()
 test_reusable_reader.create_project_alpha(p_alpha)
 out_alpha = tmp / 'reader-alpha.html'
-build.rebuild_generic(p_alpha, 'pkgs/misc/research-provenance/target/debug/rp', out_alpha)
+build.rebuild_generic(p_alpha, os.environ.get('RP_BIN', '../../target/debug/rp'), out_alpha)
 print(out_alpha)
 `], { encoding: 'utf-8' }).trim();
 

@@ -768,6 +768,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "rp-server"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "jiff",
+ "rp-core",
+ "serde",
+ "serde_json",
+ "sha2",
+]
+
+[[package]]
 name = "rustix"
 version = "1.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
